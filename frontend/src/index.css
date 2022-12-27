@@ -7,8 +7,25 @@
   padding: none;
   font-family: "Source Code Pro", monospace;
   color: white;
+  scroll-behavior: smooth;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+html {
+  scroll-snap-type: y mandatory;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: column nowrap;
+  font-family: monospace;
+}
 .gradienttext {
   background: #74ebd5; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -25,4 +42,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 100%;
+}
+
+.gradientbg {
+  background: rgb(83, 82, 237);
+  background: linear-gradient(
+    180deg,
+    rgba(83, 82, 237, 1) 0%,
+    rgba(111, 116, 242, 1) 64%,
+    rgba(83, 82, 237, 1) 100%
+  );
 }
