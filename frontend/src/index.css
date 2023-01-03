@@ -27,18 +27,10 @@ html {
   font-family: monospace;
 }
 .gradienttext {
-  background: #74ebd5; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #acb6e5,
-    #74ebd5
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #acb6e5,
-    #74ebd5
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background: #1FA2FF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 100%;
@@ -52,4 +44,33 @@ html {
     rgba(111, 116, 242, 1) 64%,
     rgba(83, 82, 237, 1) 100%
   );
+}
+
+@keyframes slidetop {
+  0%{
+    opacity: 0;
+    transform: translate(0, -100%);
+  }
+  100%{
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+@keyframes slideleft {
+  0%{
+    opacity: 0;
+    transform: translate(-100%);
+  }
+  100%{
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+@keyframes fadein {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
 }
