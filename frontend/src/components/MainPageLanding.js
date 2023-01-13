@@ -16,6 +16,7 @@ const MainPageLanding = ()=> {
             Get Started
           </button>
         </section>
+        
         </>
     )
 }
