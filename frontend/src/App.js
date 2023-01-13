@@ -24,16 +24,13 @@ const LandingPage = () => {
         break;
       }
   }
-  // When the user scrolls the page, execute myFunction
-  window.onscroll = function() {myFunction()};
 
-  function myFunction() {
-    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    var scrolled = (winScroll / height) * 100;
-    console.log(scrolled);
+  window.onscroll = () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
     document.getElementById("bar").style.width = scrolled + "%";
-  }
+  };
 
   return (
     <div className="w-full h-auto">
@@ -76,9 +73,9 @@ const LandingPage = () => {
         <FooterLanding/>
       </div>
       <div className="fixed top-0 z-10 w-full">
-        <div className="w-full h-[8px]">
-          <div className="h-[8px] bg-white rounded-lg" id="bar"></div>
-        </div>
+        <section className="w-full h-[8px]">
+          <section className="h-[8px] bg-white rounded-lg" id="bar"></section>
+        </section>
       </div>
     </div>
   );
