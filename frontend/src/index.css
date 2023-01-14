@@ -10,6 +10,14 @@
   scroll-behavior: smooth;
 }
 
+* {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
 html,
 body,
 #root {
@@ -17,7 +25,7 @@ body,
 }
 
 @media not all and (min-width: 640px) {
-  html{
+  html {
     scroll-snap-type: y none;
   }
 }
@@ -35,10 +43,20 @@ html {
   font-family: monospace;
 }
 .gradienttext {
-  background: #1FA2FF;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
+  background: #1fa2ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #a6ffcb,
+    #12d8fa,
+    #1fa2ff
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #a6ffcb,
+    #12d8fa,
+    #1fa2ff
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 100%;
@@ -55,36 +73,36 @@ html {
 }
 
 @keyframes slidetop {
-  0%{
+  0% {
     opacity: 0;
     transform: translate(0, -100%);
   }
-  100%{
+  100% {
     opacity: 1;
     transform: translate(0);
   }
 }
 @keyframes slideleft {
-  0%{
+  0% {
     opacity: 0;
     transform: translate(-100%);
   }
-  100%{
+  100% {
     opacity: 1;
     transform: translate(0);
   }
 }
 @keyframes fadein {
-  0%{
+  0% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 1;
   }
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
@@ -92,8 +110,8 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  background-color: rgba(245,245,245,.25);
-  color: rgba(245,245,245,.95);
+  background-color: rgba(245, 245, 245, 0.25);
+  color: rgba(245, 245, 245, 0.95);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: rgba(245,245,245,.95);
+  -webkit-text-fill-color: rgba(245, 245, 245, 0.95);
 }

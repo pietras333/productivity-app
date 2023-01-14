@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const MainPageLanding = ()=> {
     return(
         <>
@@ -12,9 +14,11 @@ const MainPageLanding = ()=> {
           </h1>
         </section>
         <section className='flex justify-center'>
-          <button className="animate-fadein max-sm:text-xs max-sm:w-[100px] max-sm:h-[40px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-[#5352ed] bg-[rgba(245,245,245,.85)]  hover:text-white hover:tracking-widest hover:cursor-pointer transition-all w-[200px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[rgba(245,245,245,.85)] ">
-            Get Started
-          </button>
+          <Link to='/get-started'>
+            <button className="animate-fadein max-sm:text-xs max-sm:w-[100px] max-sm:h-[40px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-[#5352ed] bg-[rgba(245,245,245,.85)]  hover:text-white hover:tracking-widest hover:cursor-pointer transition-all w-[200px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[rgba(245,245,245,.85)] ">
+              Get Started
+            </button>
+          </Link>
         </section>
         
         </>
