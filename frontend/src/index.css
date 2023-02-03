@@ -115,3 +115,21 @@ select:-webkit-autofill:focus {
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(245, 245, 245, 0.95);
 }
+
+@keyframes fadeinbg {
+  0% {
+    background-position: 100%;
+    opacity: 0;
+  }
+  100% {
+    background-position: 0;
+    opacity: 1;
+  }
+}
+
+.orangestroke {
+  color: white;
+  background-color: transparent;
+  text-shadow: -1px -1px 0 #f87474, 1px -1px 0 #f87474, -1px 1px 0 #f87474,
+    1px 1px 0 #f87474;
+}

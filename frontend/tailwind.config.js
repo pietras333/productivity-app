@@ -7,16 +7,21 @@ module.exports = {
         slidetop: "slidetop 500ms forwards",
         slideleft: "slideleft 1000ms forwards",
         fadein: "fadein 3000ms forwards",
+        fadeinbg: "fadeinbg 1500ms forwards",
       },
       backgroundImage: {
         landing: "url('./assets/illustrations/landing.png')",
         beingproductive: "url('./assets/illustrations/beingproductive.png')",
         relax: "url('./assets/illustrations/relax.png')",
-        pgone: "url('./assets/illustrations/one.svg')",
-        pgtwo: "url('./assets/illustrations/two.svg')",
-        pgthree: "url('./assets/illustrations/three.svg')",
-        contact: "url('./assets/illustrations/contact.svg')",
-        register: "url('./assets/illustrations/register.png')",
+        lightpgone: "url('./assets/illustrations/lightMode/lightone.svg')",
+        lightpgtwo: "url('./assets/illustrations/lightMode/lighttwo.svg')",
+        lightpgthree: "url('./assets/illustrations/lightMode/lightthree.svg')",
+        lightcontact:
+          "url('./assets/illustrations/lightMode/lightcontact.svg')",
+        lightregisterbg:
+          "url('./assets/illustrations/lightMode/lightregisterbg.svg')",
+        lightregisterbgmobile:
+          "url('./assets/illustrations/lightMode/lightregisterbgmobile.svg')",
       },
     },
   },
