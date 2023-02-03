@@ -1,12 +1,14 @@
-import NavBarLanding from "../components/NavBarLanding";
 import MainPageLanding from "../components/MainPageLanding";
 import InfoLanding from "../components/InfoLanding";
 import ContactForm from "../components/ContactForm";
 import FooterLanding from "../components/FooterLanding";
-import { useRef } from "react";
+import DarkMode from "../assets/illustrations/darkmode.png";
+import LightMode from "../assets/illustrations/lightmode.png";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+  const [darkMode, setDarkMode] = useState(false);
   const contactref = useRef(null);
   const homeref = useRef(null);
 
@@ -25,6 +27,13 @@ const LandingPage = () => {
     }
   };
 
+  const handleDisplayIconChange = () => {
+    return darkMode ? DarkMode : LightMode;
+  };
+  const handleDisplayChange = () => {
+    setDarkMode((prev) => !prev);
+  };
+
   window.onscroll = () => {
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
@@ -39,7 +48,7 @@ const LandingPage = () => {
     <div className="w-full h-auto">
       <div
         ref={homeref}
-        className="bg-pgone bg-cover bg-center bg-no-repeat w-full"
+        className="bg-lightpgone bg-cover bg-center bg-no-repeat w-full"
       >
         <section className="snap-center w-full h-screen bg-landing bg-contain bg-no-repeat bg-right-bottom md:bg-[length:505px]">
           <nav className="fixed animate-slidetop w-full max-sm:h-[60px] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px]">
@@ -64,27 +73,37 @@ const LandingPage = () => {
               >
                 Contact
               </li>
-              <li className="mr-[5%] max-sm:mr-[4%]">
+              <li className="mr-[1%] max-sm:mr-[4%]">
                 <Link to="/sign-in">
                   <button className="animate-fadein max-sm:text-xs max-sm:w-[120%] max-sm:h-[30px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-[#5352ed] bg-[rgba(245,245,245,.85)]  hover:text-white hover:tracking-widest hover:cursor-pointer transition-all w-[150%] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[rgba(245,245,245,.85)] ">
                     Sign In
                   </button>
                 </Link>
               </li>
+              <li className="mr-[1%] max-sm:mr-[1%]">
+                <button>
+                  <img
+                    src={handleDisplayIconChange()}
+                    alt="icon of display mode"
+                    className="w-[50px] invert animate-fadein"
+                    onClick={handleDisplayChange}
+                  />
+                </button>
+              </li>
             </ul>
           </nav>
           <MainPageLanding />
         </section>
       </div>
-      <div className="bg-pgtwo bg-cover bg-center bg-no-repeat w-full">
+      <div className="bg-lightpgtwo bg-cover bg-center bg-no-repeat w-full">
         <InfoLanding side="left" />
       </div>
-      <div className="bg-pgthree bg-cover bg-center bg-no-repeat w-full">
+      <div className="bg-lightpgthree bg-cover bg-center bg-no-repeat w-full">
         <InfoLanding side="right" />
       </div>
       <div
         ref={contactref}
-        className="bg-contact bg-cover bg-center bg-no-repeat w-full"
+        className="bg-lightcontact bg-cover bg-center bg-no-repeat w-full"
       >
         <ContactForm />
       </div>
