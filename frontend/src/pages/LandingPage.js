@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   const [darkMode, setDarkMode] = useState(false);
+  let scrolled = 0;
   const contactref = useRef(null);
   const homeref = useRef(null);
 
@@ -34,14 +35,24 @@ const LandingPage = () => {
     setDarkMode((prev) => !prev);
   };
 
+  const navbarstyledefault =
+    "fixed animate-slidetop w-full max-sm:h-[60px] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] transition-all border-b-2 border-b-transparent";
+  const navbarstylescrolled =
+    "fixed animate-slidetop w-full max-sm:h-[60px] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] border-b-2 border-b-[#4FACF7] shadow-2xl shadow-[#4FACF7] bg-[#4fabf7af] transition-all";
   window.onscroll = () => {
+    const navbar = document.getElementById("navbar");
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
     const height =
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
+    scrolled = (winScroll / height) * 100;
     document.getElementById("bar").style.width = scrolled + "%";
+    if (scrolled > 0) {
+      navbar.className = navbarstylescrolled;
+    } else {
+      navbar.className = navbarstyledefault;
+    }
   };
 
   return (
@@ -51,31 +62,34 @@ const LandingPage = () => {
         className="bg-lightpgone bg-cover bg-center bg-no-repeat w-full"
       >
         <section className="snap-center w-full h-screen bg-landing bg-contain bg-no-repeat bg-right-bottom md:bg-[length:505px]">
-          <nav className="fixed animate-slidetop w-full max-sm:h-[60px] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px]">
+          <nav
+            id="navbar"
+            className="fixed animate-slidetop w-full max-sm:h-[60px] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] "
+          >
             <ul className="flex justify-around items-center w-full h-full">
-              <li className="max-sm:w-[30%] max-sm:text-1xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest">
+              <li className="text-[#FFB562] max-sm:w-[30%] max-sm:text-1xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest">
                 Todooo
               </li>
               <li
                 id="home"
                 onClick={(e) => handleScroll(e)}
-                className="max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(245,245,245,.85)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                className="max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
               >
                 Home
               </li>
-              <li className="max-sm:text-xs max-sm:mr-[3%]  tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(245,245,245,.85)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+              <li className="max-sm:text-xs max-sm:mr-[3%]  tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
                 Features
               </li>
               <li
                 id="contact"
                 onClick={(e) => handleScroll(e)}
-                className="max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(245,245,245,.85)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                className="max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
               >
                 Contact
               </li>
               <li className="mr-[1%] max-sm:mr-[4%]">
                 <Link to="/sign-in">
-                  <button className="animate-fadein max-sm:text-xs max-sm:w-[120%] max-sm:h-[30px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-[#5352ed] bg-[rgba(245,245,245,.85)]  hover:text-white hover:tracking-widest hover:cursor-pointer transition-all w-[150%] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[rgba(245,245,245,.85)] ">
+                  <button className="animate-fadein max-sm:text-xs max-sm:w-[120%] max-sm:h-[30px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[150%] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
                     Sign In
                   </button>
                 </Link>
