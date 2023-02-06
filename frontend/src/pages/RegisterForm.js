@@ -7,9 +7,22 @@ import LightMode from "../assets/illustrations/lightmode.png";
 const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [usernamePropriety, setUsernamePropriety] = useState(true);
-  const [passwordPropriety, setPasswordPropriety] = useState(true);
+  const [usernameCorectness, setUsernameCorectness] = useState(true);
+  const [passwordCorectness, setPasswordCorectness] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  // CHECK IF USERNAME IS ALREADY IN DATABASE(BACKEND)
+  // IF IT EXISTS THEN SHOW usernameInfo[1]
+  // ELSE IF USERNAME DIDNT PASS CORECTNESSCHECK THEN SHOW usernameInfo[0]
+  // ELSE CREATE USER
+  const usernameInfo = [
+    "Username can't contain special characters",
+    "Username already taken",
+  ];
+  // Something like that ->
+  // const  handleUsernameInfo = async (event) => {
+  //   // const data = await server.checkUsername(event);
+  //   // return data.user.exists ? usernameInfo[1] : usernameInfo[0]
+  // }
 
   const handleDisplayIconChange = () => {
     return darkMode ? DarkMode : LightMode;
@@ -26,14 +39,15 @@ const RegisterForm = () => {
     setUsername(event.target.value);
   };
 
-  const proprietyCheck = (str) => {
+  const corectnessCheck = (str) => {
     const special = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     return special.test(str);
   };
 
   useEffect(() => {
-    setUsernamePropriety(!proprietyCheck(username));
-    setPasswordPropriety(proprietyCheck(password));
+    setUsernameCorectness(!corectnessCheck(username));
+    setPasswordCorectness(corectnessCheck(password));
+    console.log("darkMode ===", darkMode);
   });
 
   return (
@@ -71,13 +85,13 @@ const RegisterForm = () => {
                   onChange={(e) => handleUsernameChange(e)}
                   value={username}
                 />
-                {usernamePropriety ? (
+                {usernameCorectness ? (
                   <h3 className="text-transparent text-xs tracking-widest max-sm:text-center">
-                    Username can't contain special characters
+                    {usernameInfo}
                   </h3>
                 ) : (
                   <h3 className="text-[#F87474] text-xs tracking-widest animate-slideleft max-sm:text-center">
-                    Username can't contain special characters
+                    {usernameInfo}
                   </h3>
                 )}
               </div>
@@ -92,7 +106,7 @@ const RegisterForm = () => {
                   onChange={(e) => handlePasswordChange(e)}
                   value={password}
                 />
-                {passwordPropriety ? (
+                {passwordCorectness ? (
                   <h3 className="text-transparent text-xs tracking-widest max-sm:text-center">
                     Password must contain special characters
                   </h3>
