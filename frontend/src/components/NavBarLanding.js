@@ -6,16 +6,16 @@ const NavBarLanding = (props) => {
   return (
     <>
       {pagestate === "getstarted" ? (
-        <li className="text-[#FFB562] max-sm:w-[30%] max-sm:text-1xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest">
+        <li className="h-full flex justify-center items-center text-[#FFB562] max-sm:w-[30%] max-sm:text-4xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest">
           Todooo
         </li>
       ) : (
-        <li className="max-sm:w-[30%] max-sm:text-1xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest">
+        <li className="h-full flex justify-center items-center max-sm:w-[30%] max-sm:text-4xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest">
           Todooo
         </li>
       )}
-      <Link to="../">
-        <li className="text-[#FFB562] max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(245,245,245,.85)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+      <Link to="../" className="h-full">
+        <li className="h-full flex justify-center items-center text-[#fcc281] max-sm:text-xl max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all">
           Home
         </li>
       </Link>
