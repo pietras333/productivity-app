@@ -4,6 +4,8 @@ import ContactForm from "../components/ContactForm";
 import FooterLanding from "../components/FooterLanding";
 import DarkMode from "../assets/illustrations/darkmode.png";
 import LightMode from "../assets/illustrations/lightmode.png";
+import Hamburger from "../assets/illustrations/hamburger.png";
+import Arrow from "../assets/illustrations/arrow.png";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -40,9 +42,9 @@ const LandingPage = () => {
   };
 
   const navbarstyledefault =
-    "fixed animate-slidetop w-full max-sm:h-[60px] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] transition-all border-b-2 border-b-transparent";
+    "fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] transition-all border-b-2 border-b-transparent";
   const navbarstylescrolled =
-    "fixed animate-slidetop w-full max-sm:h-[60px] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] border-b-2 border-b-[#4FACF7] shadow-2xl shadow-[#4FACF7] bg-[#4fabf7af] transition-all";
+    "fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] border-b-2 border-b-[#4FACF7] shadow-2xl shadow-[#4FACF7] bg-[#4fabf7af] transition-all";
   window.onscroll = () => {
     const navbar = document.getElementById("navbar");
     const winScroll =
@@ -73,11 +75,11 @@ const LandingPage = () => {
           {navbarShowState ? (
             <nav
               id="navbar"
-              className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 bg-black"
+              className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 bg-lightmobilemenu bg-cover bg-center bg-no-repeat"
             >
               <ul className="max-lg:flex-col max-lg:items-stretch flex w-full h-full">
                 <section className="w-full h-[10%] flex justify-between items-center">
-                  <li className="max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-0 max-lg:text-center text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
+                  <li className="animate-slidetop max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
                     Todooo
                   </li>
                   <li
@@ -85,9 +87,11 @@ const LandingPage = () => {
                     className="max-lg:w-[20%] max-lg:animate-slidetop transition-all animate-fadein h-full hidden max-lg:flex max-lg:justify-center max-lg:items-center"
                   >
                     <div className="space-y-2">
-                      <span className="block w-8 h-0.5 bg-[#FFB562]"></span>
-                      <span className="block w-8 h-0.5 bg-[#FFB562]"></span>
-                      <span className="block w-8 h-0.5 bg-[#FFB562]"></span>
+                      <img
+                        src={Arrow}
+                        alt="Arrow"
+                        className="invert w-[30px]"
+                      />
                     </div>
                   </li>
                 </section>
@@ -146,14 +150,14 @@ const LandingPage = () => {
           ) : (
             <nav
               id="navbar"
-              className="fixed animate-slidetop w-full max-sm:h-[60px] 2xl:h-[150px] xl:h-[120px]  " //max-lg:h-screen max-lg:z-20
+              className="fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px]  " //max-lg:h-screen max-lg:z-20
             >
               <ul
                 className="flex w-full h-full justify-between items-center mt-2"
                 //max-lg:justify-center max-lg:items-center max-lg:flex-col
               >
                 <li
-                  className="text-[#FFB562] max-sm:w-[30%] max-sm:text-4xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest"
+                  className="animate-slidetop text-[#FFB562] max-sm:w-[30%] max-sm:text-4xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest"
                   //max-lg:ml-0 max-lg:text-center max-lg:absolute max-lg:top-1
                 >
                   Todooo
@@ -202,9 +206,11 @@ const LandingPage = () => {
                   className="transition-all animate-slidetop w-auto h-auto hidden max-lg:flex max-lg:justify-center items-center max-lg:w-[20%]"
                 >
                   <div className="space-y-2">
-                    <span className="block w-8 h-0.5 bg-[#FFB562]"></span>
-                    <span className="block w-8 h-0.5 bg-[#FFB562]"></span>
-                    <span className="block w-8 h-0.5 bg-[#FFB562]"></span>
+                    <img
+                      src={Hamburger}
+                      alt="Hamburger"
+                      className="invert w-[30px]"
+                    />
                   </div>
                 </li>
               </ul>

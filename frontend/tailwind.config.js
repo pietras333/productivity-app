@@ -22,6 +22,8 @@ module.exports = {
           "url('./assets/illustrations/lightMode/lightregisterbg.svg')",
         lightregisterbgmobile:
           "url('./assets/illustrations/lightMode/lightregisterbgmobile.svg')",
+        lightmobilemenu:
+          "url('./assets/illustrations/lightMode/lightmobilemenu.svg')",
       },
     },
   },
