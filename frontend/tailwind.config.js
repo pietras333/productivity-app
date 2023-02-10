@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
       animation: {
@@ -24,6 +25,10 @@ module.exports = {
           "url('./assets/illustrations/lightMode/lightregisterbgmobile.svg')",
         lightmobilemenu:
           "url('./assets/illustrations/lightMode/lightmobilemenu.svg')",
+        darkpgone: "url('./assets/illustrations/darkMode/darkone.svg')",
+        darkpgtwo: "url('./assets/illustrations/darkMode/darktwo.svg')",
+        darkpgthree: "url('./assets/illustrations/darkMode/darkthree.svg')",
+        darkcontact: "url('./assets/illustrations/darkMode/darkcontact.svg')",
       },
     },
   },

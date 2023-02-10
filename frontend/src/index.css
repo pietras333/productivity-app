@@ -141,3 +141,27 @@ select:-webkit-autofill:focus {
   text-shadow: -1px -1px 0 #f87474, 1px -1px 0 #f87474, -1px 1px 0 #f87474,
     1px 1px 0 #f87474;
 }
+
+.orangegradienttext {
+  background: #fe8c00; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f83600,
+    #fe8c00
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f83600,
+    #fe8c00
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 50%;
+}
+
+.transition-mode-change {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 1250ms;
+}

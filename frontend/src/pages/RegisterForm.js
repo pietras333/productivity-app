@@ -104,7 +104,7 @@ const RegisterForm = () => {
                       Sign In
                     </Link>
                   </li>
-                  <li className="mr-[1%] max-sm:mr-[1%] max-lg:mt-2">
+                  <li className="max-lg:mt-2">
                     <button>
                       <img
                         src={handleDisplayIconChange()}
@@ -121,7 +121,7 @@ const RegisterForm = () => {
         ) : (
           <nav
             id="navbar"
-            className="fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px]  " //max-lg:h-screen max-lg:z-20
+            className="fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px]" //max-lg:h-screen max-lg:z-20
           >
             <ul
               className="flex w-full h-full justify-between items-center mt-2"
@@ -133,13 +133,15 @@ const RegisterForm = () => {
               >
                 Todooo
               </li>
-              <li
-                id="home"
-                className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
-                // max-lg:hidden (onclick) max-lg:inline
-              >
-                Home
-              </li>
+              <Link to="../">
+                <li
+                  id="home"
+                  className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                  // max-lg:hidden (onclick) max-lg:inline
+                >
+                  Home
+                </li>
+              </Link>
 
               <li className="mr-[1%] max-sm:mr-[4%]">
                 <Link to="/sign-in">
@@ -148,7 +150,7 @@ const RegisterForm = () => {
                   </button>
                 </Link>
               </li>
-              <li className="mr-[1%] max-sm:mr-[1%]">
+              <li className="mr-[3%]">
                 <button>
                   <img
                     src={handleDisplayIconChange()}
@@ -221,7 +223,7 @@ const RegisterForm = () => {
                   </h3>
                 )}
               </div>
-              <button className="ml-[20%] max-sm:ml-0 mt-10 animate-fadein max-sm:text-xs max-sm:w-[50%] max-sm:h-[50px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-lg text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[250px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
+              <button className="ml-[20%] max-sm:ml-0 mt-10 animate-fadein max-sm:text-lg max-sm:w-[50%] max-sm:h-[50px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-lg text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[250px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
                 Create account
               </button>
             </form>

@@ -6,8 +6,10 @@ import DarkMode from "../assets/illustrations/darkmode.png";
 import LightMode from "../assets/illustrations/lightmode.png";
 import Hamburger from "../assets/illustrations/hamburger.png";
 import Arrow from "../assets/illustrations/arrow.png";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+
+//070809
 
 const LandingPage = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -39,12 +41,22 @@ const LandingPage = () => {
   };
   const handleDisplayChange = () => {
     setDarkMode((prev) => !prev);
+    changeMode();
+  };
+  const changeMode = () => {
+    if (!darkMode) {
+      document.querySelector("html").classList.remove("dark");
+      document.cookie = "mode: light";
+    } else {
+      document.querySelector("html").classList.add("dark");
+      document.cookie = "mode: dark";
+    }
   };
 
   const navbarstyledefault =
     "fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] transition-all border-b-2 border-b-transparent";
   const navbarstylescrolled =
-    "fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] border-b-2 border-b-[#4FACF7] shadow-2xl shadow-[#4FACF7] bg-[#4fabf7af] transition-all";
+    "fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] border-b-2 border-b-[#4FACF7] shadow-2xl shadow-[#4FACF7] bg-[#4fabf7af] transition-all dark:bg-[#00112285] dark:shadow-[#FF5722] dark:border-b-[#FF5722]";
   window.onscroll = () => {
     const navbar = document.getElementById("navbar");
     const winScroll =
@@ -64,12 +76,16 @@ const LandingPage = () => {
   const handleResponsiveNavbar = () => {
     setNavbarShowState((prev) => !prev);
   };
+  useEffect(() => {
+    changeMode();
+    console.log(document.cookie);
+  });
 
   return (
-    <div className="w-full h-auto">
+    <div id="landingpage" className="w-full h-auto transition-mode-change">
       <div
         ref={homeref}
-        className="bg-lightpgone bg-cover bg-center bg-no-repeat w-full"
+        className="bg-lightpgone dark:bg-darkpgone bg-cover bg-center bg-no-repeat w-full"
       >
         <section className="snap-center w-full h-screen bg-landing bg-contain bg-no-repeat bg-right-bottom md:bg-[length:505px]">
           {navbarShowState ? (
@@ -78,8 +94,8 @@ const LandingPage = () => {
               className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 bg-lightmobilemenu bg-cover bg-center bg-no-repeat"
             >
               <ul className="max-lg:flex-col max-lg:items-stretch flex w-full h-full">
-                <section className="w-full h-[10%] flex justify-between items-center">
-                  <li className="animate-slidetop max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
+                <section className="w-full h-[10%] flex justify-between items-center ">
+                  <li className="dark:text-[#FF5722] animate-slidetop max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
                     Todooo
                   </li>
                   <li
@@ -90,7 +106,7 @@ const LandingPage = () => {
                       <img
                         src={Arrow}
                         alt="Arrow"
-                        className="invert w-[30px]"
+                        className="invert w-[30px] transition-all"
                       />
                     </div>
                   </li>
@@ -138,7 +154,7 @@ const LandingPage = () => {
                         <img
                           src={handleDisplayIconChange()}
                           alt="icon of display mode"
-                          className="w-[50px] invert animate-fadein inline "
+                          className="w-[50px] invert animate-fadein inline transition-all"
                           onClick={handleDisplayChange}
                         />
                       </button>
@@ -150,14 +166,14 @@ const LandingPage = () => {
           ) : (
             <nav
               id="navbar"
-              className="fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px]  " //max-lg:h-screen max-lg:z-20
+              className="fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px]" //max-lg:h-screen max-lg:z-20
             >
               <ul
                 className="flex w-full h-full justify-between items-center mt-2"
                 //max-lg:justify-center max-lg:items-center max-lg:flex-col
               >
                 <li
-                  className="animate-slidetop text-[#FFB562] max-sm:w-[30%] max-sm:text-4xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest"
+                  className="dark:text-[#FF5722] animate-slidetop text-[#FFB562] max-sm:w-[30%] max-sm:text-4xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest"
                   //max-lg:ml-0 max-lg:text-center max-lg:absolute max-lg:top-1
                 >
                   Todooo
@@ -165,13 +181,13 @@ const LandingPage = () => {
                 <li
                   id="home"
                   onClick={(e) => handleScroll(e)}
-                  className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                  className="dark:text-[#cf461d] dark:hover:text-[#FF5722] max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                   // max-lg:hidden (onclick) max-lg:inline
                 >
                   Home
                 </li>
                 <li
-                  className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%]  tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                  className="dark:text-[#cf461d] dark:hover:text-[#FF5722] max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%]  tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                   // max-lg:hidden (onclick) max-lg:inline
                 >
                   Features
@@ -179,14 +195,14 @@ const LandingPage = () => {
                 <li
                   id="contact"
                   onClick={(e) => handleScroll(e)}
-                  className="max-lg:hidden inline max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                  className="dark:text-[#cf461d] dark:hover:text-[#FF5722] max-lg:hidden inline max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                   // max-lg:hidden (onclick) max-lg:inline
                 >
                   Contact
                 </li>
                 <li className="mr-[1%] max-sm:mr-[4%]">
                   <Link to="/sign-in">
-                    <button className="inline max-lg:hidden animate-fadein max-sm:text-xs max-sm:w-[120%] max-sm:h-[30px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[150%] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
+                    <button className="inline max-lg:hidden animate-fadein max-sm:text-xs max-sm:w-[120%] max-sm:h-[30px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] dark:bg-[#FF5722] dark:text-[#001B35] dark:hover:text-[#FF5722] dark:hover:bg-transparent dark:hover:border-[#FF5722] hover:tracking-widest hover:cursor-pointer transition-all w-[150%] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
                       Sign In
                     </button>
                   </Link>
@@ -196,7 +212,7 @@ const LandingPage = () => {
                     <img
                       src={handleDisplayIconChange()}
                       alt="icon of display mode"
-                      className="w-[50px] invert animate-fadein inline max-lg:hidden"
+                      className="w-[50px] invert animate-fadein inline max-lg:hidden transition-all"
                       onClick={handleDisplayChange}
                     />
                   </button>
@@ -209,7 +225,7 @@ const LandingPage = () => {
                     <img
                       src={Hamburger}
                       alt="Hamburger"
-                      className="invert w-[30px]"
+                      className="invert w-[30px] transition-all"
                     />
                   </div>
                 </li>
@@ -219,24 +235,27 @@ const LandingPage = () => {
           <MainPageLanding />
         </section>
       </div>
-      <div className="bg-lightpgtwo bg-cover bg-center bg-no-repeat w-full">
+      <div className="bg-lightpgtwo dark:bg-darkpgtwo bg-cover bg-center bg-no-repeat w-full">
         <InfoLanding side="left" />
       </div>
-      <div className="bg-lightpgthree bg-cover bg-center bg-no-repeat w-full">
+      <div className="bg-lightpgthree dark:bg-darkpgthree bg-cover bg-center bg-no-repeat w-full">
         <InfoLanding side="right" />
       </div>
       <div
         ref={contactref}
-        className="bg-lightcontact bg-cover bg-center bg-no-repeat w-full"
+        className="bg-lightcontact dark:bg-darkcontact bg-cover bg-center bg-no-repeat w-full"
       >
         <ContactForm />
       </div>
-      <div className="bg-[#0052cc] w-full h-[300px] snap-center flex max-sm:flex-col justify-around">
+      <div className="bg-[#0052cc] dark:bg-[#001122] w-full h-[300px] snap-center flex max-sm:flex-col justify-around">
         <FooterLanding />
       </div>
       <div className="fixed top-0 z-10 w-full">
         <section className="w-full h-[8px]">
-          <section className="h-[8px] bg-[#FFB562]" id="bar"></section>
+          <section
+            className="h-[8px] bg-[#FFB562] dark:bg-[#FF5722]"
+            id="bar"
+          ></section>
         </section>
       </div>
     </div>
