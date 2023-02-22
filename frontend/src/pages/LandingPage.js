@@ -6,12 +6,13 @@ import DarkMode from "../assets/illustrations/darkmode.png";
 import LightMode from "../assets/illustrations/lightmode.png";
 import Hamburger from "../assets/illustrations/hamburger.png";
 import Arrow from "../assets/illustrations/arrow.png";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 //070809
 
 const LandingPage = () => {
+  const [localCookie, setLocalCookie] = useState();
   const [darkMode, setDarkMode] = useState(false);
   const [navbarShowState, setNavbarShowState] = useState(false);
   let scrolled = 0;
@@ -40,17 +41,17 @@ const LandingPage = () => {
     return darkMode ? DarkMode : LightMode;
   };
   const handleDisplayChange = () => {
-    setDarkMode((prev) => !prev);
-    changeMode();
-  };
-  const changeMode = () => {
-    if (!darkMode) {
+    const theme = localStorage.getItem("mode");
+    if (theme === "dark") {
+      localStorage.removeItem("mode");
+      localStorage.setItem("mode", "light");
       document.querySelector("html").classList.remove("dark");
-      document.cookie = "mode: light";
     } else {
+      localStorage.removeItem("mode");
+      localStorage.setItem("mode", "dark");
       document.querySelector("html").classList.add("dark");
-      document.cookie = "mode: dark";
     }
+    setDarkMode((prev) => !prev);
   };
 
   const navbarstyledefault =
@@ -58,6 +59,10 @@ const LandingPage = () => {
   const navbarstylescrolled =
     "fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] border-b-2 border-b-[#4FACF7] shadow-2xl shadow-[#4FACF7] bg-[#4fabf7af] transition-all dark:bg-[#00112285] dark:shadow-[#FF5722] dark:border-b-[#FF5722]";
   window.onscroll = () => {
+    scroll();
+  };
+  const scroll = () => {
+    console.log("SCROLLED");
     const navbar = document.getElementById("navbar");
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
@@ -75,23 +80,35 @@ const LandingPage = () => {
 
   const handleResponsiveNavbar = () => {
     setNavbarShowState((prev) => !prev);
+    scroll();
   };
-  useEffect(() => {
-    changeMode();
-    console.log(document.cookie);
-  });
+  useLayoutEffect(() => {
+    const theme = localStorage.getItem("mode");
+    console.log("theme ===", theme);
+    if (theme === "dark") {
+      return document.documentElement.classList.add("dark");
+    }
+    return document.documentElement.classList.remove("dark");
+  }, []);
 
   return (
-    <div id="landingpage" className="w-full h-auto transition-mode-change">
+    <div
+      id="landingpage"
+      className={
+        darkMode
+          ? "dark w-full h-auto transition-mode-change"
+          : "w-full h-auto transition-mode-change"
+      }
+    >
       <div
         ref={homeref}
-        className="bg-lightpgone dark:bg-darkpgone bg-cover bg-center bg-no-repeat w-full"
+        className="transition-all bg-lightpgone dark:bg-darkpgone bg-cover bg-center bg-no-repeat w-full"
       >
         <section className="snap-center w-full h-screen bg-landing bg-contain bg-no-repeat bg-right-bottom md:bg-[length:505px]">
           {navbarShowState ? (
             <nav
               id="navbar"
-              className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 bg-lightmobilemenu bg-cover bg-center bg-no-repeat"
+              className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 bg-lightmobilemenu dark:bg-darkmobilemenu bg-cover bg-center bg-no-repeat"
             >
               <ul className="max-lg:flex-col max-lg:items-stretch flex w-full h-full">
                 <section className="w-full h-[10%] flex justify-between items-center ">
@@ -119,21 +136,29 @@ const LandingPage = () => {
                     <li
                       id="home"
                       onClick={(e) => handleScroll(e)}
-                      className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter  text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                      className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter  text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition -all "
+                      tabindex="0"
                     >
                       Home
                     </li>
-                    <li className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+                    <li
+                      tabIndex="2"
+                      className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                    >
                       Features
                     </li>
                     <li
                       id="contact"
                       onClick={(e) => handleScroll(e)}
                       className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                      tabIndex="3"
                     >
                       Contact
                     </li>
-                    <li className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+                    <li
+                      className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                      tabIndex="4"
+                    >
                       <Link
                         to="/sign-in"
                         className="max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
