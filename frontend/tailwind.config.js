@@ -29,6 +29,12 @@ module.exports = {
         darkpgtwo: "url('./assets/illustrations/darkMode/darktwo.svg')",
         darkpgthree: "url('./assets/illustrations/darkMode/darkthree.svg')",
         darkcontact: "url('./assets/illustrations/darkMode/darkcontact.svg')",
+        darkmobilemenu:
+          "url('./assets/illustrations/darkMode/darkmobilemenu.svg')",
+        darkregisterbgmobile:
+          "url('./assets/illustrations/darkMode/darkregisterbgmobile.svg')",
+        darkregisterbg:
+          "url('./assets/illustrations/darkMode/darkregisterbg.svg')",
       },
     },
   },

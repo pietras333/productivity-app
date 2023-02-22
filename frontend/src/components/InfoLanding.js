@@ -9,19 +9,9 @@ const InfoLanding = (props) => {
               <h2 className=" max-sm:text-4xl 2xl:text-7xl xl:text-6xl lg:text-6xl md:text-4xl sm:text-5xl font-bold tracking-widest gradienttext">
                 Let your creativity spread!
               </h2>
-              <p className="max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-base sm:text-base text-white">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio,
-                tempora dolor. Tempora iusto delectus, ipsam quo quae
-                architecto, nisi vero obcaecati, error molestiae fugit facilis
-                sapiente odit voluptate. Dolore rem laboriosam dolores corporis,
-                dicta, veniam cupiditate illum sapiente mollitia iusto est
-                consequatur? Doloremque facere a dolorem at quisquam officia
-                odio quas ipsum laboriosam ut. Similique, tempora. Enim eum
-                nulla accusamus, error rem sed dignissimos doloribus esse
-                pariatur repellendus, eos nihil assumenda quos ratione cum alias
-                doloremque! Velit harum magni ducimus temporibus saepe! Tenetur
-                recusandae eos necessitatibus nam dolore maiores, deserunt saepe
-                consequuntur atque aut! Eligendi sint amet fugiat quas dolore.
+              <p className="text-white max-sm:text-xl max-sm:mr-[3%] tracking-tighter 2xl:text-2xl xl:text-2xl lg:text-xl md:text-base sm:text-base">
+                Know how important it is to have space that your creativity can
+                fill in!
               </p>
             </main>
           </section>
@@ -34,19 +24,9 @@ const InfoLanding = (props) => {
               <h2 className="dark:text-[black] gradienttext max-sm:text-4xl 2xl:text-7xl xl:text-6xl lg:text-6xl md:text-4xl sm:text-5xl font-bold tracking-widest">
                 Do your job with relaxation!
               </h2>
-              <p className="text-white max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-base sm:text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio,
-                tempora dolor. Tempora iusto delectus, ipsam quo quae
-                architecto, nisi vero obcaecati, error molestiae fugit facilis
-                sapiente odit voluptate. Dolore rem laboriosam dolores corporis,
-                dicta, veniam cupiditate illum sapiente mollitia iusto est
-                consequatur? Doloremque facere a dolorem at quisquam officia
-                odio quas ipsum laboriosam ut. Similique, tempora. Enim eum
-                nulla accusamus, error rem sed dignissimos doloribus esse
-                pariatur repellendus, eos nihil assumenda quos ratione cum alias
-                doloremque! Velit harum magni ducimus temporibus saepe! Tenetur
-                recusandae eos necessitatibus nam dolore maiores, deserunt saepe
-                consequuntur atque aut! Eligendi sint amet fugiat quas dolore.
+              <p className="text-white max-sm:text-xl max-sm:mr-[3%] tracking-tighter 2xl:text-2xl xl:text-2xl lg:text-xl  md:text-base sm:text-base">
+                Work without the stress of deadline and any other factors that
+                can make you stressed!
               </p>
             </main>
           </section>
