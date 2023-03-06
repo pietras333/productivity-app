@@ -2,19 +2,15 @@ import MainPageLanding from "../components/MainPageLanding";
 import InfoLanding from "../components/InfoLanding";
 import ContactForm from "../components/ContactForm";
 import FooterLanding from "../components/FooterLanding";
-import DarkMode from "../assets/illustrations/darkmode.png";
-import LightMode from "../assets/illustrations/lightmode.png";
 import Hamburger from "../assets/illustrations/hamburger.png";
 import Arrow from "../assets/illustrations/arrow.png";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-
-//070809
+import DarkModeHandler from "../components/DarkModeHandler";
 
 const LandingPage = () => {
-  const [localCookie, setLocalCookie] = useState();
-  const [darkMode, setDarkMode] = useState(false);
   const [navbarShowState, setNavbarShowState] = useState(false);
+  const [currentMode, setCurrentMode] = useState("");
   let scrolled = 0;
   const contactref = useRef(null);
   const homeref = useRef(null);
@@ -37,27 +33,10 @@ const LandingPage = () => {
     }
   };
 
-  const handleDisplayIconChange = () => {
-    return darkMode ? DarkMode : LightMode;
-  };
-  const handleDisplayChange = () => {
-    const theme = localStorage.getItem("mode");
-    if (theme === "dark") {
-      localStorage.removeItem("mode");
-      localStorage.setItem("mode", "light");
-      document.querySelector("html").classList.remove("dark");
-    } else {
-      localStorage.removeItem("mode");
-      localStorage.setItem("mode", "dark");
-      document.querySelector("html").classList.add("dark");
-    }
-    setDarkMode((prev) => !prev);
-  };
-
   const navbarstyledefault =
     "fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] transition-all border-b-2 border-b-transparent";
   const navbarstylescrolled =
-    "fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] border-b-2 border-b-[#4FACF7] shadow-2xl shadow-[#4FACF7] bg-[#4fabf7af] transition-all dark:bg-[#00112285] dark:shadow-[#FF5722] dark:border-b-[#FF5722]";
+    "dark:bg-[#121212] dark:shadow-transparent dark:border-b-[#7b34c2b6] fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px] lg:h-[100px] md:h-[80px] sm:h-[60px] border-b-2 border-b-[#4FACF7] shadow-2xl shadow-[#4FACF7] bg-[#4fabf7af] transition-all ";
   window.onscroll = () => {
     scroll();
   };
@@ -82,22 +61,24 @@ const LandingPage = () => {
     setNavbarShowState((prev) => !prev);
     scroll();
   };
+  const handleModeChange = () => {
+    const handler = DarkModeHandler;
+    handler.changeMode();
+    setCurrentMode(handler.getMode());
+    console.log("currentMode ===", currentMode);
+  };
   useLayoutEffect(() => {
-    const theme = localStorage.getItem("mode");
-    console.log("theme ===", theme);
-    if (theme === "dark") {
-      return document.documentElement.classList.add("dark");
-    }
-    return document.documentElement.classList.remove("dark");
-  }, []);
+    const handler = DarkModeHandler;
+    setCurrentMode(handler.getMode());
+  });
 
   return (
     <div
       id="landingpage"
       className={
-        darkMode
-          ? "dark w-full h-auto transition-mode-change"
-          : "w-full h-auto transition-mode-change"
+        currentMode === "dark"
+          ? "w-full h-auto transition-mode-change dark bg-[#121212]"
+          : "w-full h-auto transition-mode-change bg-[#121212] "
       }
     >
       <div
@@ -108,11 +89,11 @@ const LandingPage = () => {
           {navbarShowState ? (
             <nav
               id="navbar"
-              className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 bg-lightmobilemenu dark:bg-darkmobilemenu bg-cover bg-center bg-no-repeat"
+              className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 bg-lightmobilemenu  bg-cover bg-center bg-no-repeat"
             >
               <ul className="max-lg:flex-col max-lg:items-stretch flex w-full h-full">
                 <section className="w-full h-[10%] flex justify-between items-center ">
-                  <li className="dark:text-[#FF5722] animate-slidetop max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
+                  <li className=" animate-slidetop max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
                     Todooo
                   </li>
                   <li
@@ -174,16 +155,6 @@ const LandingPage = () => {
                         Get Started
                       </Link>
                     </li>
-                    <li className="mr-[1%] max-sm:mr-[1%] max-lg:mt-2">
-                      <button>
-                        <img
-                          src={handleDisplayIconChange()}
-                          alt="icon of display mode"
-                          className="w-[50px] invert animate-fadein inline transition-all"
-                          onClick={handleDisplayChange}
-                        />
-                      </button>
-                    </li>
                   </section>
                 </section>
               </ul>
@@ -191,56 +162,42 @@ const LandingPage = () => {
           ) : (
             <nav
               id="navbar"
-              className="fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px]" //max-lg:h-screen max-lg:z-20
+              className="fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px]"
             >
-              <ul
-                className="flex w-full h-full justify-between items-center mt-2"
-                //max-lg:justify-center max-lg:items-center max-lg:flex-col
-              >
-                <li
-                  className="dark:text-[#FF5722] animate-slidetop text-[#FFB562] max-sm:w-[30%] max-sm:text-4xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest"
-                  //max-lg:ml-0 max-lg:text-center max-lg:absolute max-lg:top-1
-                >
+              <ul className="flex w-full h-full justify-between items-center mt-2">
+                <li className="dark:text-[#a76bcf] pointer-events-none animate-slidetop text-[#FFB562] max-sm:w-[30%] max-sm:text-4xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest">
                   Todooo
                 </li>
                 <li
                   id="home"
                   onClick={(e) => handleScroll(e)}
-                  className="dark:text-[#cf461d] dark:hover:text-[#FF5722] max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
-                  // max-lg:hidden (onclick) max-lg:inline
+                  className="dark:hover:text-[#a76bcf] max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                 >
                   Home
                 </li>
-                <li
-                  className="dark:text-[#cf461d] dark:hover:text-[#FF5722] max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%]  tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
-                  // max-lg:hidden (onclick) max-lg:inline
-                >
+                <li className="dark:hover:text-[#a76bcf]  max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%]  tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
                   Features
                 </li>
                 <li
                   id="contact"
                   onClick={(e) => handleScroll(e)}
-                  className="dark:text-[#cf461d] dark:hover:text-[#FF5722] max-lg:hidden inline max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
-                  // max-lg:hidden (onclick) max-lg:inline
+                  className="dark:hover:text-[#a76bcf] max-lg:hidden inline max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                 >
                   Contact
                 </li>
-                <li className="mr-[1%] max-sm:mr-[4%]">
+                <li
+                  id="mode"
+                  onClick={handleModeChange}
+                  className="dark:hover:text-[#a76bcf]  max-lg:hidden inline max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                >
+                  {currentMode === "dark" ? "Dark" : "Light"}
+                </li>
+                <li className="mr-[10%] max-sm:mr-[4%]">
                   <Link to="/sign-in">
-                    <button className="inline max-lg:hidden animate-fadein max-sm:text-xs max-sm:w-[120%] max-sm:h-[30px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] dark:bg-[#FF5722] dark:text-[#001B35] dark:hover:text-[#FF5722] dark:hover:bg-transparent dark:hover:border-[#FF5722] hover:tracking-widest hover:cursor-pointer transition-all w-[150%] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
+                    <button className="dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] inline max-lg:hidden animate-fadein max-sm:text-xs max-sm:w-[120%] max-sm:h-[30px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[150%] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
                       Sign In
                     </button>
                   </Link>
-                </li>
-                <li className="mr-[1%] max-sm:mr-[1%]">
-                  <button>
-                    <img
-                      src={handleDisplayIconChange()}
-                      alt="icon of display mode"
-                      className="w-[50px] invert animate-fadein inline max-lg:hidden transition-all"
-                      onClick={handleDisplayChange}
-                    />
-                  </button>
                 </li>
                 <li
                   onClick={handleResponsiveNavbar}
@@ -272,13 +229,13 @@ const LandingPage = () => {
       >
         <ContactForm />
       </div>
-      <div className="bg-[#0052cc] dark:bg-[#001122] w-full h-[300px] snap-center flex max-sm:flex-col justify-around">
+      <div className="bg-[#0052cc] dark:bg-[#121212]  w-full h-[300px] snap-center flex max-sm:flex-col justify-around">
         <FooterLanding />
       </div>
       <div className="fixed top-0 z-10 w-full">
         <section className="w-full h-[8px]">
           <section
-            className="h-[8px] bg-[#FFB562] dark:bg-[#FF5722]"
+            className="h-[8px] bg-[#FFB562] dark:bg-[#a76bcf] "
             id="bar"
           ></section>
         </section>
