@@ -67,8 +67,10 @@ const RegisterForm = () => {
           >
             <ul className="max-lg:flex-col max-lg:items-stretch flex w-full h-full">
               <section className="w-full h-[10%] flex justify-between items-center">
-                <li className="animate-slidetop max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
-                  Todooo
+                <li className="max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] max-lg:text-4xl font-bold tracking-widest">
+                  <h1 className="dark:text-[#a76bcf] animate-slidetop text-[#FFB562]">
+                    Todooo
+                  </h1>
                 </li>
                 <li
                   onClick={handleResponsiveNavbar}
@@ -88,11 +90,10 @@ const RegisterForm = () => {
                     id="home"
                     className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter  text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                   >
-                    <Link
-                      className="max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
-                      to="../"
-                    >
-                      Home
+                    <Link className="" to="../">
+                      <h2 className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+                        Home
+                      </h2>
                     </Link>
                   </li>
 
@@ -101,7 +102,9 @@ const RegisterForm = () => {
                       to="../sign-in"
                       className="max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                     >
-                      Sign In
+                      <h2 className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+                        Sign In
+                      </h2>
                     </Link>
                   </li>
                 </section>
@@ -114,28 +117,27 @@ const RegisterForm = () => {
             className="fixed animate-slidetop w-full max-sm:h-[10%] 2xl:h-[150px] xl:h-[120px]"
           >
             <ul className="flex w-full h-full justify-between items-center mt-2">
-              <li className="animate-slidetop  text-[#FFB562] max-sm:w-[30%] max-sm:text-4xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest">
-                Todooo
+              <li className="max-sm:w-[30%] max-sm:text-4xl 2xl:w-[60%] xl:w-[60%] lg:w-[50%] md:w-[40%] sm:w-[35%] 2xl:text-6xl xl:text-6xl lg:text-6xl md:text-5xl sm:text-5xl font-bold ml-[5%] tracking-widest">
+                <h1 className="dark:text-[#a76bcf] animate-slidetop text-[#FFB562]">
+                  Todooo
+                </h1>
               </li>
               <Link to="../">
-                <li
-                  id="home"
-                  className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
-                >
-                  Home
+                <li id="home">
+                  <h2 className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+                    Home
+                  </h2>
                 </li>
               </Link>
-              <li
-                id="mode"
-                onClick={handleModeChange}
-                className="dark:hover:text-[#a76bcf]  max-lg:hidden inline max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
-              >
-                {currentMode === "dark" ? "Dark" : "Light"}
+              <li id="mode" onClick={handleModeChange}>
+                <h2 className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+                  {currentMode === "dark" ? "Dark" : "Light"}
+                </h2>
               </li>
 
               <li className="mr-[10%] max-sm:mr-[4%]">
                 <Link to="/sign-in">
-                  <button className="inline max-lg:hidden animate-fadein max-sm:text-xs max-sm:w-[120%] max-sm:h-[30px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562] hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[150%] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562]">
+                  <button className="dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] animate-fadein max-sm:text-lg max-sm:w-[150px] max-sm:h-[40px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[180px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
                     Sign In
                   </button>
                 </Link>
@@ -158,16 +160,22 @@ const RegisterForm = () => {
         )}
         <section className="w-[50%] max-sm:w-full h-full flex justify-center items-center">
           <section className="h-[70%] w-full flex justify-center items-center flex-col">
-            <h1 className=" text-8xl max-sm:text-6xl mt-10 max-sm:mt-2 w-[80%] orangestroke font-bold">
-              Get Started
-            </h1>
+            {localStorage.getItem("mode") === "dark" ? (
+              <h1 className="text-[#7b34c2b6] text-8xl max-sm:text-6xl mt-10 max-sm:mt-2 w-[80%] font-bold">
+                Get Started
+              </h1>
+            ) : (
+              <h1 className="text-8xl max-sm:text-6xl mt-10 max-sm:mt-2 w-[80%] orangestroke font-bold">
+                Get Started
+              </h1>
+            )}
             <form className="w-[80%] max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center">
               <div className="mt-10 max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center">
-                <h2 className="text-[#FFB562] font-bold tracking-widest text-2xl max-sm:text-xl">
+                <h2 className="text-[#FFB562] dark:text-[#a76bcf] font-bold tracking-widest text-2xl max-sm:text-xl">
                   Pass your username
                 </h2>
                 <input
-                  className="focus:border-[#FFB562] bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#FFB562] w-[50%] max-sm:w-[80%] transition-all focus:w-[65%] max-sm:focus:w-[90%]"
+                  className="focus:border-[#FFB562] dark:focus:border-[#7b34c2b6] dark:border-b-[#7b34c2b6] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#FFB562] w-[50%] max-sm:w-[80%] transition-all focus:w-[65%] max-sm:focus:w-[90%]"
                   type="text"
                   placeholder="Username..."
                   onChange={(e) => handleUsernameChange(e)}
@@ -184,11 +192,11 @@ const RegisterForm = () => {
                 )}
               </div>
               <div className="mt-10 max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center">
-                <h2 className="text-[#FFB562] font-bold tracking-widest text-2xl max-sm:text-xl">
+                <h2 className="text-[#FFB562] dark:text-[#a76bcf] font-bold tracking-widest text-2xl max-sm:text-xl">
                   Set your password
                 </h2>
                 <input
-                  className="focus:border-[#FFB562] bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#FFB562]w-[50%] max-sm:w-[80%] transition-all focus:w-[65%] max-sm:focus:w-[90%]"
+                  className="focus:border-[#FFB562] dark:focus:border-[#7b34c2b6] dark:border-b-[#7b34c2b6] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#FFB562] w-[50%] max-sm:w-[80%] transition-all focus:w-[65%] max-sm:focus:w-[90%]"
                   type="password"
                   placeholder="Psst..."
                   onChange={(e) => handlePasswordChange(e)}
@@ -204,7 +212,7 @@ const RegisterForm = () => {
                   </h3>
                 )}
               </div>
-              <button className="ml-[20%] max-sm:ml-0 mt-10 animate-fadein max-sm:text-lg max-sm:w-[50%] max-sm:h-[50px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-lg text-white bg-[#FFB562] hover:text-[#FFB562] hover:tracking-widest max-lg:hover:tracking-wide  hover:cursor-pointer transition-all w-[250px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562]">
+              <button className="dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] ml-[20%] max-sm:ml-0 mt-10 animate-fadein max-sm:text-lg max-sm:w-[50%] max-sm:h-[50px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-lg text-white bg-[#FFB562] hover:text-[#FFB562] hover:tracking-widest max-lg:hover:tracking-wide  hover:cursor-pointer transition-all w-[250px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562]">
                 Create account
               </button>
             </form>

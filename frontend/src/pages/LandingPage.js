@@ -93,7 +93,7 @@ const LandingPage = () => {
             >
               <ul className="max-lg:flex-col max-lg:items-stretch flex w-full h-full">
                 <section className="w-full h-[10%] flex justify-between items-center ">
-                  <li className=" animate-slidetop max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
+                  <li className="animate-slidetop max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
                     Todooo
                   </li>
                   <li
@@ -118,7 +118,7 @@ const LandingPage = () => {
                       id="home"
                       onClick={(e) => handleScroll(e)}
                       className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter  text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition -all "
-                      tabindex="0"
+                      tabIndex="0"
                     >
                       Home
                     </li>
@@ -229,7 +229,7 @@ const LandingPage = () => {
       >
         <ContactForm />
       </div>
-      <div className="bg-[#0052cc] dark:bg-[#121212]  w-full h-[300px] snap-center flex max-sm:flex-col justify-around">
+      <div className="bg-[#F7770F] dark:bg-[#121212]  w-full h-[300px] snap-center flex max-sm:flex-col justify-around">
         <FooterLanding />
       </div>
       <div className="fixed top-0 z-10 w-full">
