@@ -35,6 +35,17 @@ module.exports = {
           "url('./assets/illustrations/darkMode/darkregisterbgmobile.svg')",
         darkmobilemenu:
           "url('./assets/illustrations/darkMode/darkmobilemenu.svg')",
+        lightsigninbg:
+          "url('./assets/illustrations/lightMode/lightsigninbg.svg')",
+        lightsigninbgmobile:
+          "url('./assets/illustrations/lightMode/lightsigninbgmobile.svg')",
+        lightsignmobilemenu:
+          "url('./assets/illustrations/lightMode/lightsignmobilemenu.svg')",
+        darksigninbg: "url('./assets/illustrations/darkMode/darksigninbg.svg')",
+        darksigninbgmobile:
+          "url('./assets/illustrations/darkMode/darksigninbgmobile.svg')",
+        darksigninmobilemenu:
+          "url('./assets/illustrations/darkMode/darksigninmobilemenu.svg')",
       },
     },
   },
