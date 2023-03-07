@@ -169,32 +169,42 @@ const LandingPage = () => {
                   Todooo
                 </li>
                 <li
+                  tabIndex="0"
                   id="home"
                   onClick={(e) => handleScroll(e)}
-                  className="dark:hover:text-[#a76bcf] max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                  className="dark:outline-[#a76bcf] outline-white outline-offset-4 focus:rounded-lg dark:hover:text-[#a76bcf] max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                 >
                   Home
                 </li>
-                <li className="dark:hover:text-[#a76bcf]  max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%]  tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+                <li
+                  tabIndex="0"
+                  className="dark:outline-[#a76bcf] outline-white outline-offset-4 focus:rounded-lg dark:hover:text-[#a76bcf] max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%]  tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                >
                   Features
                 </li>
                 <li
+                  tabIndex="0"
                   id="contact"
                   onClick={(e) => handleScroll(e)}
-                  className="dark:hover:text-[#a76bcf] max-lg:hidden inline max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                  className="dark:outline-[#a76bcf] outline-white outline-offset-4 focus:rounded-lg dark:hover:text-[#a76bcf] max-lg:hidden inline max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                 >
                   Contact
                 </li>
                 <li
+                  tabIndex="0"
                   id="mode"
                   onClick={handleModeChange}
-                  className="dark:hover:text-[#a76bcf]  max-lg:hidden inline max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                  className="dark:outline-[#a76bcf] outline-white outline-offset-4 focus:rounded-lg dark:hover:text-[#a76bcf]  max-lg:hidden inline max-sm:text-xs  max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                 >
                   {currentMode === "dark" ? "Dark" : "Light"}
                 </li>
                 <li className="mr-[10%] max-sm:mr-[4%]">
-                  <Link to="/sign-in">
-                    <button className="dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] inline max-lg:hidden animate-fadein max-sm:text-xs max-sm:w-[120%] max-sm:h-[30px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[150%] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
+                  <Link
+                    tabIndex="-1"
+                    to="/sign-in"
+                    className="focus:outline-none"
+                  >
+                    <button className="dark:outline-[#a76bcf] outline-white outline-offset-4 dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] inline max-lg:hidden animate-fadein max-sm:text-xs max-sm:w-[120%] max-sm:h-[30px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[150%] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
                       Sign In
                     </button>
                   </Link>
@@ -217,19 +227,29 @@ const LandingPage = () => {
           <MainPageLanding />
         </section>
       </div>
-      <div className="bg-lightpgtwo dark:bg-darkpgtwo bg-cover bg-center bg-no-repeat w-full">
+      <div
+        tabIndex="0"
+        className="bg-lightpgtwo outline-white dark:bg-darkpgtwo bg-cover bg-center bg-no-repeat w-full"
+      >
         <InfoLanding side="left" />
       </div>
-      <div className="bg-lightpgthree dark:bg-darkpgthree bg-cover bg-center bg-no-repeat w-full">
+      <div
+        tabIndex="0"
+        className="bg-lightpgthree outline-white dark:bg-darkpgthree bg-cover bg-center bg-no-repeat w-full"
+      >
         <InfoLanding side="right" />
       </div>
       <div
+        tabIndex="0"
         ref={contactref}
-        className="bg-lightcontact dark:bg-darkcontact bg-cover bg-center bg-no-repeat w-full"
+        className="bg-lightcontact outline-white dark:bg-darkcontact bg-cover bg-center bg-no-repeat w-full"
       >
         <ContactForm />
       </div>
-      <div className="bg-[#F7770F] dark:bg-[#121212]  w-full h-[300px] snap-center flex max-sm:flex-col justify-around">
+      <div
+        tabIndex="0"
+        className="bg-[#F7770F] outline-white dark:bg-[#121212]  w-full h-[300px] snap-center flex max-sm:flex-col justify-around"
+      >
         <FooterLanding />
       </div>
       <div className="fixed top-0 z-10 w-full">

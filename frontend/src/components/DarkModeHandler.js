@@ -12,10 +12,8 @@ const DarkModeHandler = {
 
   changeMode() {
     if (this.getMode() === "dark") {
-      console.log("HELLO FROM DARK");
       return localStorage.setItem("mode", "light");
     }
-    console.log("HELLO FROM LIGHT");
     return localStorage.setItem("mode", "dark");
   },
 
