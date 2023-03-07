@@ -33,6 +33,8 @@ module.exports = {
           "url('./assets/illustrations/darkMode/darkregisterbg.svg')",
         darkregisterbgmobile:
           "url('./assets/illustrations/darkMode/darkregisterbgmobile.svg')",
+        darkmobilemenu:
+          "url('./assets/illustrations/darkMode/darkmobilemenu.svg')",
       },
     },
   },

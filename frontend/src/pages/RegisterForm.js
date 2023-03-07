@@ -63,7 +63,7 @@ const RegisterForm = () => {
         {navbarShowState ? (
           <nav
             id="navbar"
-            className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 bg-lightmobilemenu bg-cover bg-center bg-no-repeat"
+            className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 bg-lightmobilemenu dark:bg-darkmobilemenu bg-cover bg-center bg-no-repeat"
           >
             <ul className="max-lg:flex-col max-lg:items-stretch flex w-full h-full">
               <section className="w-full h-[10%] flex justify-between items-center">
@@ -86,23 +86,21 @@ const RegisterForm = () => {
                   className="flex justify-center items-center flex-col w-full
                   "
                 >
-                  <li
-                    id="home"
-                    className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter  text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
-                  >
+                  <li id="home">
                     <Link to="../">
-                      <h2 className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+                      <h2 className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
                         Home
                       </h2>
                     </Link>
                   </li>
-
-                  <li className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
-                    <Link
-                      to="../sign-in"
-                      className="max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
-                    >
-                      <h2 className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+                  <li tabIndex="0" id="mode" onClick={handleModeChange}>
+                    <h2 className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
+                      {currentMode === "dark" ? "Dark" : "Light"}
+                    </h2>
+                  </li>
+                  <li>
+                    <Link to="../sign-in">
+                      <h2 className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
                         Sign In
                       </h2>
                     </Link>
@@ -122,8 +120,8 @@ const RegisterForm = () => {
                   Todooo
                 </h1>
               </li>
-              <Link to="../">
-                <li id="home">
+              <Link to="../" tabIndex="-1">
+                <li id="home" tabIndex="0">
                   <h2 className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
                     Home
                   </h2>
@@ -136,8 +134,11 @@ const RegisterForm = () => {
               </li>
 
               <li className="mr-[10%] max-sm:mr-[4%]">
-                <Link to="/sign-in">
-                  <button className="max-lg:hidden dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] animate-fadein max-sm:text-lg max-sm:w-[150px] max-sm:h-[40px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[180px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
+                <Link to="/sign-in" tabIndex="-1">
+                  <button
+                    tabIndex="0"
+                    className="max-lg:hidden dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] animate-fadein max-sm:text-lg max-sm:w-[150px] max-sm:h-[40px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[180px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] "
+                  >
                     Sign In
                   </button>
                 </Link>

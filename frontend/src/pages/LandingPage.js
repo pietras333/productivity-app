@@ -89,11 +89,11 @@ const LandingPage = () => {
           {navbarShowState ? (
             <nav
               id="navbar"
-              className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 bg-lightmobilemenu  bg-cover bg-center bg-no-repeat"
+              className="transition-all fixed animate-slidetop w-full max-lg:h-screen max-lg:z-20 dark:bg-darkmobilemenu bg-lightmobilemenu  bg-cover bg-center bg-no-repeat"
             >
               <ul className="max-lg:flex-col max-lg:items-stretch flex w-full h-full">
                 <section className="w-full h-[10%] flex justify-between items-center ">
-                  <li className="animate-slidetop max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
+                  <li className="dark:text-[#a76bcf] animate-slidetop max-lg:w-[80%] max-lg:animate-slidetop max-lg:ml-[5%] text-[#FFB562] max-lg:text-4xl font-bold tracking-widest">
                     Todooo
                   </li>
                   <li
@@ -110,10 +110,7 @@ const LandingPage = () => {
                   </li>
                 </section>
                 <section className="flex h-[90%] justify-around items-center flex-col ">
-                  <section
-                    className="flex justify-center items-center flex-col w-full
-                  "
-                  >
+                  <section className="flex justify-center items-center flex-col w-full">
                     <li
                       id="home"
                       onClick={(e) => handleScroll(e)}
@@ -123,7 +120,7 @@ const LandingPage = () => {
                       Home
                     </li>
                     <li
-                      tabIndex="2"
+                      tabIndex="0"
                       className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                     >
                       Features
@@ -132,9 +129,17 @@ const LandingPage = () => {
                       id="contact"
                       onClick={(e) => handleScroll(e)}
                       className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
-                      tabIndex="3"
+                      tabIndex="0"
                     >
                       Contact
+                    </li>
+                    <li
+                      tabIndex="0"
+                      id="mode"
+                      onClick={handleModeChange}
+                      className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
+                    >
+                      {currentMode === "dark" ? "Dark" : "Light"}
                     </li>
                     <li
                       className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
