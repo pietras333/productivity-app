@@ -23,8 +23,12 @@ const MainPageLanding = () => {
         <Link
           to="/get-started"
           className="w-full h-full flex justify-center items-center"
+          tabIndex="-1"
         >
-          <button className="dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] animate-fadein max-sm:text-lg max-sm:w-[150px] max-sm:h-[40px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[180px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
+          <button
+            tabIndex="0"
+            className="dark:bg-[#a76bcf] dark:outline-[#a76bcf] outline-white outline-offset-4 dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] animate-fadein max-sm:text-lg max-sm:w-[150px] max-sm:h-[40px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[180px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] "
+          >
             Get Started
           </button>
         </Link>

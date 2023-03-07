@@ -59,7 +59,7 @@ const RegisterForm = () => {
           : "w-full h-auto transition-mode-change"
       }
     >
-      <div className="transition-all max-sm:bg-lightregisterbgmobile dark:bg-darkregisterbg w-screen h-screen bg-lightregisterbg bg-cover bg-no-repeat bg-left-bottom animate-fadeinbg">
+      <div className="transition-all max-sm:bg-lightregisterbgmobile max-sm:dark:bg-darkregisterbgmobile dark:bg-darkregisterbg w-screen h-screen bg-lightregisterbg bg-cover bg-no-repeat bg-left-bottom animate-fadeinbg">
         {navbarShowState ? (
           <nav
             id="navbar"
@@ -90,7 +90,7 @@ const RegisterForm = () => {
                     id="home"
                     className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter  text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                   >
-                    <Link className="" to="../">
+                    <Link to="../">
                       <h2 className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
                         Home
                       </h2>
@@ -129,7 +129,7 @@ const RegisterForm = () => {
                   </h2>
                 </li>
               </Link>
-              <li id="mode" onClick={handleModeChange}>
+              <li tabIndex="0" id="mode" onClick={handleModeChange}>
                 <h2 className="max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
                   {currentMode === "dark" ? "Dark" : "Light"}
                 </h2>
@@ -137,7 +137,7 @@ const RegisterForm = () => {
 
               <li className="mr-[10%] max-sm:mr-[4%]">
                 <Link to="/sign-in">
-                  <button className="dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] animate-fadein max-sm:text-lg max-sm:w-[150px] max-sm:h-[40px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[180px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
+                  <button className="max-lg:hidden dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] animate-fadein max-sm:text-lg max-sm:w-[150px] max-sm:h-[40px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-base text-white bg-[#FFB562]  hover:text-[#FFB562] hover:tracking-widest hover:cursor-pointer transition-all w-[180px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562] ">
                     Sign In
                   </button>
                 </Link>

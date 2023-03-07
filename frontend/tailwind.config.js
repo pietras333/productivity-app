@@ -31,6 +31,8 @@ module.exports = {
         darkcontact: "url('./assets/illustrations/darkMode/darkcontact.svg')",
         darkregisterbg:
           "url('./assets/illustrations/darkMode/darkregisterbg.svg')",
+        darkregisterbgmobile:
+          "url('./assets/illustrations/darkMode/darkregisterbgmobile.svg')",
       },
     },
   },
