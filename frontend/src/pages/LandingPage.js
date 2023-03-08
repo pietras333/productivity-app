@@ -4,7 +4,7 @@ import ContactForm from "../components/ContactForm";
 import FooterLanding from "../components/FooterLanding";
 import Hamburger from "../assets/illustrations/hamburger.png";
 import Arrow from "../assets/illustrations/arrow.png";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import DarkModeHandler from "../components/DarkModeHandler";
 
@@ -14,6 +14,8 @@ const LandingPage = () => {
   let scrolled = 0;
   const contactref = useRef(null);
   const homeref = useRef(null);
+
+  const [data, setData] = useState(null);
 
   const handleScroll = (event) => {
     const id = event.target.id;
@@ -41,7 +43,6 @@ const LandingPage = () => {
     scroll();
   };
   const scroll = () => {
-    console.log("SCROLLED");
     const navbar = document.getElementById("navbar");
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
@@ -65,12 +66,21 @@ const LandingPage = () => {
     const handler = DarkModeHandler;
     handler.changeMode();
     setCurrentMode(handler.getMode());
-    console.log("currentMode ===", currentMode);
   };
   useLayoutEffect(() => {
     const handler = DarkModeHandler;
     setCurrentMode(handler.getMode());
   });
+
+  const handleApiRequest = async () => {
+    const res = await fetchData();
+    console.log("res ===", { res });
+  };
+  const fetchData = async () => {
+    const res = await fetch("../api");
+    const data = await res.json();
+    return data;
+  };
 
   return (
     <div
@@ -182,6 +192,7 @@ const LandingPage = () => {
                   Home
                 </li>
                 <li
+                  onClick={handleApiRequest}
                   tabIndex="0"
                   className="dark:outline-[#a76bcf] outline-white outline-offset-4 focus:rounded-lg dark:hover:text-[#a76bcf] max-lg:hidden inline max-sm:text-xs max-sm:mr-[3%]  tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-sm text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all"
                 >

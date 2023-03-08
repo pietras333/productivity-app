@@ -38,7 +38,6 @@ const SignInPage = () => {
     const handler = DarkModeHandler;
     handler.changeMode();
     setCurrentMode(handler.getMode());
-    console.log("currentMode ===", currentMode);
   };
 
   useEffect(() => {
