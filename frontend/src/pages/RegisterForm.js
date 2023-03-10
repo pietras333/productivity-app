@@ -54,8 +54,8 @@ const RegisterForm = () => {
     <div
       className={
         currentMode === "dark"
-          ? "w-full h-auto transition-mode-change dark"
-          : "w-full h-auto transition-mode-change"
+          ? "w-full h-auto transition-mode-change dark bg-[#121212]"
+          : "w-full h-auto transition-mode-change bg-[#121212]"
       }
     >
       <div className="transition-all max-sm:bg-lightregisterbgmobile max-sm:dark:bg-darkregisterbgmobile dark:bg-darkregisterbg w-screen h-screen bg-lightregisterbg bg-cover bg-no-repeat bg-left-bottom animate-fadeinbg">
