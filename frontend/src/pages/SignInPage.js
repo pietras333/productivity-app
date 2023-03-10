@@ -54,8 +54,8 @@ const SignInPage = () => {
     <div
       className={
         currentMode === "dark"
-          ? "w-full h-auto transition-mode-change dark"
-          : "w-full h-auto transition-mode-change"
+          ? "w-full h-auto transition-mode-change dark bg-[#121212]"
+          : "w-full h-auto transition-mode-change bg-[#121212]"
       }
     >
       <div className="transition-all max-sm:bg-lightsigninbgmobile max-sm:dark:bg-darksigninbgmobile dark:bg-darksigninbg w-screen h-screen bg-lightsigninbg bg-cover bg-no-repeat bg-left-bottom animate-fadeinbg">
