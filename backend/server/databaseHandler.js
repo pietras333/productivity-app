@@ -1,8 +1,6 @@
 const { MongoClient } = require("mongodb");
 const { mongoose } = require("mongoose");
-
-const uri =
-  "***REMOVED***";
+const { uri } = require("../server/uricontent.js");
 
 module.exports.connect = async () => {
   try {
