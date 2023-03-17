@@ -1,8 +1,6 @@
 const { MongoClient } = require("mongodb");
 const { mongoose } = require("mongoose");
-
-const uri =
-  "mongodb+srv://pietras333:Ffcd08edr2vx3j@wendt.bpnygwf.mongodb.net/?retryWrites=true&w=majority";
+const { uri } = require("../server/uricontent.js");
 
 module.exports.connect = async () => {
   try {
