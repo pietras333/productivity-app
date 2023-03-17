@@ -1,10 +1,10 @@
 const { MongoClient } = require("mongodb");
 const { mongoose } = require("mongoose");
-const { uri } = require("../server/uricontent.js");
+const config = require("../server/sensitive.json");
 
 module.exports.connect = async () => {
   try {
-    await mongoose.connect(uri);
+    await mongoose.connect(config.uri);
     console.log("Connected to MongoDB");
   } catch (err) {
     console.log("Error ===", err);
