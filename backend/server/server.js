@@ -3,9 +3,16 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const database = require("../server/databaseHandler.js");
 
+database.connect();
+// database.addUser("Agata", "Jasiukiewicz");
+// database.findUser("Agata").then((data) => {
+// });
+// database.checkUser("Agata", "as").then((response) => {
+//   console.log(response);
+// });
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-database.connect();
 
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
