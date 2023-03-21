@@ -32,14 +32,14 @@ app.post("/api/users", async (req, res) => {
     case "register":
       try {
         const result = await handleRegister(data);
-        return res.status(201).send(result);
+        return res.status(201).send({ result });
       } catch {
         return res.status(500).send();
       }
     case "sign-in":
       try {
         const result = await handleLogin(data);
-        return res.status(201).send(result);
+        return res.status(201).send({ result });
       } catch {
         return res.status(500).send();
       }
