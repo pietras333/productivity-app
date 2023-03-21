@@ -27,7 +27,7 @@ class database {
         password: await bcrypt.hash(pass, 10),
       });
       await user.save();
-      return "Username created";
+      return "User created";
     }
   };
 
