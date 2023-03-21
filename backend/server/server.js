@@ -1,11 +1,17 @@
-const express = require("express");
+import express from "express";
 const PORT = process.env.PORT || 3001;
 const app = express();
-const database = require("../server/databaseHandler.js");
+import database from "../server/databaseHandler.js";
 
-database.connect();
+const db = new database();
+db.connect();
 
-// database.addUser("Agata", "Jasiukiewicz");
+// database.addUser("J", "Cole").then((data) => {
+//   console.log(data);
+// });
+// database.handleAuthentication("J", "Cole").then((data) => {
+//   console.log(data);
+// });
 // database.findUser("Agata").then((data) => {
 // });
 // database.checkUser("Agata", "as").then((response) => {
@@ -24,9 +30,19 @@ app.post("/api/users", async (req, res) => {
   const data = req.body;
   switch (data.method) {
     case "register":
-      return handleRegister(data);
+      try {
+        const result = await handleRegister(data);
+        return res.status(201).send(result);
+      } catch {
+        return res.status(500).send();
+      }
     case "sign-in":
-      return handleLogin(data);
+      try {
+        const result = await handleLogin(data);
+        return res.status(201).send(result);
+      } catch {
+        return res.status(500).send();
+      }
   }
 });
 
@@ -34,9 +50,9 @@ app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
-const handleLogin = (data) => {
-  console.log("login data ===", data);
+const handleLogin = async (data) => {
+  return await db.handleAuthentication(data.username, data.password);
 };
-const handleRegister = (data) => {
-  console.log("register data ===", data);
+const handleRegister = async (data) => {
+  return await db.addUser(data.username, data.password);
 };
