@@ -31,7 +31,7 @@ const TEST = () => {
 
   // SIMULATE LOGIN OR REGISTER
   const handleLogin = async () => {
-    await fetch("../api/users", {
+    await fetch("../api/users/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const TEST = () => {
     });
   };
   const handleRegister = async () => {
-    await fetch("../api/users", {
+    await fetch("../api/users/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const TEST = () => {
           </div>
           {/* SIMULATION OF LOGIN AND REGISTER */}
           <div className="bg-[#353535] flex justify-center">
-            <form className="flex justify-center items-center flex-col">
+            <div className="flex justify-center items-center flex-col">
               <div className="mt-5 flex justify-center items-center flex-col">
                 <h2 className="text-white">Pass your username</h2>
                 <input
@@ -113,7 +113,7 @@ const TEST = () => {
               >
                 Sign In
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@ const TEST = () => {
           </div>
           {/* SIMULATION OF LOGIN AND REGISTER */}
           <div className="bg-[#353535] flex justify-center">
-            <form className="flex justify-center items-center flex-col">
+            <div className="flex justify-center items-center flex-col">
               <div className="mt-5 flex justify-center items-center flex-col">
                 <h2 className="text-white">Pass your username</h2>
                 <input
@@ -171,7 +171,7 @@ const TEST = () => {
               >
                 Register
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
