@@ -4,6 +4,7 @@ const app = express();
 const database = require("../server/databaseHandler.js");
 
 database.connect();
+
 // database.addUser("Agata", "Jasiukiewicz");
 // database.findUser("Agata").then((data) => {
 // });
