@@ -51,8 +51,13 @@ app.listen(PORT, () => {
 });
 
 const handleLogin = async (data) => {
-  return await db.handleAuthentication(data.username, data.password);
+  return await db.handleAuthentication(data.email, data.password);
 };
 const handleRegister = async (data) => {
-  return await db.addUser(data.username, data.password);
+  return await db.addUser(
+    data.first_name,
+    data.last_name,
+    data.email,
+    data.password
+  );
 };

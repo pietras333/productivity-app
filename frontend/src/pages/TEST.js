@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 
 const TEST = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [usernameCorectness, setUsernameCorectness] = useState(true);
   const [passwordCorectness, setPasswordCorectness] = useState(true);
   const [loginRes, setLoginRes] = useState({});
@@ -13,24 +15,17 @@ const TEST = () => {
     "Username already taken",
   ];
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
   const corectnessCheck = (str) => {
     const special = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     return special.test(str);
   };
 
   useEffect(() => {
-    setUsernameCorectness(!corectnessCheck(username));
-    setPasswordCorectness(corectnessCheck(password));
-    console.log("loginRes ===", loginRes);
-    console.log("registerRes ===", registerRes);
+    // setUsernameCorectness(!corectnessCheck(username));
+    // setPasswordCorectness(corectnessCheck(password));
+    // console.log("loginRes ===", loginRes);
+    // console.log("registerRes ===", registerRes);
+    console.log("first name ===", firstName);
   });
 
   // SIMULATE LOGIN OR REGISTER
@@ -41,7 +36,7 @@ const TEST = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
+        email: email,
         password: password,
         method: "sign-in",
       }),
@@ -58,7 +53,9 @@ const TEST = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
         password: password,
         method: "register",
       }),
@@ -82,43 +79,42 @@ const TEST = () => {
           <div className="bg-[#353535] flex justify-center">
             <div className="flex justify-center items-center flex-col">
               <div className="mt-5 flex justify-center items-center flex-col">
-                <h2 className="text-white">Pass your username</h2>
+                <h2 className="text-white">Pass your first name</h2>
+                <input
+                  className="text-black"
+                  type="text"
+                  placeholder="First name..."
+                  onChange={(e) => setFirstName(e.target.value)}
+                  value={firstName}
+                />
+                <h2 className="text-white">Pass your last name</h2>
+                <input
+                  className="text-black"
+                  type="text"
+                  placeholder="Last name..."
+                  onChange={(e) => setLastName(e.target.value)}
+                  value={lastName}
+                />
+                <h2 className="text-white">Pass your email</h2>
                 <input
                   className="text-black"
                   type="text"
                   placeholder="Username..."
-                  onChange={(e) => handleUsernameChange(e)}
-                  value={username}
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                 />
-                {usernameCorectness ? (
-                  <h3 className="mt-2 text-transparent text-xs tracking-widest max-sm:text-center">
-                    {usernameInfo}
-                  </h3>
-                ) : (
-                  <h3 className="mt-2 text-[#F87474] text-xs tracking-widest animate-slideleft max-sm:text-center">
-                    {usernameInfo}
-                  </h3>
-                )}
+                <div className="flex justify-center items-center flex-col">
+                  <h2 className="text-white">Pass your password</h2>
+                  <input
+                    className="text-black "
+                    type="password"
+                    placeholder="Psst..."
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                  />
+                </div>
               </div>
-              <div className="mt-5 flex justify-center items-center flex-col">
-                <h2 className="text-white">Pass your password</h2>
-                <input
-                  className="text-black "
-                  type="password"
-                  placeholder="Psst..."
-                  onChange={(e) => handlePasswordChange(e)}
-                  value={password}
-                />
-                {passwordCorectness ? (
-                  <h3 className="mt-2 text-transparent text-xs tracking-widest">
-                    Password must contain special characters
-                  </h3>
-                ) : (
-                  <h3 className="mt-2 text-[#F87474] text-xs tracking-widest animate-slideleft ">
-                    Password must contain at least one special character
-                  </h3>
-                )}
-              </div>
+
               <button
                 onClick={handleLogin}
                 className="mt-2 mb-2 bg-lime-500 p-2 text-lg rounded-lg"
