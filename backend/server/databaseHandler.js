@@ -17,13 +17,15 @@ class database {
     console.log("Hello from database handler");
   };
 
-  addUser = async (username, pass) => {
-    const existance = await this.handleUserExistance(username);
+  addUser = async (firstName, lastName, email, pass) => {
+    const existance = await this.handleUserExistance(email);
     if (existance) {
-      return "Username taken";
+      return "Email taken";
     } else {
       const user = new UserModel({
-        name: username,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
         password: await bcrypt.hash(pass, 10),
       });
       await user.save();
@@ -31,33 +33,33 @@ class database {
     }
   };
 
-  findUser = async (username) => {
-    const user = await UserModel.find({ name: username });
+  findUser = async (email) => {
+    const user = await UserModel.find({ email: email });
     return user;
   };
 
-  checkUser = async (username, password) => {
-    const user = await this.findUser(username);
+  checkUser = async (email, password) => {
+    const user = await this.findUser(email);
     if (user[0].password != password) {
       return false;
     }
     return true;
   };
 
-  handleUserExistance = async (username) => {
-    const result = await this.findUser(username);
+  handleUserExistance = async (email) => {
+    const result = await this.findUser(email);
     if (result.length != 0) {
       return true;
     }
     return false;
   };
 
-  handleAuthentication = async (username, password) => {
-    const exists = await this.handleUserExistance(username);
+  handleAuthentication = async (email, password) => {
+    const exists = await this.handleUserExistance(email);
     if (!exists) {
       return "User doesn't exist";
     } else {
-      const user = await this.findUser(username);
+      const user = await this.findUser(email);
       const hashedpassword = user[0].password;
       if (await bcrypt.compare(password, hashedpassword)) {
         return "authentication completed";
