@@ -5,30 +5,13 @@ import Hamburger from "../assets/illustrations/hamburger.png";
 import DarkModeHandler from "../components/DarkModeHandler";
 
 const RegisterForm = () => {
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameCorectness, setUsernameCorectness] = useState(true);
-  const [passwordCorectness, setPasswordCorectness] = useState(true);
   const [navbarShowState, setNavbarShowState] = useState(false);
   const [currentMode, setCurrentMode] = useState("");
-
-  const usernameInfo = [
-    "Username can't contain special characters",
-    "Username already taken",
-  ];
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const corectnessCheck = (str) => {
-    const special = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    return special.test(str);
-  };
+  const [serverData, setServerData] = useState({});
 
   const handleResponsiveNavbar = () => {
     setNavbarShowState((prev) => !prev);
@@ -40,15 +23,31 @@ const RegisterForm = () => {
     setCurrentMode(handler.getMode());
   };
 
-  useEffect(() => {
-    setUsernameCorectness(!corectnessCheck(username));
-    setPasswordCorectness(corectnessCheck(password));
-  });
-
   useLayoutEffect(() => {
     const handler = DarkModeHandler;
     setCurrentMode(handler.getMode());
   });
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    await fetch("../api/users/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password,
+        method: "register",
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setServerData({ data });
+      });
+  };
 
   return (
     <div
@@ -81,10 +80,7 @@ const RegisterForm = () => {
                 </li>
               </section>
               <section className="flex h-[90%] justify-around items-center flex-col ">
-                <section
-                  className="flex justify-center items-center flex-col w-full
-                  "
-                >
+                <section className="flex justify-center items-center flex-col w-full ">
                   <li id="home">
                     <Link to="../">
                       <h2 className="max-lg:mt-2 max-lg:animate-slideleft max-lg:text-xl max-lg:inline inline tracking-tighter text-[rgba(255,255,255,.75)] hover:text-white hover:tracking-widest hover:cursor-pointer transition-all">
@@ -169,52 +165,65 @@ const RegisterForm = () => {
                 Get Started
               </h1>
             )}
-            <form className="w-[80%] max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center">
-              <div className="mt-10 max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center">
-                <h2 className="text-[#FFB562] dark:text-[#a76bcf] font-bold tracking-widest text-2xl max-sm:text-xl">
-                  Pass your username
-                </h2>
-                <input
-                  className="focus:border-[#FFB562] dark:focus:border-[#7b34c2b6] dark:border-b-[#7b34c2b6] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#FFB562] w-[50%] max-sm:w-[80%] transition-all focus:w-[65%] max-sm:focus:w-[90%]"
-                  type="text"
-                  placeholder="Username..."
-                  onChange={(e) => handleUsernameChange(e)}
-                  value={username}
-                />
-                {usernameCorectness ? (
-                  <h3 className="text-transparent text-xs tracking-widest max-sm:text-center">
-                    {usernameInfo}
-                  </h3>
-                ) : (
-                  <h3 className="text-[#F87474] text-xs tracking-widest animate-slideleft max-sm:text-center">
-                    {usernameInfo}
-                  </h3>
-                )}
-              </div>
-              <div className="mt-10 max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center">
-                <h2 className="text-[#FFB562] dark:text-[#a76bcf] font-bold tracking-widest text-2xl max-sm:text-xl">
-                  Set your password
-                </h2>
-                <input
-                  className="focus:border-[#FFB562] dark:focus:border-[#7b34c2b6] dark:border-b-[#7b34c2b6] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#FFB562] w-[50%] max-sm:w-[80%] transition-all focus:w-[65%] max-sm:focus:w-[90%]"
-                  type="password"
-                  placeholder="Psst..."
-                  onChange={(e) => handlePasswordChange(e)}
-                  value={password}
-                />
-                {passwordCorectness ? (
-                  <h3 className="text-transparent text-xs tracking-widest max-sm:text-center">
-                    Password must contain special characters
-                  </h3>
-                ) : (
-                  <h3 className="text-[#F87474] text-xs tracking-widest animate-slideleft max-sm:text-center">
-                    Password must contain at least one special character
-                  </h3>
-                )}
-              </div>
-              <button className="dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] ml-[20%] max-sm:ml-0 mt-10 animate-fadein max-sm:text-lg max-sm:w-[50%] max-sm:h-[50px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-lg text-white bg-[#FFB562] hover:text-[#FFB562] hover:tracking-widest max-lg:hover:tracking-wide  hover:cursor-pointer transition-all w-[250px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562]">
-                Create account
-              </button>
+            <form
+              onSubmit={handleRegister}
+              className="w-[80%] max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center"
+            >
+              <section className="w-[80%] max-sm:w-full max-sm:flex max-sm:justify-center max-sm:flex-col max-sm:items-center">
+                <div className="flex w-full justify-between ">
+                  <div className="w-full">
+                    <h2 className="text-[#FFB562] text-sm dark:text-[#A76BCF] font-bold tracking-widest">
+                      First name
+                    </h2>
+                    <input
+                      className="focus:border-[#FFB562] dark:focus:border-[#7b34c2b6] dark:border-b-[#7b34c2b6] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#FFB562] w-[90%] max-sm:w-[95%] transition-all focus:w-[95%] max-sm:focus:w-[90%]"
+                      type="text"
+                      placeholder="Peter..."
+                      onChange={(e) => setFirstName(e.target.value)}
+                      value={firstName}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <h2 className="text-[#FFB562] text-sm dark:text-[#A76BCF] font-bold tracking-widest">
+                      Last name
+                    </h2>
+                    <input
+                      className="focus:border-[#FFB562] dark:focus:border-[#7b34c2b6] dark:border-b-[#7b34c2b6] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#FFB562] w-[90%] max-sm:w-[95%] transition-all focus:w-[95%] max-sm:focus:w-[90%]"
+                      type="text"
+                      placeholder="Griffin..."
+                      onChange={(e) => setLastName(e.target.value)}
+                      value={lastName}
+                    />
+                  </div>
+                </div>
+                <div className="mt-3 w-full">
+                  <h2 className="text-[#FFB562] text-sm dark:text-[#A76BCF] font-bold tracking-widest">
+                    Email
+                  </h2>
+                  <input
+                    className="focus:border-[#FFB562] dark:focus:border-[#7b34c2b6] dark:border-b-[#7b34c2b6] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#FFB562] w-[95%] max-sm:w-[95%] transition-all focus:w-[97%] max-sm:focus:w-[90%]"
+                    type="text"
+                    placeholder="stewie@maguire.com"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                  />
+                </div>
+                <div className="mt-3 w-full">
+                  <h2 className="text-[#FFB562] text-sm dark:text-[#A76BCF] font-bold tracking-widest">
+                    Password
+                  </h2>
+                  <input
+                    className="focus:border-[#FFB562] dark:focus:border-[#7b34c2b6] dark:border-b-[#7b34c2b6] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#FFB562] w-[95%] max-sm:w-[95%] transition-all focus:w-[97%] max-sm:focus:w-[90%]"
+                    type="password"
+                    placeholder="..."
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                  />
+                </div>
+                <button className="dark:bg-[#a76bcf] dark:hover:border-[#a76bcf] dark:hover:bg-transparent dark:hover:text-[#a76bcf] ml-[20%] max-sm:ml-0 mt-10 animate-fadein max-sm:text-lg max-sm:w-[60%] max-sm:h-[50px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-lg text-white bg-[#FFB562] hover:text-[#FFB562] hover:tracking-widest max-lg:hover:tracking-wide  hover:cursor-pointer transition-all w-[250px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#FFB562]">
+                  Create account
+                </button>
+              </section>
             </form>
           </section>
         </section>

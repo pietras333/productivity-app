@@ -46,6 +46,7 @@ const TEST = () => {
         setLoginRes({ data });
       });
   };
+
   const handleRegister = async () => {
     await fetch("../api/users/", {
       method: "POST",

@@ -5,30 +5,11 @@ import Hamburger from "../assets/illustrations/hamburger.png";
 import DarkModeHandler from "../components/DarkModeHandler";
 
 const SignInPage = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameCorectness, setUsernameCorectness] = useState(true);
-  const [passwordCorectness, setPasswordCorectness] = useState(true);
   const [navbarShowState, setNavbarShowState] = useState(false);
   const [currentMode, setCurrentMode] = useState("");
-
-  const usernameInfo = [
-    "Username can't contain special characters",
-    "Username already taken",
-  ];
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const corectnessCheck = (str) => {
-    const special = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    return special.test(str);
-  };
+  const [serverData, setServerData] = useState({});
 
   const handleResponsiveNavbar = () => {
     setNavbarShowState((prev) => !prev);
@@ -40,15 +21,29 @@ const SignInPage = () => {
     setCurrentMode(handler.getMode());
   };
 
-  useEffect(() => {
-    setUsernameCorectness(!corectnessCheck(username));
-    setPasswordCorectness(corectnessCheck(password));
-  });
-
   useLayoutEffect(() => {
     const handler = DarkModeHandler;
     setCurrentMode(handler.getMode());
   });
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    await fetch("../api/users/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        method: "sign-in",
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setServerData({ data });
+      });
+  };
 
   return (
     <div
@@ -169,48 +164,37 @@ const SignInPage = () => {
                 Welcome back
               </h1>
             )}
-            <form className="w-[80%] max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center">
+            <form
+              onSubmit={handleLogin}
+              className="w-[80%] max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center"
+            >
               <div className="mt-10 max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center">
-                <h2 className="text-[#FCAF3C] dark:text-[#9CAF3D] font-bold tracking-widest text-2xl max-sm:text-xl">
-                  Pass your username
-                </h2>
-                <input
-                  className="focus:border-[#449F62] dark:focus:border-[#9CAF3D] dark:border-b-[#9CAF3D] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#449F62] w-[50%] max-sm:w-[80%] transition-all focus:w-[65%] max-sm:focus:w-[90%]"
-                  type="text"
-                  placeholder="Username..."
-                  onChange={(e) => handleUsernameChange(e)}
-                  value={username}
-                />
-                {usernameCorectness ? (
-                  <h3 className="text-transparent text-xs tracking-widest max-sm:text-center">
-                    {usernameInfo}
-                  </h3>
-                ) : (
-                  <h3 className="text-[#F87474] text-xs tracking-widest animate-slideleft max-sm:text-center">
-                    {usernameInfo}
-                  </h3>
-                )}
+                <div className="w-full">
+                  <h2 className="text-[#FFB562] text-sm dark:text-[#9CAF3D] font-bold tracking-widest">
+                    Email
+                  </h2>
+                  <input
+                    className="focus:border-[#449F62] dark:focus:border-[#9CAF3D] dark:border-b-[#9CAF3D] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#449F62] w-[50%] max-sm:w-[80%] transition-all focus:w-[65%] max-sm:focus:w-[90%]"
+                    type="text"
+                    placeholder="stewie@example.com"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                  />
+                </div>
               </div>
               <div className="mt-10 max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center">
-                <h2 className="text-[#FCAF3C] dark:text-[#9CAF3D] font-bold tracking-widest text-2xl max-sm:text-xl">
-                  Pass your password
-                </h2>
-                <input
-                  className="focus:border-[#449F62] dark:focus:border-[#9CAF3D] dark:border-b-[#9CAF3D] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#449F62] w-[50%] max-sm:w-[80%] transition-all focus:w-[65%] max-sm:focus:w-[90%]"
-                  type="password"
-                  placeholder="Psst..."
-                  onChange={(e) => handlePasswordChange(e)}
-                  value={password}
-                />
-                {passwordCorectness ? (
-                  <h3 className="text-transparent text-xs tracking-widest max-sm:text-center">
-                    Password must contain special characters
-                  </h3>
-                ) : (
-                  <h3 className="text-[#F87474] text-xs tracking-widest animate-slideleft max-sm:text-center">
-                    Password must contain at least one special character
-                  </h3>
-                )}
+                <div className="w-full">
+                  <h2 className="text-[#FFB562] text-sm dark:text-[#9CAF3D] font-bold tracking-widest">
+                    Password
+                  </h2>
+                  <input
+                    className="focus:border-[#449F62] dark:focus:border-[#9CAF3D] dark:border-b-[#9CAF3D] dark:text-white bg-transparent text-xl p-1 placeholder:text-[rgba(135,135,135,1)] focus:placeholder:text-transparent rounded-sm focus:rounded-lg border-2 text-[rgba(30,30,30,1)] outline-none border-transparent border-b-2 border-b-[#449F62] w-[50%] max-sm:w-[80%] transition-all focus:w-[65%] max-sm:focus:w-[90%]"
+                    type="password"
+                    placeholder="..."
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                  />
+                </div>
               </div>
               <button className="dark:bg-[#9CAF3D] dark:hover:border-[#9CAF3D] dark:hover:bg-transparent dark:hover:text-[#9CAF3D] ml-[20%] max-sm:ml-0 mt-10 animate-fadein max-sm:text-lg max-sm:w-[50%] max-sm:h-[50px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-lg text-white bg-[#449F62] hover:text-[#449F62] hover:tracking-widest max-lg:hover:tracking-wide  hover:cursor-pointer transition-all w-[250px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#449F62]">
                 Sign In
