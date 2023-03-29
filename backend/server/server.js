@@ -2,24 +2,15 @@ import express from "express";
 const PORT = process.env.PORT || 3001;
 const app = express();
 import database from "../server/databaseHandler.js";
+import MailHandler from "../server/mailHandler.js";
 
 const db = new database();
 db.connect();
-
-// database.addUser("J", "Cole").then((data) => {
-//   console.log(data);
-// });
-// database.handleAuthentication("J", "Cole").then((data) => {
-//   console.log(data);
-// });
-// database.findUser("Agata").then((data) => {
-// });
-// database.checkUser("Agata", "as").then((response) => {
-//   console.log(response);
-// });
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+const mail = new MailHandler();
+// mail.sendEmail("Piotr", "Wendt");
 
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
