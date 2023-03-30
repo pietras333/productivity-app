@@ -1,8 +1,9 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Arrow from "../assets/illustrations/arrow.png";
 import Hamburger from "../assets/illustrations/hamburger.png";
 import DarkModeHandler from "../components/DarkModeHandler";
+import { Transition } from "@tailwindui/react";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ const SignInPage = () => {
   const [navbarShowState, setNavbarShowState] = useState(false);
   const [currentMode, setCurrentMode] = useState("");
   const [serverData, setServerData] = useState({});
+  const [loaderState, setLoaderState] = useState(true);
 
   const handleResponsiveNavbar = () => {
     setNavbarShowState((prev) => !prev);
@@ -24,10 +26,19 @@ const SignInPage = () => {
   useLayoutEffect(() => {
     const handler = DarkModeHandler;
     setCurrentMode(handler.getMode());
+    handleLoad();
   });
+
+  const handleLoad = async () => {
+    await delay(800);
+    setLoaderState(false);
+  };
+
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    setLoaderState(true);
     await fetch("../api/users/", {
       method: "POST",
       headers: {
@@ -43,6 +54,8 @@ const SignInPage = () => {
       .then((data) => {
         setServerData({ data });
       });
+    await delay(2000);
+    setLoaderState(false);
   };
 
   return (
@@ -195,6 +208,11 @@ const SignInPage = () => {
                     value={password}
                   />
                 </div>
+                <Link>
+                  <h2 className="text-red-500 text-xs mt-2 dark:text-[#9CAF3D] font-thin tracking-tightest hover:tracking-widest">
+                    Forgot password?
+                  </h2>
+                </Link>
               </div>
               <button className="dark:bg-[#9CAF3D] dark:hover:border-[#9CAF3D] dark:hover:bg-transparent dark:hover:text-[#9CAF3D] ml-[20%] max-sm:ml-0 mt-10 animate-fadein max-sm:text-lg max-sm:w-[50%] max-sm:h-[50px] tracking-tighter 2xl:text-xl xl:text-xl lg:text-lg md:text-lg sm:text-lg text-white bg-[#449F62] hover:text-[#449F62] hover:tracking-widest max-lg:hover:tracking-wide  hover:cursor-pointer transition-all w-[250px] h-[50px] rounded-xl hover:bg-transparent border-[3px] border-transparent hover:border-[#449F62]">
                 Sign In
@@ -203,6 +221,23 @@ const SignInPage = () => {
           </section>
         </section>
       </div>
+      <Transition
+        show={loaderState}
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <div className="w-full h-full bg-white dark:bg-[#121212] flex justify-center items-center z-50 absolute top-0 left-0">
+          <div className="spinner dark:bg-[#121212]">
+            <div className="circle one"></div>
+            <div className="circle two"></div>
+            <div className="circle three"></div>
+          </div>
+        </div>
+      </Transition>
     </div>
   );
 };

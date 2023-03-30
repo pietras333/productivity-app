@@ -7,6 +7,7 @@ import Arrow from "../assets/illustrations/arrow.png";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import DarkModeHandler from "../components/DarkModeHandler";
+import { Transition } from "@tailwindui/react";
 
 const LandingPage = () => {
   const [navbarShowState, setNavbarShowState] = useState(false);
@@ -14,6 +15,7 @@ const LandingPage = () => {
   let scrolled = 0;
   const contactref = useRef(null);
   const homeref = useRef(null);
+  const [loaderState, setLoaderState] = useState(true);
 
   const handleScroll = (event) => {
     const id = event.target.id;
@@ -68,7 +70,14 @@ const LandingPage = () => {
   useLayoutEffect(() => {
     const handler = DarkModeHandler;
     setCurrentMode(handler.getMode());
+    handleLoad();
   });
+
+  const handleLoad = async () => {
+    await delay(800);
+    setLoaderState(false);
+  };
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   return (
     <div
@@ -255,6 +264,23 @@ const LandingPage = () => {
       >
         <FooterLanding />
       </div>
+      <Transition
+        show={loaderState}
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <div className="w-full h-full bg-white dark:bg-[#121212] flex justify-center items-center z-50 absolute top-0 left-0">
+          <div className="spinner dark:bg-[#121212]">
+            <div className="circle one"></div>
+            <div className="circle two"></div>
+            <div className="circle three"></div>
+          </div>
+        </div>
+      </Transition>
       <div className="fixed top-0 z-10 w-full">
         <section className="w-full h-[8px]">
           <section
