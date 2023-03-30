@@ -8,6 +8,8 @@ module.exports = {
         slidetop: "slidetop 500ms forwards",
         slideleft: "slideleft 1000ms forwards",
         fadein: "fadein 3000ms forwards",
+        fadeinloader: "fadein 500ms forwards",
+        fadeoutloader: "fadeout 500ms forwards",
         fadeinbg: "fadeinbg 1500ms forwards",
       },
       backgroundImage: {

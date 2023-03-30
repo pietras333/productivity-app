@@ -27,6 +27,7 @@ class database {
         last_name: lastName,
         email: email,
         password: await bcrypt.hash(pass, 10),
+        verified: false,
       });
       await user.save();
       return "User created";
@@ -61,12 +62,19 @@ class database {
     } else {
       const user = await this.findUser(email);
       const hashedpassword = user[0].password;
-      if (await bcrypt.compare(password, hashedpassword)) {
+      if (
+        (await bcrypt.compare(password, hashedpassword)) &&
+        user[0].verified
+      ) {
         return "authentication completed";
       } else {
         return "authentication error";
       }
     }
+  };
+
+  verifyUser = async (email) => {
+    await UserModel.updateOne({ email: email }, { $set: { verified: true } });
   };
 }
 

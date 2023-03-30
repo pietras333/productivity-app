@@ -9,27 +9,55 @@ class mailHandler {
     });
   };
 
-  sendEmail = (firstName, lastName) => {
+  passwordRecovery = (email, firstName) => {
     const request = this.connect()
       .post("send", { version: "v3.1" })
       .request({
         Messages: [
           {
             From: {
-              Email: "pilot@mailjet.com",
-              Name: "Mailjet Pilot",
+              Email: "todoooapp@gmail.com",
+              Name: "Todooo Help",
             },
             To: [
               {
-                Email: "passenger1@mailjet.com",
-                Name: "passenger 1",
+                Email: `${email}`,
+                Name: `${firstName}`,
               },
             ],
-            Subject: "Your email flight plan!",
-            TextPart:
-              "Dear passenger 1, welcome to Mailjet! May the delivery force be with you!",
-            HTMLPart:
-              '<h3>Dear passenger 1, welcome to <a href="https://www.mailjet.com/">Mailjet</a>!</h3><br />May the delivery force be with you!',
+            Subject: "Your password recovery!",
+            TextPart: `Dear ${firstName}, We guess it's time to recover your password!`,
+            HTMLPart: `<h3>Dear ${firstName}, to recover your password click <a href="https://www.mailjet.com/">here</a>!</h3><br />Hope it will fix your problem, peace!`,
+          },
+        ],
+      });
+    request
+      .then((result) => {
+        console.log(result.body);
+      })
+      .catch((err) => {
+        console.log(err.statusCode);
+      });
+  };
+  accountActivation = (email, firstName) => {
+    const request = this.connect()
+      .post("send", { version: "v3.1" })
+      .request({
+        Messages: [
+          {
+            From: {
+              Email: "todoooapp@gmail.com",
+              Name: "Todooo Help",
+            },
+            To: [
+              {
+                Email: `${email}`,
+                Name: `${firstName}`,
+              },
+            ],
+            Subject: "Your account activation!",
+            TextPart: `Dear ${firstName}, We guess it's time to activate your account!`,
+            HTMLPart: `<h3>Dear ${firstName}, to activate your account click <a href="https://www.mailjet.com/">here</a>!</h3><br />It's all for now, peace!`,
           },
         ],
       });
