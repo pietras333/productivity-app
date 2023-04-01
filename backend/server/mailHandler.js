@@ -39,7 +39,7 @@ class mailHandler {
         console.log(err.statusCode);
       });
   };
-  accountActivation = (email, firstName) => {
+  accountActivation = (email, firstName, verificationToken) => {
     const request = this.connect()
       .post("send", { version: "v3.1" })
       .request({
@@ -57,7 +57,7 @@ class mailHandler {
             ],
             Subject: "Your account activation!",
             TextPart: `Dear ${firstName}, We guess it's time to activate your account!`,
-            HTMLPart: `<h3>Dear ${firstName}, to activate your account click <a href="https://www.mailjet.com/">here</a>!</h3><br />It's all for now, peace!`,
+            HTMLPart: `<h3>Dear ${firstName}, to activate your account click <a href="http://localhost:3001/api/verify/${verificationToken}">here</a>!</h3><br />It's all for now, peace!`,
           },
         ],
       });

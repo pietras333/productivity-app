@@ -53,6 +53,7 @@ const SignInPage = () => {
       .then((res) => res.json())
       .then((data) => {
         setServerData({ data });
+        window.localStorage.setItem("authorizationToken", data.result.token);
       });
     await delay(2000);
     setLoaderState(false);
