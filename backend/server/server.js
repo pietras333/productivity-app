@@ -6,15 +6,21 @@ import MailHandler from "../server/mailHandler.js";
 
 const db = new database();
 db.connect();
-// db.verifyUser("a.jasiukiewicz2000@gmail.com");
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-const mail = new MailHandler();
-// mail.sendEmail("wendtpiotr333@gmail.com", "Wendt");
-
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
+});
+
+app.get("/api/verify/:id", (req, res) => {
+  const token = req.params.id;
+  db.verifyUser(token);
+});
+
+app.get("/main", (req, res) => {
+  res.json({ message: "hello world" });
 });
 
 // TESTING REGISTER AND LOGIN FORM
@@ -53,3 +59,5 @@ const handleRegister = async (data) => {
     data.password
   );
 };
+
+app.get("/");
