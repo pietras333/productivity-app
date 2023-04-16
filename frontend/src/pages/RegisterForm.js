@@ -40,7 +40,7 @@ const RegisterForm = () => {
 
   const handleRegister = async (event) => {
     event.preventDefault();
-    await fetch("../api/users/", {
+    await fetch("../api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,6 @@ const RegisterForm = () => {
         last_name: lastName,
         email: email,
         password: password,
-        method: "register",
       }),
     })
       .then((res) => res.json())

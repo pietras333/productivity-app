@@ -2,16 +2,11 @@ import mailjet from "node-mailjet";
 
 class mailHandler {
   connect = () => {
-    return mailjet.apiConnect(
-      process.env.MAIL_API_SECRET,
-      process.env.MAIL_SECRET,
-      {
-        config: {},
-        options: {},
-      }
-    );
+    return mailjet.apiConnect(process.env.MAIL_API, process.env.MAIL_SECRET, {
+      config: {},
+      options: {},
+    });
   };
-
   passwordRecovery = (email, firstName) => {
     const request = this.connect()
       .post("send", { version: "v3.1" })

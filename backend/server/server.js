@@ -1,12 +1,13 @@
 import express from "express";
 const PORT = process.env.PORT || 3001;
 const app = express();
-import database from "../server/databaseHandler.js";
-import MailHandler from "../server/mailHandler.js";
 import * as dotenv from "dotenv";
-dotenv.config();
+import jwt from "jsonwebtoken";
+import register from "./middleware/register.js";
+import userModel from "./models/userModel.js";
+import login from "./middleware/login.js";
 
-const db = new database();
+dotenv.config();
 db.connect();
 
 app.use(express.urlencoded({ extended: false }));
@@ -25,38 +26,48 @@ app.get("/main", (req, res) => {
   res.json({ message: "hello world" });
 });
 
-// TESTING REGISTER AND LOGIN FORM
-app.post("/api/users", async (req, res) => {
-  const data = req.body;
-  switch (data.method) {
-    case "register":
-      try {
-        const result = await handleRegister(data);
-        return res.status(result.status).send({ result });
-      } catch {
-        return res.status(500).send();
-      }
-    case "sign-in":
-      try {
-        const result = await handleLogin(data);
-        return res.status(result.status).send(result.token);
-      } catch {
-        return res.status(500).send();
-      }
-  }
+app.post("/api/register", register, async (req, res) => {
+  const user = await userModel.find({ email: req.body.email });
+  console.log(user);
+  const token = jwt.sign({ id: user[0]._id }, process.env.JWT_SECRET, {
+    expiresIn: "2h",
+  });
+  await userModel.updateOne(
+    { email: req.body.email },
+    {
+      $set: {
+        authorizationToken: token,
+      },
+    }
+  );
+  res.status(201).send({
+    Headers: {
+      Authorization: token,
+    },
+    Message: "User created",
+  });
 });
 
-const handleLogin = async (data) => {
-  return await db.handleAuthentication(data.email, data.password);
-};
-const handleRegister = async (data) => {
-  return await db.addUser(
-    data.first_name,
-    data.last_name,
-    data.email,
-    data.password
+app.post("/api/login", login, async (req, res) => {
+  const user = await userModel.find({ email: req.body.email });
+  const token = jwt.sign({ id: user[0]._id }, process.env.JWT_SECRET, {
+    expiresIn: "2h",
+  });
+  await userModel.updateOne(
+    { email: req.body.email },
+    {
+      $set: {
+        authorizationToken: token,
+      },
+    }
   );
-};
+  res.status(201).send({
+    Headers: {
+      Authorization: token,
+    },
+    Message: "Succesfully logged in",
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
