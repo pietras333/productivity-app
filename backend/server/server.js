@@ -6,10 +6,10 @@ import jwt from "jsonwebtoken";
 import register from "./middleware/register.js";
 import userModel from "./models/userModel.js";
 import login from "./middleware/login.js";
+import verification from "./middleware/verification.js";
+import authorize from "./middleware/authorize.js";
 
 dotenv.config();
-db.connect();
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -17,13 +17,12 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-app.get("/api/verify/:id", (req, res) => {
-  const token = req.params.id;
-  db.verifyUser(token);
+app.get("/api/verify/:token", verification, (req, res) => {
+  res.status(201).send({ Message: "User verified" });
 });
 
-app.get("/main", (req, res) => {
-  res.json({ message: "hello world" });
+app.post("/main", authorize, (req, res) => {
+  res.json({ Message: "Authorization completed" });
 });
 
 app.post("/api/register", register, async (req, res) => {
