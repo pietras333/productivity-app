@@ -10,7 +10,6 @@ const SignInPage = () => {
   const [password, setPassword] = useState("");
   const [navbarShowState, setNavbarShowState] = useState(false);
   const [currentMode, setCurrentMode] = useState("");
-  const [serverData, setServerData] = useState({});
   const [loaderState, setLoaderState] = useState(true);
 
   const handleResponsiveNavbar = () => {
@@ -51,8 +50,10 @@ const SignInPage = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setServerData({ data });
-        window.localStorage.setItem("authorizationToken", data.result.token);
+        window.localStorage.setItem(
+          "authorizationToken",
+          data.Headers["Authorization"]
+        );
       });
     await delay(2000);
     setLoaderState(false);
