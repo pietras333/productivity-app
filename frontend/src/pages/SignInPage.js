@@ -39,7 +39,7 @@ const SignInPage = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     setLoaderState(true);
-    await fetch("../api/users/", {
+    await fetch("../api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,6 @@ const SignInPage = () => {
       body: JSON.stringify({
         email: email,
         password: password,
-        method: "sign-in",
       }),
     })
       .then((res) => res.json())

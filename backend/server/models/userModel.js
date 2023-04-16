@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
   password: String,
   verified: Boolean,
   verificationToken: String,
-  authorized: Boolean,
   authorizationToken: String,
+  jwt: String,
 });
 
 const userModel = mongoose.model("User", userSchema);
