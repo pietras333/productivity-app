@@ -1,5 +1,4 @@
 import { mongoose } from "mongoose";
-import config from "../server/config.json" assert { type: "json" };
 import UserModel from "../server/models/userModel.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
@@ -8,7 +7,7 @@ import MailHandler from "../server/mailHandler.js";
 class database {
   connect = async () => {
     try {
-      await mongoose.connect(config.uri);
+      await mongoose.connect(process.env.URI_SECRET);
       console.log("Connected to MongoDB");
     } catch (err) {
       console.log("Error ===", err);

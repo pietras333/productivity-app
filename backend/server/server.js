@@ -3,6 +3,8 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 import database from "../server/databaseHandler.js";
 import MailHandler from "../server/mailHandler.js";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const db = new database();
 db.connect();

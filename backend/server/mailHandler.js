@@ -1,12 +1,15 @@
 import mailjet from "node-mailjet";
-import config from "../server/config.json" assert { type: "json" };
 
 class mailHandler {
   connect = () => {
-    return mailjet.apiConnect(config.mailjetapi, config.mailjetsecret, {
-      config: {},
-      options: {},
-    });
+    return mailjet.apiConnect(
+      process.env.MAIL_API_SECRET,
+      process.env.MAIL_SECRET,
+      {
+        config: {},
+        options: {},
+      }
+    );
   };
 
   passwordRecovery = (email, firstName) => {
