@@ -30,22 +30,18 @@ app.post("/api/users", async (req, res) => {
     case "register":
       try {
         const result = await handleRegister(data);
-        return res.status(201).send({ result });
+        return res.status(result.status).send({ result });
       } catch {
         return res.status(500).send();
       }
     case "sign-in":
       try {
         const result = await handleLogin(data);
-        return res.status(201).send({ result });
+        return res.status(result.status).send(result.token);
       } catch {
         return res.status(500).send();
       }
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
 });
 
 const handleLogin = async (data) => {
@@ -60,4 +56,6 @@ const handleRegister = async (data) => {
   );
 };
 
-app.get("/");
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});

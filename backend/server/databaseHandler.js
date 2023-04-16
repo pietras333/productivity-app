@@ -22,7 +22,7 @@ class database {
   addUser = async (firstName, lastName, email, pass) => {
     const existance = await this.handleUserExistance(email);
     if (existance) {
-      return "Email taken";
+      return { status: 403 };
     } else {
       const verificationToken = await this.generateVerificationToken();
       const user = new UserModel({
@@ -36,7 +36,7 @@ class database {
       const mail = new MailHandler();
       mail.accountActivation(email, firstName, verificationToken);
       await user.save();
-      return "User created";
+      return { status: 201 };
     }
   };
 
@@ -64,7 +64,7 @@ class database {
   handleAuthentication = async (email, password) => {
     const exists = await this.handleUserExistance(email);
     if (!exists) {
-      return "User doesn't exist";
+      return 404;
     } else {
       const user = await this.findUser(email);
       const hashedpassword = user[0].password;
@@ -74,24 +74,32 @@ class database {
       ) {
         await this.authorizeUser(email);
         const token = user[0].authorizationToken;
-        return { token: token };
+        return { token: token, status: 201 };
       } else {
-        return "authentication error";
+        return 401;
       }
     }
   };
 
   verifyUser = async (token) => {
     const user = await UserModel.find({ verificationToken: token });
-    await UserModel.updateOne(
-      { email: user[0].email },
-      { $set: { verified: true } }
-    );
+    console.log(user);
+    if (user.length != 0) {
+      await UserModel.updateOne(
+        { email: user[0].email },
+        { $set: { verified: true } }
+      );
+      return 201;
+    } else {
+      return 404;
+    }
   };
 
   generateVerificationToken = async () => {
     const base = crypto.randomBytes(20).toString("hex");
-    return await bcrypt.hash(base, 10);
+    return (await bcrypt.hash(base, 10))
+      .replace(/\//g, "_")
+      .replace(/\+/g, "-");
   };
 
   authorizeUser = async (email) => {
