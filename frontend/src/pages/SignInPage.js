@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Arrow from "../assets/illustrations/arrow.png";
 import Hamburger from "../assets/illustrations/hamburger.png";
