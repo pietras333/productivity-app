@@ -13,23 +13,21 @@ const register = async (req, res, next) => {
   await mongoose.connect(process.env.MONGO_URI);
   const exists = await userModel.find({ email: req.body.email });
   if (exists.length != 0) {
-    res.status(409).send("User Already exists");
-    return next();
-  } else {
-    const verToken = await handleVerToken();
-    const user = new userModel({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      email: req.body.email.toLowerCase(),
-      password: await bcrypt.hash(req.body.password, 10),
-      verified: false,
-      verificationToken: verToken,
-    });
-    const mail = new mailHandler();
-    mail.accountActivation(req.body.email, req.body.first_name, verToken);
-    await user.save();
-    return next();
+    return res.status(409).send();
   }
+  const verToken = await handleVerToken();
+  const user = new userModel({
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email.toLowerCase(),
+    password: await bcrypt.hash(req.body.password, 10),
+    verified: false,
+    verificationToken: verToken,
+  });
+  const mail = new mailHandler();
+  mail.accountActivation(req.body.email, req.body.first_name, verToken);
+  await user.save();
+  return next();
 };
 
 export default register;
