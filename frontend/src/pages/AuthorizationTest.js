@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const AuthorizationTest = () => {
+  const [authorized, setAuthorized] = useState(false);
+  const [serverData, setServerData] = useState();
+
   useEffect(() => {
     fetch("../main", {
       method: "POST",
@@ -11,20 +14,34 @@ const AuthorizationTest = () => {
       },
     })
       .then((response) => {
-        if (!response.ok) throw new Error(response.status);
-        else return response.json();
+        return response.ok;
       })
-      .then((data) => {
-        console.log("data ===", data);
-        console.log("DATA STORED");
-      })
-      .catch((error) => {
-        console.log("error: " + error);
-        this.setState({ requestFailed: true });
+      .then((auth) => {
+        setAuthorized(auth);
       });
+    fetch("../api", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer " + window.localStorage.getItem("authorizationToken"),
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => setServerData(data));
   }, []);
 
-  return <div className="text-black">hello world</div>;
+  const log = () => {
+    return console.log(serverData);
+  };
+
+  return (
+    <div className="bg-black">
+      {authorized ? <div>hello world</div> : <div>Un authorized</div>}
+      <button onClick={log}>TEST</button>
+    </div>
+  );
 };
 
 export default AuthorizationTest;

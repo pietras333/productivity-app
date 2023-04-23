@@ -26,6 +26,10 @@ const SignInPage = () => {
     const handler = DarkModeHandler;
     setCurrentMode(handler.getMode());
     handleLoad();
+    const token = window.localStorage.getItem("authorizationToken");
+    if (token) {
+      window.location.href = "../main";
+    }
   });
 
   const handleLoad = async () => {
@@ -54,7 +58,9 @@ const SignInPage = () => {
           "authorizationToken",
           data.Headers["Authorization"]
         );
+        window.location.href = "../main";
       });
+
     await delay(2000);
     setLoaderState(false);
   };

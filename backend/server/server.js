@@ -1,6 +1,7 @@
 import express from "express";
 const PORT = process.env.PORT || 3001;
 const app = express();
+
 import * as dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import register from "./middleware/register.js";
@@ -8,21 +9,23 @@ import userModel from "./models/userModel.js";
 import login from "./middleware/login.js";
 import verification from "./middleware/verification.js";
 import authorize from "./middleware/authorize.js";
+import postsModel from "./models/postModel.js";
+import findUserPosts from "./middleware/findUserPosts.js";
 
 dotenv.config();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
+app.get("/api", authorize, findUserPosts, async (req, res) => {
+  res.status(201).send(res.posts);
 });
 
 app.get("/api/verify/:token", verification, (req, res) => {
-  res.status(201).send({ Message: "User verified" });
+  res.status(201).send();
 });
 
 app.post("/main", authorize, (req, res) => {
-  res.json({ Message: "Authorization completed" });
+  res.status(200).send();
 });
 
 app.post("/api/register", register, async (req, res) => {
