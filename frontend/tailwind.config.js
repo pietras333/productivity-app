@@ -2,6 +2,7 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
+  localDisplay: "class",
   theme: {
     extend: {
       animation: {
@@ -48,6 +49,9 @@ module.exports = {
           "url('./assets/illustrations/darkMode/darksigninbgmobile.svg')",
         darksigninmobilemenu:
           "url('./assets/illustrations/darkMode/darksigninmobilemenu.svg')",
+        lightboardbg:
+          "url('./assets/illustrations/lightMode/lightboardbg.svg')",
+        darkboardbg: "url('./assets/illustrations/darkMode/darkboardbg.svg')",
       },
     },
   },

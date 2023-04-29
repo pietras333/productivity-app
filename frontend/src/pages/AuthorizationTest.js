@@ -40,6 +40,13 @@ const AuthorizationTest = () => {
     <div className="bg-black">
       {authorized ? <div>hello world</div> : <div>Un authorized</div>}
       <button onClick={log}>TEST</button>
+      <div>
+        {serverData
+          ? serverData.map((el) => {
+              return <div>{el.topic}</div>;
+            })
+          : ""}
+      </div>
     </div>
   );
 };
