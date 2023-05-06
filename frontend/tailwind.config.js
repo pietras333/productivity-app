@@ -2,18 +2,30 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
-  localDisplay: "class",
   theme: {
     extend: {
+      fontFamily: {
+        fredoka: ["Fredoka", "sans-serif"],
+        sourceCodePro: ["Source Code Pro", "monospace"],
+      },
       animation: {
         slidetop: "slidetop 500ms forwards",
         slideleft: "slideleft 1000ms forwards",
+        slideright: "slideright 1000ms forwards",
         fadein: "fadein 3000ms forwards",
         fadeinloader: "fadein 500ms forwards",
         fadeoutloader: "fadeout 500ms forwards",
         fadeinbg: "fadeinbg 1500ms forwards",
       },
       backgroundImage: {
+        logo: "url('./assets/illustrations/logo.svg')",
+        home: "url('./assets/illustrations/lightMode/home.svg')",
+        homeMobile: "url('./assets/illustrations/lightMode/homeMobile.svg')",
+        homeMobileDark:
+          "url('./assets/illustrations/darkMode/homeMobileDark.svg')",
+        homeDark: "url('./assets/illustrations/darkMode/homeDark.svg')",
+        features: "url('./assets/illustrations/lightMode/features.svg')",
+        //
         landing: "url('./assets/illustrations/landing.png')",
         beingproductive: "url('./assets/illustrations/beingproductive.png')",
         relax: "url('./assets/illustrations/relax.png')",
