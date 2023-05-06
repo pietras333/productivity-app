@@ -5,8 +5,6 @@
 * {
   margin: none;
   padding: none;
-  font-family: "Source Code Pro", monospace;
-  color: white;
   scroll-behavior: smooth;
   transition: all 500ms;
 }
@@ -17,12 +15,6 @@
 }
 ::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
-}
-
-html,
-body,
-#root {
-  height: 100%;
 }
 
 @media not all and (min-width: 640px) {
@@ -97,6 +89,19 @@ html {
     pointer-events: all;
   }
 }
+@keyframes slideright {
+  0% {
+    opacity: 0;
+    transform: translate(100%);
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+    pointer-events: all;
+  }
+}
+
 @keyframes fadein {
   0% {
     opacity: 0;

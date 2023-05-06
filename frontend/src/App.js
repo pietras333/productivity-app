@@ -4,11 +4,13 @@ import LandingPage from "./pages/LandingPage";
 import RegisterForm from "./pages/RegisterForm";
 import SignInPage from "./pages/SignInPage";
 import AuthorizationTest from "./pages/AuthorizationTest";
+import HomePage from "./pages/HomePage";
 import Board from "./pages/Board";
 export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/home" element={<HomePage />} />
         <Route exact path="/" element={<Navigate to="landing" />} />
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/get-started" element={<RegisterForm />} />
