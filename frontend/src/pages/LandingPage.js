@@ -21,7 +21,6 @@ const LandingPage = () => {
     const id = event.target.id;
     switch (id) {
       case "contact":
-        contactref.current?.scrollIntoView({ behaviour: "smooth" });
         if (navbarShowState) setNavbarShowState((prev) => !prev);
         break;
       case "home":

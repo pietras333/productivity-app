@@ -16,15 +16,16 @@ module.exports = {
         fadeinloader: "fadein 500ms forwards",
         fadeoutloader: "fadeout 500ms forwards",
         fadeinbg: "fadeinbg 1500ms forwards",
+        scrollLeft: "scrollLeft 11500ms infinite linear",
       },
       backgroundImage: {
-        logo: "url('./assets/illustrations/logo.svg')",
         home: "url('./assets/illustrations/lightMode/home.svg')",
         homeMobile: "url('./assets/illustrations/lightMode/homeMobile.svg')",
         homeMobileDark:
           "url('./assets/illustrations/darkMode/homeMobileDark.svg')",
         homeDark: "url('./assets/illustrations/darkMode/homeDark.svg')",
         features: "url('./assets/illustrations/lightMode/features.svg')",
+        featuresDark: "url('./assets/illustrations/darkMode/featuresDark.svg')",
         //
         landing: "url('./assets/illustrations/landing.png')",
         beingproductive: "url('./assets/illustrations/beingproductive.png')",
