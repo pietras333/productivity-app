@@ -1,117 +1,220 @@
-import { useEffect, useLayoutEffect, useState } from "react";
-import DarkModeHandler from "../components/DarkModeHandler";
-import Logo from "../assets/illustrations/logo.svg";
-import LogoDark from "../assets/illustrations/logoDark.svg";
+/* eslint-disable jsx-a11y/no-redundant-roles */
+/* eslint-disable jsx-a11y/aria-role */
 import { Transition } from "@tailwindui/react";
+import { useState, useLayoutEffect } from "react";
+import ImgZone from "../assets/illustrations/img_zone.svg";
+import hand_one from "../assets/illustrations/hands/hand_one.webp";
+import hand_two from "../assets/illustrations/hands/hand_two.webp";
+import hand_three from "../assets/illustrations/hands/hand_three.webp";
+import hand_fist from "../assets/illustrations/hands/hand_fist.webp";
+import hand_two_fingers from "../assets/illustrations/hands/hand_two_fingers.webp";
 
 const HomePage = () => {
-  const [currentMode, setCurrentMode] = useState("");
-  const [mobileMenu, setMobileMenu] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  const handleModeChange = () => {
-    const handler = DarkModeHandler;
-    handler.changeMode();
-    setCurrentMode(handler.getMode());
-  };
-
-  setTimeout(() => {
-    window.screen.width < 1024 ? setIsMobile(true) : setIsMobile(false);
-  }, 5000);
-
-  useLayoutEffect(() => {
-    const handler = DarkModeHandler;
-    window.screen.width < 1024 ? setIsMobile(true) : setIsMobile(false);
-    setCurrentMode(handler.getMode());
-  });
+  const [usedHandOne, setUsedHandOne] = useState(true);
+  const [usedHandTwo, setUsedHandTwo] = useState(false);
+  const [usedHandThree, setUsedHandThree] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleMenuChange = () => {
-    setMobileMenu((prev) => !prev);
+    setIsOpen((prev) => !prev);
+    const m = document.getElementById("menu");
+    if (!isOpen) {
+      m.style.clipPath = "circle(25px at 30px 30px)";
+      m.style.top = "3rem";
+      m.style.left = "3rem";
+      m.style.width = "0%";
+      m.style.height = "0%";
+      m.style.position = "fixed";
+    } else {
+      m.style.clipPath = "circle(75%)";
+      m.style.width = "100%";
+      m.style.height = "100%";
+      m.style.top = "0";
+      m.style.left = "0";
+      m.style.position = "fixed";
+    }
+  };
+
+  const changeDisplayedHand = (e) => {
+    const id = e.target.id;
+    switch (id) {
+      case "hand_one":
+        setUsedHandTwo(false);
+        setUsedHandThree(false);
+        return setUsedHandOne(true);
+      case "hand_two":
+        setUsedHandTwo(true);
+        setUsedHandThree(false);
+        return setUsedHandOne(false);
+      case "hand_three":
+        setUsedHandTwo(false);
+        setUsedHandThree(true);
+        return setUsedHandOne(false);
+      default:
+        setUsedHandTwo(false);
+        setUsedHandThree(false);
+        return setUsedHandOne(true);
+    }
   };
 
   return (
-    <>
-      <div
-        className={
-          currentMode === "dark"
-            ? "dark bg-cover bg-center bg-fixed bg-no-repeat h-screen w-full bg-homeDark max-lg:bg-homeMobileDark"
-            : "bg-cover bg-no-repeat bg-center bg-fixed h-screen w-full bg-home max-lg:bg-homeMobile"
-        }
-      >
-        <nav className="transition-all fixed w-full h-[8%]">
-          <ul className="w-full h-full flex text-black font-fredoka items-center justify-between ">
-            <li className="ml-2 max hover:cursor-pointer">
-              {currentMode === "dark" ? (
-                <button onClick={handleModeChange}>
-                  <img src={LogoDark} alt="logo" />
-                </button>
-              ) : (
-                <button onClick={handleModeChange}>
-                  <img src={Logo} alt="logo" />
-                </button>
-              )}
+    <div className="w-full h-screen font-fredoka">
+      <section className="absolute bottom-0 right-0 w-full h-[170px]">
+        <img src={ImgZone} alt="footer" className="w-full" />
+      </section>
+      <section className="fixed w-full h-[140px] top-0 right-0 z-40">
+        <nav className="w-full h-full">
+          <ul className="w-full h-full flex justify-between items-center">
+            <li className="ml-10">
+              <button
+                aria-label="Open/Close menu"
+                role="button"
+                onClick={handleMenuChange}
+                className="focus:outline-8 focus:outline-green-500 hover:cursor-pointer hover:rounded-[40%] w-[71px] flex flex-col justify-center items-center h-[71px] rounded-[50%] bg-[#1f1f1f]"
+              >
+                <hr className="bg-white w-[38%] rounded-xl h-[4px] mb-1 text-white" />
+                <hr className="bg-white w-[38%] rounded-xl h-[4px] text-white" />
+              </button>
             </li>
-            {isMobile ? (
-              <li className="mr-2">
-                <button
-                  onClick={handleMenuChange}
-                  className="bg-black dark:bg-white dark:text-black text-white text-2xl p-2 rounded-tl-2xl rounded-b-2xl tracking-widest"
-                >
-                  Menu
-                </button>
-                <Transition
-                  show={mobileMenu}
-                  enter="transition-all duration-500"
-                  enterFrom="translate-x-full"
-                  enterTo="translate-x-0"
-                  leave="transition-all duration-500"
-                  leaveFrom="translate-x-0"
-                  leaveTo="-translate-x-full"
-                  as="section"
-                  className="w-[100%] h-full fixed right-0 top-0 bg-[rgba(255,255,255,.15)] dark:bg-[rgba(5,5,5,.15)] backdrop-blur-xl"
-                >
-                  <nav className="transition-all font-bold max-lg:font-normal h-full text-black dark:text-white flex justify-center items-center">
-                    <ul>
-                      <li className="hover:cursor-pointer text-3xl hover:tracking-widest">
-                        <button onClick={handleMenuChange}>Menu</button>
-                      </li>
-                      <li className="hover:cursor-pointer text-3xl hover:tracking-widest">
-                        <button>Features</button>
-                      </li>
-                      <li className="hover:cursor-pointer text-3xl hover:tracking-widest">
-                        <button>Info</button>
-                      </li>
-                      <li className="hover:cursor-pointer text-3xl hover:tracking-widest">
-                        <button>Contact</button>
-                      </li>
-                      <li className="hover:cursor-pointer text-3xl hover:tracking-widest">
-                        <button>Create Account</button>
-                      </li>
-                    </ul>
-                  </nav>
-                </Transition>
-              </li>
-            ) : (
-              <section className="flex justify-around w-full">
-                <li className="max-xl:text-xl dark:text-[rgba(255,255,255,.55)] dark:hover:text-white dark:hover:border-b-white text-[rgba(0,0,0,.55)] w-[25%] border-b-2 border-b-transparent  hover:border-b-black  hover:text-black hover:cursor-pointer hover:tracking-widest text-2xl justify-self-end mr-2">
-                  Features
-                </li>
-                <li className="max-xl:text-xl dark:text-[rgba(255,255,255,.55)] dark:hover:text-white dark:hover:border-b-white text-[rgba(0,0,0,.55)] w-[25%] border-b-2 border-b-transparent hover:border-b-black hover:text-black hover:cursor-pointer hover:tracking-widest text-2xl justify-self-end mr-2">
-                  Info
-                </li>
-                <li className="max-xl:text-xl dark:text-[rgba(255,255,255,.55)] dark:hover:text-white dark:hover:border-b-white text-[rgba(0,0,0,.55)] w-[25%] border-b-2 border-b-transparent hover:border-b-black hover:text-black hover:cursor-pointer hover:tracking-widest text-2xl justify-self-end mr-2">
-                  Contact
-                </li>
-                <li className="max-xl:text-xl dark:text-[rgba(255,255,255,.55)] dark:hover:text-white dark:hover:border-b-white text-[rgba(0,0,0,.55)] w-[25%] border-b-2 border-b-transparent hover:border-b-black hover:text-black hover:cursor-pointer hover:tracking-widest text-2xl justify-self-end mr-2">
-                  Create Account
-                </li>
-              </section>
-            )}
           </ul>
         </nav>
-      </div>
-      <div className="w-full bg-features bg-cover h-screen"></div>
-    </>
+      </section>
+      <section
+        id="menu"
+        className="bg-[#1f1f1f] menuClip text-[#D9D9D9] fixed left-[3rem] top-[3rem] w-0 h-0 z-30 flex justify-center items-center"
+      >
+        <h2 className="fixed top-0 right-0 mr-10 mt-10 rotate-90">2023</h2>
+        <h2 className="fixed bottom-0 left-0 mb-[6rem] rotate-90">
+          © All Rights Reserved
+        </h2>
+        <img
+          src={hand_fist}
+          alt="hand fist"
+          className="w-[400px] h-[800px] fixed circle top-[-8em] left-[-2em] rotate-[135deg]"
+        />
+        <img
+          src={hand_two_fingers}
+          alt="hand two fingers"
+          className="w-[400px] h-[800px] fixed bottom-[-8em] right-[-2em] -rotate-45"
+        />
+        <ul className="w-[50%] h-full text-[#D9D9D9] text-3xl flex items-center justify-center flex-col">
+          <li
+            tabIndex={0}
+            aria-label="Navigate to contact"
+            role="button"
+            className="focus:outline-8 focus:outline-green-500 hover:cursor-pointer hover:tracking-widest bg-[#1f1f1f] p-2 rounded-2xl"
+          >
+            Contact
+          </li>
+          <li
+            tabIndex={0}
+            aria-label="Navigate to features"
+            role="button"
+            className="focus:outline-8 focus:outline-green-500 hover:cursor-pointer hover:tracking-widest bg-[#1f1f1f] p-2 rounded-2xl"
+          >
+            Features
+          </li>
+          <li
+            tabIndex={0}
+            aria-label="Navigate to FAQ"
+            role="button"
+            className="focus:outline-8 focus:outline-green-500 hover:cursor-pointer hover:tracking-widest bg-[#1f1f1f] p-2 rounded-2xl"
+          >
+            FAQ
+          </li>
+        </ul>
+      </section>
+      <section className="w-full bg-home bg-center bg-cover bg-no-repeat h-full flex items-center">
+        <section className="w-[55%] h-[100%] z-10">
+          <p className="text-[#1f1f1f] mt-[15%] ml-[5%] text-6xl font-sourceCodePro font-bold">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
+            delectus unde nesciunt vel aliquid dolorum debitis atque nisi
+            ratione quaerat.
+          </p>
+          <section className="mt-[5%] ml-[5%]">
+            <p className="text-[#1f1f1f] w-[50%] text-xl font-sourceCodePro">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae,
+              natus.
+            </p>
+            <section className="mt-2">
+              <button
+                aria-label="Create account"
+                role="button"
+                className="focus:outline-8 focus:outline-green-500 bg-[#1f1f1f] hover:tracking-widest text-white text-xl w-[23%] p-2 rounded-2xl"
+              >
+                Create Account
+              </button>
+              <a
+                aria-label="Navigate to info"
+                role="button"
+                href="/home"
+                className="focus:outline-8 focus:outline-green-500 text-[#1f1f1f] text-xl ml-4 underline hover:text-green-500"
+              >
+                Learn More
+              </a>
+            </section>
+          </section>
+        </section>
+        <section className="w-[45%] h-full z-10 bg-center bg-no-repeat flex justify-end items-center">
+          <Transition
+            show={usedHandOne}
+            enter="duration-1000"
+            enterFrom="translate-y-full opacity-0"
+            enterTo="translate-0 opacity-1"
+            leave="duration-300 absolute"
+            leaveFrom="translate-0 opacity-1"
+            leaveTo="translate-y-full opacity-0"
+          >
+            <img id="hand" src={hand_one} alt="img of hand" />;
+          </Transition>
+          <Transition
+            show={usedHandTwo}
+            enter="duration-1000"
+            enterFrom="translate-y-full opacity-0"
+            enterTo="translate-0 opacity-1"
+            leave="duration-300 absolute"
+            leaveFrom="translate-0 opacity-1"
+            leaveTo="translate-y-full opacity-0"
+          >
+            <img id="hand" src={hand_two} alt="img of hand" />;
+          </Transition>
+          <Transition
+            show={usedHandThree}
+            enter="duration-1000"
+            enterFrom="translate-y-full opacity-0"
+            enterTo="translate-0 opacity-1"
+            leave="duration-300 absolute"
+            leaveFrom="translate-0 opacity-1"
+            leaveTo="translate-y-full opacity-0"
+          >
+            <img id="hand" src={hand_three} alt="img of hand" />;
+          </Transition>
+        </section>
+        <section className="w-[20px] h-[60%] mr-[15%] flex justify-center items-center flex-col">
+          <button
+            aria-label="Change image"
+            role="button"
+            id="hand_one"
+            onClick={(e) => changeDisplayedHand(e)}
+            className="focus:outline-8 focus:outline-green-500 hover:bg-green-500 w-[5px] h-[50px] bg-white rounded-2xl"
+          ></button>
+          <button
+            aria-label="Change image"
+            role="button"
+            onClick={(e) => changeDisplayedHand(e)}
+            id="hand_two"
+            className="focus:outline-8 focus:outline-green-500 hover:bg-green-500 w-[5px] h-[50px] bg-white rounded-2xl mt-2"
+          ></button>
+          <button
+            aria-label="Change image"
+            role="button"
+            onClick={(e) => changeDisplayedHand(e)}
+            id="hand_three"
+            className="focus:outline-8 focus:outline-green-500 hover:bg-green-500 w-[5px] h-[50px] bg-white rounded-2xl mt-2"
+          ></button>
+        </section>
+      </section>
+    </div>
   );
 };
 

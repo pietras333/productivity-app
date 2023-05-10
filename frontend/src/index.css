@@ -230,3 +230,16 @@ select:-webkit-autofill:focus {
     transform: rotate(360deg);
   }
 }
+
+@keyframes scrollLeft {
+  from {
+    transform: translate(-100%);
+  }
+  to {
+    transform: translate(100%);
+  }
+}
+
+.menuClip {
+  clip-path: circle(75%);
+}
