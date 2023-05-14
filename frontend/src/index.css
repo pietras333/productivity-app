@@ -7,6 +7,11 @@
   padding: none;
   scroll-behavior: smooth;
   transition: all 500ms;
+  font-family: "Baloo Bhai 2", cursive;
+}
+
+.pentagon {
+  clip-path: polygon(50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
 }
 
 * {
@@ -241,5 +246,60 @@ select:-webkit-autofill:focus {
 }
 
 .menuClip {
-  clip-path: circle(75%);
+  clip-path: circle(25px at 30px 30px);
+}
+
+@keyframes load-left {
+  0% {
+    opacity: 0;
+    transform: translate(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+.load-left {
+  animation: load-left 500ms forwards;
+}
+@keyframes un-load-left {
+  0% {
+    opacity: 1;
+    transform: translate(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-100%);
+  }
+}
+.un-load-left {
+  animation: un-load-left 500ms forwards;
+}
+
+@keyframes load-right {
+  0% {
+    opacity: 0;
+    transform: translate(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+.load-right {
+  animation: load-right 500ms forwards;
+}
+
+@keyframes load-top {
+  0% {
+    opacity: 0;
+    transform: translate(0, -100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+.load-top {
+  animation: load-top 500ms forwards;
 }
