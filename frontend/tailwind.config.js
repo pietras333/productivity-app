@@ -4,10 +4,6 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      fontFamily: {
-        fredoka: ["Fredoka", "sans-serif"],
-        sourceCodePro: ["Source Code Pro", "monospace"],
-      },
       animation: {
         slidetop: "slidetop 500ms forwards",
         slideleft: "slideleft 1000ms forwards",
@@ -19,7 +15,10 @@ module.exports = {
         scrollLeft: "scrollLeft 11500ms infinite linear",
       },
       backgroundImage: {
-        home: "url('./assets/illustrations/lightMode/home.svg')",
+        credits: "url('./assets/illustrations/lightMode/credits.svg')",
+        aboutUs: "url('./assets/illustrations/lightMode/about-us.svg')",
+        pentagon: "url('./assets/illustrations/lightMode/polygon.png')",
+        home: "url('./assets/illustrations/lightMode/home.png')",
         homeMobile: "url('./assets/illustrations/lightMode/homeMobile.svg')",
         homeMobileDark:
           "url('./assets/illustrations/darkMode/homeMobileDark.svg')",
