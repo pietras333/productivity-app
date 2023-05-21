@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
   theme: {
+    fontFamily: {
+      Oswald: ["Raleway", "sans-serif"],
+    },
     extend: {
       animation: {
         slidetop: "slidetop 500ms forwards",
@@ -15,15 +18,17 @@ module.exports = {
         scrollLeft: "scrollLeft 11500ms infinite linear",
       },
       backgroundImage: {
+        navbar: "url('./assets/illustrations/lightMode/nav.svg')",
         credits: "url('./assets/illustrations/lightMode/credits.svg')",
         aboutUs: "url('./assets/illustrations/lightMode/about-us.svg')",
         pentagon: "url('./assets/illustrations/lightMode/polygon.png')",
         home: "url('./assets/illustrations/lightMode/home.png')",
+        space: "url('./assets/illustrations/lightMode/space.png')",
+        features: "url('./assets/illustrations/lightMode/features.png')",
         homeMobile: "url('./assets/illustrations/lightMode/homeMobile.svg')",
         homeMobileDark:
           "url('./assets/illustrations/darkMode/homeMobileDark.svg')",
         homeDark: "url('./assets/illustrations/darkMode/homeDark.svg')",
-        features: "url('./assets/illustrations/lightMode/features.svg')",
         featuresDark: "url('./assets/illustrations/darkMode/featuresDark.svg')",
         //
         landing: "url('./assets/illustrations/landing.png')",
