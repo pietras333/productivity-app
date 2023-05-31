@@ -302,3 +302,7 @@ select:-webkit-autofill:focus {
 .load-top {
   animation: load-top 500ms forwards;
 }
+.currentTab {
+  color: rgb(34 197 94);
+  border-bottom-color: rgb(34 197 94);
+}

@@ -63,7 +63,7 @@ app.post("/api/login", login, async (req, res) => {
       },
     }
   );
-  res.status(201).send({
+  res.status(200).send({
     Headers: {
       Authorization: token,
     },

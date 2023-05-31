@@ -3,6 +3,14 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
   theme: {
+    backgroundSize: {
+      auto: "auto",
+      cover: "cover",
+      contain: "contain",
+      "1/2": "50%",
+      "1/4": "25%",
+      "3/4": "75%",
+    },
     fontFamily: {
       Oswald: ["Raleway", "sans-serif"],
     },
@@ -26,10 +34,8 @@ module.exports = {
         space: "url('./assets/illustrations/lightMode/space.png')",
         features: "url('./assets/illustrations/lightMode/features.png')",
         homeMobile: "url('./assets/illustrations/lightMode/homeMobile.svg')",
-        homeMobileDark:
-          "url('./assets/illustrations/darkMode/homeMobileDark.svg')",
-        homeDark: "url('./assets/illustrations/darkMode/homeDark.svg')",
-        featuresDark: "url('./assets/illustrations/darkMode/featuresDark.svg')",
+        homeDark: "url('./assets/illustrations/darkMode/home.png')",
+        featuresDark: "url('./assets/illustrations/darkMode/features.png')",
         //
         landing: "url('./assets/illustrations/landing.png')",
         beingproductive: "url('./assets/illustrations/beingproductive.png')",
