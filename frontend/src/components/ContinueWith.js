@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import apple from "../assets/illustrations/icons/apple.png";
 import google from "../assets/illustrations/icons/google.png";
 import facebook from "../assets/illustrations/icons/facebook.png";

@@ -10,16 +10,11 @@ import alien_yellow from "../assets/illustrations/icons/alien_yellow.png";
 import Register from "../components/Register";
 import Login from "../components/Login";
 import cancel_icon from "../assets/illustrations/icons/cancel.png";
-import eye_icon from "../assets/illustrations/icons/eye.png";
-import eye_closed_icon from "../assets/illustrations/icons/eye-closed.png";
-import { GoogleLogin } from "react-google-login";
-import { gapi } from "gapi-script";
 
 const HomePage = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [isInLogin, setIsInLogin] = useState(true);
   const [dropdown, setDropdown] = useState(false);
-  const [language, setLanguage] = useState("en");
   const [dark, setDark] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

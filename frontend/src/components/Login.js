@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { Transition } from "@tailwindui/react";
 import cancel_icon from "../assets/illustrations/icons/cancel.png";
 import eye_icon from "../assets/illustrations/icons/eye.png";
@@ -9,8 +9,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [serverData, setServerData] = useState();
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
   const [feedback, setFeedback] = useState(false);
   const [hidden, setHidden] = useState(true);
 
