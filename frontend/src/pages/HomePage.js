@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 /* eslint-disable jsx-a11y/aria-role */
 import { Transition } from "@tailwindui/react";
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useMemo } from "react";
 import wave from "../assets/illustrations/lightMode/wave.svg";
 import waveDark from "../assets/illustrations/darkMode/wave.svg";
 import alien from "../assets/illustrations/icons/alien.png";
@@ -10,6 +10,7 @@ import alien_yellow from "../assets/illustrations/icons/alien_yellow.png";
 import Register from "../components/Register";
 import Login from "../components/Login";
 import cancel_icon from "../assets/illustrations/icons/cancel.png";
+import NavbarHandler from "../components/NavbarHandler";
 
 const HomePage = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -25,27 +26,8 @@ const HomePage = () => {
   const featuresRef = useRef();
   const exploreRef = useRef();
 
-  const navbarstyledefault =
-    "fixed w-full h-[13%] max-md:h-[12%] flex font-bold z-50 border-b-transparent";
-  const navbarstylescrolled =
-    "fixed w-full h-[13%] max-md:h-[12%] flex font-bold z-50 bg-[#FFFDFA] dark:bg-[#14162E] dark:shadow-xl border-b-zinc-300 shadow-2xl shadow-zinc-300";
-  let scrolled = 0;
   window.onscroll = () => {
-    scroll();
-  };
-  const scroll = () => {
-    const navbar = document.getElementById("navbar");
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
-    const height =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
-    scrolled = (winScroll / height) * 100;
-    if (scrolled > 0) {
-      navbar.className = navbarstylescrolled;
-    } else {
-      navbar.className = navbarstyledefault;
-    }
+    NavbarHandler.OnScroll();
   };
 
   const handleMenuChange = () => {
@@ -454,7 +436,7 @@ const HomePage = () => {
                       className="shadow-xl shadow-zinc-300 focus:shadow-zinc-500 w-11/12 h-14 ml-1 max-md:h-10 max-xl:text-lg focus:bg-indigo-500 focus:text-white focus:placeholder:text-white bg-[#EAF0F7] rounded-l-xl pl-4 text-xl outline-none"
                     />
                     <button
-                      id="first-name-reset"
+                      id="last-name-reset"
                       onClick={(e) => {
                         handleValueReset(e);
                       }}

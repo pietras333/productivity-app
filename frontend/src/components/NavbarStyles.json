@@ -1,0 +1,6 @@
+{
+  "navbar": {
+    "def": "fixed w-full h-[13%] max-md:h-[12%] flex font-bold z-50 border-b-transparent",
+    "scrolled": "fixed w-full h-[13%] max-md:h-[12%] flex font-bold z-50 bg-[#FFFDFA] dark:bg-[#14162E] dark:shadow-xl border-b-zinc-300 shadow-2xl shadow-zinc-300"
+  }
+}
