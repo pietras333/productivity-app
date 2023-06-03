@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.no-autofill:-webkit-autofill,
+.no-autofill:-webkit-autofill:hover,
+.no-autofill:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #eaf0f7 inset !important;
+  -webkit-text-fill-color: inherit !important;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.no-autofill:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(34 197 94) inset !important;
+  -webkit-text-fill-color: white !important;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 * {
   margin: none;
   padding: none;

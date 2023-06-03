@@ -13,7 +13,7 @@ const register = async (req, res, next) => {
   await mongoose.connect(process.env.MONGO_URI);
   const exists = await userModel.find({ email: req.body.email });
   if (exists.length != 0) {
-    return res.status(409).send();
+    return res.status(403).send();
   }
   const verToken = await handleVerToken();
   const user = new userModel({

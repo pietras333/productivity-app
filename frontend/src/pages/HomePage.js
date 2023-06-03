@@ -12,6 +12,8 @@ import Login from "../components/Login";
 import cancel_icon from "../assets/illustrations/icons/cancel.png";
 import eye_icon from "../assets/illustrations/icons/eye.png";
 import eye_closed_icon from "../assets/illustrations/icons/eye-closed.png";
+import { GoogleLogin } from "react-google-login";
+import { gapi } from "gapi-script";
 
 const HomePage = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -19,6 +21,10 @@ const HomePage = () => {
   const [dropdown, setDropdown] = useState(false);
   const [language, setLanguage] = useState("en");
   const [dark, setDark] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
   const homeRef = useRef();
   const aboutRef = useRef();
   const featuresRef = useRef();
@@ -134,9 +140,22 @@ const HomePage = () => {
     return setDark(false);
   };
 
-  useEffect(() => {
-    console.log(dark);
-  });
+  const handleValueReset = (e) => {
+    e.preventDefault();
+    const id = e.target.id;
+    switch (id) {
+      case "first-name-reset":
+        return setFirstName("");
+      case "last-name-reset":
+        return setLastName("");
+      case "email-reset-contact":
+        return setEmail("");
+      default:
+        setFirstName("");
+        setLastName("");
+        return setEmail("");
+    }
+  };
 
   return (
     <section className={`${dark ? "dark" : ""}`}>
@@ -342,13 +361,12 @@ const HomePage = () => {
           className="absolute -top-px rotate-180 right-0 left-0 z-30"
         />
         <main className="w-1/2 max-xl:w-3/4 h-full pl-24 text-black dark:text-white flex justify-center items-center flex-col">
-          <h3 className="text-9xl max-xl:text-8xl max-md:text-5xl w-full font-bold">
-            Lorem ipsum dolor sit.
+          <h3 className="text-8xl max-xl:text-8xl max-md:text-5xl w-full font-bold">
+            Where Efficiency Takes Flight!
           </h3>
           <p className="text-2xl max-xl:text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-            aliquid ullam cumque hic excepturi cupiditate vel possimus
-            voluptatem a accusamus?
+            Streamlined productivity app, simplifying tasks, calendars, and
+            communication for optimal efficiency and success.
           </p>
           <span className="w-full z-40 text-2xl max-md:w-auto dark:text-[#03D0B1] text-indigo-600 font-bold hover:cursor-pointer hover:text-green-500">
             Know More
@@ -381,13 +399,12 @@ const HomePage = () => {
           <img src={alien} alt="blue alien" />
         </section>
         <main className="w-1/2 max-xl:w-3/4 h-full pr-24 text-black dark:text-white flex justify-center items-center flex-col">
-          <h3 className="text-9xl max-xl:text-8xl max-md:text-5xl w-full font-bold">
-            Lorem ipsum dolor sit.
+          <h3 className="text-8xl max-xl:text-8xl max-md:text-5xl w-full font-bold">
+            Elevate Your Productivity to Infinity and Beyond!
           </h3>
           <p className="text-2xl max-xl:text-xl ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-            aliquid ullam cumque hic excepturi cupiditate vel possimus
-            voluptatem a accusamus?
+            Where productivity soars to new heights, unleashing your full
+            potential for boundless success.
           </p>
           <span className="w-full text-2xl z-40 max-md:w-auto dark:text-[#03D0B1] text-indigo-600 font-bold hover:cursor-pointer hover:text-green-500">
             Know More
@@ -414,9 +431,19 @@ const HomePage = () => {
                       name="first-name-contact"
                       type="text"
                       placeholder="First Name👋"
+                      onChange={(e) => {
+                        setFirstName(e.target.value);
+                      }}
+                      value={firstName}
                       className="shadow-xl  shadow-zinc-300 focus:shadow-zinc-500 w-11/12 h-14 max-md:h-10 max-xl:text-lg focus:bg-indigo-500 focus:text-white focus:placeholder:text-white bg-[#EAF0F7] rounded-l-xl pl-4 text-xl outline-none"
                     />
-                    <button className="w-2/12 h-14 max-md:h-10 hover:bg-green-500 bg-[#EAF0F7] rounded-r-xl flex justify-center items-center">
+                    <button
+                      id="first-name-reset"
+                      onClick={(e) => {
+                        handleValueReset(e);
+                      }}
+                      className="w-2/12 h-14 max-md:h-10 hover:bg-green-500 bg-[#EAF0F7] rounded-r-xl flex justify-center items-center"
+                    >
                       <img src={cancel_icon} alt="cancel" />
                     </button>
                   </section>
@@ -425,9 +452,19 @@ const HomePage = () => {
                       name="last-name-contact"
                       type="text"
                       placeholder="Last Name🙌"
+                      onChange={(e) => {
+                        setLastName(e.target.value);
+                      }}
+                      value={lastName}
                       className="shadow-xl shadow-zinc-300 focus:shadow-zinc-500 w-11/12 h-14 ml-1 max-md:h-10 max-xl:text-lg focus:bg-indigo-500 focus:text-white focus:placeholder:text-white bg-[#EAF0F7] rounded-l-xl pl-4 text-xl outline-none"
                     />
-                    <button className="w-2/12 h-14 max-md:h-10 hover:bg-green-500 bg-[#EAF0F7] rounded-r-xl flex justify-center items-center">
+                    <button
+                      id="first-name-reset"
+                      onClick={(e) => {
+                        handleValueReset(e);
+                      }}
+                      className="w-2/12 h-14 max-md:h-10 hover:bg-green-500 bg-[#EAF0F7] rounded-r-xl flex justify-center items-center"
+                    >
                       <img src={cancel_icon} alt="cancel" />
                     </button>
                   </section>
@@ -439,9 +476,19 @@ const HomePage = () => {
                     name="email-contact"
                     type="email"
                     placeholder="Enter Email👀"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    value={email}
                     className="shadow-xl shadow-zinc-300 focus:shadow-zinc-500 w-11/12 h-14 max-md:h-10 max-xl:text-lg focus:bg-indigo-500 focus:text-white focus:placeholder:text-white bg-[#EAF0F7] rounded-l-xl pl-4 text-xl outline-none"
                   />
-                  <button className="w-2/12 h-14 max-md:h-10 hover:bg-green-500 bg-[#EAF0F7] rounded-r-xl flex justify-center items-center">
+                  <button
+                    id="email-reset-contact"
+                    onClick={(e) => {
+                      handleValueReset(e);
+                    }}
+                    className="w-2/12 h-14 max-md:h-10 hover:bg-green-500 bg-[#EAF0F7] rounded-r-xl flex justify-center items-center"
+                  >
                     <img src={cancel_icon} alt="cancel" />
                   </button>
                 </section>
@@ -452,6 +499,10 @@ const HomePage = () => {
                     name="message"
                     type="text"
                     placeholder="Enter your message🧠"
+                    onChange={(e) => {
+                      setMessage(e.target.value);
+                    }}
+                    message={firstName}
                     className="shadow-xl focus:shadow-zinc-500 shadow-zinc-300 w-full h-full max-xl:text-lg focus:bg-indigo-500 focus:text-white focus:placeholder:text-white bg-[#EAF0F7] rounded-xl pl-4 text-xl outline-none"
                   />
                 </section>
