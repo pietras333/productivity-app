@@ -1,314 +1,174 @@
-import dashboard from "../assets/illustrations/icons/dashboard.png";
-import settings from "../assets/illustrations/icons/settings.png";
-import activities from "../assets/illustrations/icons/activities.png";
-import avatar from "../assets/illustrations/icons/planet-purple.webp";
-import box from "../assets/illustrations/icons/box.png";
-import handshake from "../assets/illustrations/icons/handshake.png";
-import checkmark from "../assets/illustrations/icons/checkmark.png";
-import brain from "../assets/illustrations/icons/brain.png";
-import calendar from "../assets/illustrations/icons/calendar.png";
-import folder from "../assets/illustrations/icons/folder.png";
-import more from "../assets/illustrations/icons/more.png";
-import clock from "../assets/illustrations/icons/clock.png";
+import Todo from "../components/Todo";
 
-const Board = () => {
+const board = () => {
   return (
-    <section className="w-screen h-screen flex font-Oswald">
-      <section className="w-2/12 h-full bg-[#EFF0F1]">
-        <section className="w-full h-2/6 ">
-          <nav className="w-full h-full flex justify-center items-center">
-            <ul className="w-5/6 h-5/6 flex flex-col justify-around items-center">
-              <li className="flex justify-between items-center bg-white rounded-xl p-4">
-                <img src={avatar} alt="user avatar" className="w-1/6" />
-                <h2 className="w-5/6 text-2xl ml-5">Digital Space</h2>
-              </li>
-              <li className="flex justify-between items-center ml-5 opacity-30 hover:cursor-pointer hover:opacity-100">
-                <img src={dashboard} alt="dashboard" className="w-1/6" />
-                <h2 className="w-5/6 text-xl ml-5">Dashboard</h2>
-              </li>
-              <li className="flex justify-between items-center ml-5 opacity-30 hover:cursor-pointer hover:opacity-100">
-                <img src={settings} alt="settings" className="w-1/6" />
-                <h2 className="w-5/6 text-xl ml-5">Settings</h2>
-              </li>
-              <li className="flex justify-between items-center ml-5 opacity-30 hover:cursor-pointer hover:opacity-100">
-                <img src={activities} alt="activities" className="w-1/6" />
-                <h2 className="w-5/6 text-xl ml-5">All activities</h2>
-              </li>
-            </ul>
-          </nav>
-        </section>
-        <section className="w-full h-3/6 flex justify-center items-center">
-          <ul className="w-5/6 h-full text-lg tracking-wide flex flex-col justify-around items-center">
-            <li className="flex justify-between items-center ml-5 hover:cursor-pointer bg-white p-4 rounded-2xl">
-              <img src={checkmark} alt="checkmark" className="w-1/6" />
-              <h2 className="w-5/6 ml-5">Daily Task</h2>
+    <section className="w-screen h-screen flex">
+      <section className="h-full w-2/12">
+        <header className="h-1/3 p-4 text-[#00216A] font-bold flex flex-col justify-center items-start">
+          <section className="text-5xl flex justify-between items-center w-full">
+            <h1 className="ml-5">Inbox </h1>
+            <h1 className="mr-5 text-[rgba(0,0,0,.3)]">+</h1>
+          </section>
+          <h2 className="text-xl ml-5 mt-5 text-[rgba(0,0,0,.3)]">7h</h2>
+        </header>
+        <nav className="h-2/3 flex justify-center items-center">
+          <ul className="w-11/12 h-full flex justify-start items-center flex-col p-2">
+            <li className="border-[rgba(0,0,0,.3)] mt-5 text-xl border-2 rounded-xl p-2 w-full flex justify-between items-center">
+              <h3 className="font-bold text-[rgba(0,34,106,0.75)]">
+                Research Sourdough
+              </h3>
+              <span className="font-bold text-[rgba(0,0,0,.3)]">1h</span>
             </li>
-            <li className="flex justify-between items-center ml-5 hover:cursor-pointer bg-transparent p-4 rounded-2xl">
-              <img src={handshake} alt="handshake" className="w-1/6" />
-              <h2 className="w-5/6 ml-5">Meetings Summary</h2>
+            <li className="border-[rgba(0,0,0,.3)] mt-5  text-xl border-2 rounded-xl p-2 w-full flex justify-between items-center">
+              <h3 className="font-bold text-[rgba(0,34,106,0.75)]">Taxes</h3>
+              <span className="font-bold text-[rgba(0,0,0,.3)]">3h</span>
             </li>
-            <li className="flex justify-between items-center ml-5 hover:cursor-pointer bg-transparent p-4 rounded-2xl">
-              <img src={calendar} alt="calendar" className="w-1/6" />
-              <h2 className="w-5/6 ml-5">Availability</h2>
+            <li className="border-[rgba(0,0,0,.3)] mt-5  text-xl border-2 rounded-xl p-2 w-full flex justify-between items-center">
+              <h3 className="font-bold text-[rgba(0,34,106,0.75)]">
+                Write color blog post
+              </h3>
+              <span className="font-bold text-[rgba(0,0,0,.3)]">2h</span>
             </li>
-            <li className="flex justify-between items-center ml-5 hover:cursor-pointer bg-transparent p-4 rounded-2xl">
-              <img src={box} alt="box" className="w-1/6" />
-              <h2 className="w-5/6 ml-5">All Projects</h2>
-            </li>
-            <li className="flex justify-between items-center ml-5 hover:cursor-pointer bg-transparent p-4 rounded-2xl">
-              <img src={folder} alt="folder" className="w-1/6" />
-              <h2 className="w-5/6 ml-5">Archive</h2>
-            </li>
-            <li className="flex justify-between items-center ml-5 hover:cursor-pointer bg-transparent p-4 rounded-2xl">
-              <img src={brain} alt="brain" className="w-1/6" />
-              <h2 className="w-5/6 ml-5">Brainstroaming</h2>
+            <li className="border-[rgba(0,0,0,.3)] mt-5 text-xl border-2 rounded-xl p-2 w-full flex justify-between items-center">
+              <h3 className="font-bold text-[rgba(0,34,106,0.75)]">
+                Calc. cost of living in HI
+              </h3>
+              <span className="font-bold text-[rgba(0,0,0,.3)]">1h</span>
             </li>
           </ul>
+        </nav>
+      </section>
+      <section className="bg-[#F5F6FD] h-full w-7/12 max-w-[58%] overflow-x-scroll">
+        <section className="w-screen h-full flex justify-between items-center">
+          <ul className="w-1/3 h-full ml-1 mr-1 flex flex-col justify-center items-center">
+            <header className="w-10/12 h-1/6 flex text-4xl font-bold justify-start items-center">
+              <h2 className="text-[rgba(0,34,106)]">Today</h2>
+              <span className="text-[rgba(0,0,0,.3)] text-3xl mt-1 ml-5">
+                7h 30m
+              </span>
+            </header>
+            <main className="w-10/12 h-5/6">
+              <ul className="w-full h-full flex flex-col justify-start items-center">
+                <Todo />
+                <Todo />
+                <Todo />
+              </ul>
+            </main>
+          </ul>
+          <ul className="w-1/3 h-full ml-1 mr-1 flex flex-col justify-center items-center">
+            <header className="w-10/12 h-1/6 flex text-4xl font-bold justify-start items-center">
+              <h2 className="text-[rgba(0,34,106)]">Mon</h2>
+              <span className="text-[rgba(0,0,0,.3)] text-3xl mt-1 ml-5">
+                7h 30m
+              </span>
+            </header>
+            <main className="w-10/12 h-5/6">
+              <ul className="w-full h-full flex flex-col justify-start items-center">
+                <Todo />
+                <Todo />
+                <Todo />
+              </ul>
+            </main>
+          </ul>
+          <ul className="w-1/3 h-full ml-1 mr-1 flex flex-col justify-center items-center">
+            <header className="w-10/12 h-1/6 flex text-4xl font-bold justify-start items-center">
+              <h2 className="text-[rgba(0,34,106)]">Tue</h2>
+              <span className="text-[rgba(0,0,0,.3)] text-3xl mt-1 ml-5">
+                3h
+              </span>
+            </header>
+            <main className="w-10/12 h-5/6">
+              <ul className="w-full h-full flex flex-col justify-start items-center">
+                <Todo />
+                <Todo />
+                <Todo />
+              </ul>
+            </main>
+          </ul>
+          <ul className="w-1/3 h-full ml-1 mr-1 flex flex-col justify-center items-center">
+            <header className="w-10/12 h-1/6 flex text-4xl font-bold justify-start items-center">
+              <h2 className="text-[rgba(0,34,106)]">Wed</h2>
+              <span className="text-[rgba(0,0,0,.3)] text-3xl mt-1 ml-5">
+                1h
+              </span>
+            </header>
+            <main className="w-10/12 h-5/6">
+              <ul className="w-full h-full flex flex-col justify-start items-center">
+                <Todo />
+                <Todo />
+                <Todo />
+              </ul>
+            </main>
+          </ul>
+          <ul className="w-1/3 h-full ml-1 mr-1 flex flex-col justify-center items-center">
+            <header className="w-10/12 h-1/6 flex text-4xl font-bold justify-start items-center">
+              <h2 className="text-[rgba(0,34,106)]">Thu</h2>
+              <span className="text-[rgba(0,0,0,.3)] text-3xl mt-1 ml-5">
+                30m
+              </span>
+            </header>
+            <main className="w-10/12 h-5/6">
+              <ul className="w-full h-full flex flex-col justify-start items-center">
+                <Todo />
+                <Todo />
+                <Todo />
+              </ul>
+            </main>
+          </ul>
         </section>
-        <section className="w-full h-1/6 flex justify-center items-center">
-          <button className="text-3xl bg-blue-600 p-4 rounded-2xl w-3/4 text-white tracking-widest">
-            + New Project
+      </section>
+      <section className="h-full w-3/12 p-4 flex flex-col justify-center items-center">
+        <header className="w-11/12 h-1/3 flex flex-col justify-center items-start">
+          <h3 className="text-[rgba(0,0,0,.3)] text-xl font-bold">TASK</h3>
+          <h2 className="text-[rgb(0,34,106)] text-5xl font-bold mt-8">
+            Complete Task & Focus App Design
+          </h2>
+        </header>
+        <section className="h-2/3 w-11/12">
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="6"
+            className="w-full bg-[#F5F6FD] rounded-xl border-2-[#F5F6FD] p-4 text-lg font-bold resize-none"
+            placeholder="Type some details about your task"
+          />
+          <h3 className="font-bold mt-5 text-xl text-[rgba(0,0,0,.3)]">
+            TIME ESTIMATE
+          </h3>
+          <button className="w-full">
+            <section className="bg-[#F5F6FD] mt-10 rounded-3xl flex justify-between items-center p-4 text-xl font-bold text-[rgb(0,34,106)]">
+              <p>3 hours 30 minutes</p>
+              <span className="rotate-90">&gt;</span>
+            </section>
+          </button>
+          <h3 className="font-bold mt-5 text-xl text-[rgba(0,0,0,.3)]">
+            Project
+          </h3>
+          <ul className="w-full flex justify-around items-center mt-5">
+            <li className="w-[50px] h-[50px] rounded-[50%] shadow-xl flex justify-center items-center">
+              <span className="bg-blue-500 w-[30px] h-[30px] rounded-2xl"></span>
+            </li>
+            <li className="w-[50px] h-[50px] rounded-[50%] shadow-xl flex justify-center items-center">
+              <span className="bg-green-500 w-[30px] h-[30px] rounded-2xl"></span>
+            </li>
+            <li className="w-[50px] h-[50px] rounded-[50%] shadow-xl flex justify-center items-center">
+              <span className="bg-violet-500 w-[30px] h-[30px] rounded-2xl"></span>
+            </li>
+            <li className="w-[50px] h-[50px] rounded-[50%] shadow-xl flex justify-center items-center">
+              <span className="bg-orange-500 w-[30px] h-[30px] rounded-2xl"></span>
+            </li>
+            <li className="w-[50px] h-[50px] rounded-[50%] shadow-xl flex justify-center items-center">
+              <span className="bg-red-500 w-[30px] h-[30px] rounded-2xl"></span>
+            </li>
+          </ul>
+          <button className=" w-full p-4 rounded-2xl text-white font-bold text-2xl mt-5 bg-[rgb(0,34,106)]">
+            Create Task
           </button>
         </section>
       </section>
-      <section className="w-8/12 h-full border-r-2 border-dashed border-r-zinc-400">
-        <header className="w-full h-1/4 flex justify-center items-center">
-          <section className="w-10/12 h-full flex justify-start items-start flex-col">
-            <section className="w-full h-4/6 flex justify-start items-center">
-              <img src={checkmark} alt="checkmark" className="w-1/12" />
-              <h2 className="text-4xl font-bold tracking-wide">Daily Task</h2>
-            </section>
-            <section className="w-full h-2/6 text-xl opacity-30 tracking-wide">
-              <p>
-                Click <span></span> To create new list and wait for project
-                manager card.
-              </p>
-              <p>
-                Don't Create a card by yourself to manage a good colaboration.
-              </p>
-            </section>
-          </section>
-        </header>
-        <main className="w-full h-3/4 flex justify-center items-center flex-col">
-          <header className="w-11/12 h-[8%]">
-            <ul className="w-full h-full flex justify-around items-center">
-              <li className="bg-[#EFF0F1] w-1/4 flex p-2 justify-between rounded-lg shadow-xl">
-                Next Up
-                <span className="w-6 bg-black rounded-md text-white flex justify-center items-center text-sm">
-                  3
-                </span>
-              </li>
-              <li className="bg-[#EFF0F1] w-1/4 flex p-2 justify-between rounded-lg shadow-xl">
-                In Progress
-                <span className="w-6 bg-black rounded-md text-white flex justify-center items-center text-sm">
-                  2
-                </span>
-              </li>
-              <li className="bg-[#EFF0F1] w-1/4 flex p-2 justify-between rounded-lg shadow-xl">
-                Complete
-                <span className="w-6 bg-black rounded-md text-white flex justify-center items-center text-sm">
-                  2
-                </span>
-              </li>
-            </ul>
-          </header>
-          <section className="w-11/12 h-5/6 flex justify-around items-center">
-            <ul className="w-1/4 h-full flex flex-col justify-around items-stretch">
-              <li className="w-full h-[30%]">
-                <section className="w-full h-full bg-white p-2 shadow-xl rounded-xl shadow-zinc-300">
-                  <header className="w-full h-1/4 flex justify-between items-center">
-                    <img
-                      src={checkmark}
-                      alt="brain"
-                      className="w-2/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                    <img
-                      src={more}
-                      alt="brain"
-                      className="w-1/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                  </header>
-                  <main className="w-full h-2/4 text-black text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Doloribus, architecto.
-                  </main>
-                  <section className="w-full h-1/4">
-                    <section className="bg-green-500 text-white text-sm p-1 flex w-3/12 rounded-lg">
-                      <img src={clock} alt="clock" className="w-4/12 invert" />
-                      <h2 className="ml-1">3 May</h2>
-                    </section>
-                  </section>
-                </section>
-              </li>
-              <li className="w-full h-[30%]">
-                <section className="w-full h-full bg-white p-2 shadow-xl rounded-xl shadow-zinc-300">
-                  <header className="w-full h-1/4 flex justify-between items-center">
-                    <img
-                      src={avatar}
-                      alt="brain"
-                      className="w-2/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                    <img
-                      src={more}
-                      alt="brain"
-                      className="w-1/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                  </header>
-                  <main className="w-full h-2/4 text-black text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Doloribus, architecto.
-                  </main>
-                  <section className="bg-orange-500 text-white text-sm p-1 flex w-3/12 rounded-lg">
-                    <img src={clock} alt="clock" className="w-4/12 invert" />
-                    <h2 className="ml-1">3 May</h2>
-                  </section>
-                </section>
-              </li>
-              <li className="w-full h-[30%] ">
-                <section className="w-full h-full bg-white p-2 shadow-xl rounded-xl shadow-zinc-300">
-                  <header className="w-full h-1/4 flex justify-between items-center">
-                    <img
-                      src={folder}
-                      alt="brain"
-                      className="w-2/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                    <img
-                      src={more}
-                      alt="brain"
-                      className="w-1/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                  </header>
-                  <main className="w-full h-2/4 text-black text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Doloribus, architecto.
-                  </main>
-                  <section className="bg-orange-500 text-white text-sm p-1 flex w-3/12 rounded-lg">
-                    <img src={clock} alt="clock" className="w-4/12 invert" />
-                    <h2 className="ml-1">3 May</h2>
-                  </section>
-                </section>
-              </li>
-            </ul>
-            <ul className="w-1/4 h-full flex flex-col justify-around items-stretch">
-              <li className="w-full h-[30%] ">
-                <section className="w-full h-full bg-white p-2 shadow-xl rounded-xl shadow-zinc-300">
-                  <header className="w-full h-1/4 flex justify-between items-center">
-                    <img
-                      src={brain}
-                      alt="brain"
-                      className="w-2/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                    <img
-                      src={more}
-                      alt="brain"
-                      className="w-1/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                  </header>
-                  <main className="w-full h-2/4 text-black text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Doloribus, architecto.
-                  </main>
-                  <section className="bg-red-500 text-white text-sm p-1 flex w-3/12 rounded-lg">
-                    <img src={clock} alt="clock" className="w-4/12 invert" />
-                    <h2 className="ml-1">3 May</h2>
-                  </section>
-                </section>
-              </li>
-              <li className="w-full h-[30%] ">
-                <section className="w-full h-full bg-white p-2 shadow-xl rounded-xl shadow-zinc-300">
-                  <header className="w-full h-1/4 flex justify-between items-center">
-                    <img
-                      src={dashboard}
-                      alt="brain"
-                      className="w-2/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                    <img
-                      src={more}
-                      alt="brain"
-                      className="w-1/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                  </header>
-                  <main className="w-full h-2/4 text-black text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Doloribus, architecto.
-                  </main>
-                  <section className="bg-orange-500 text-white text-sm p-1 flex w-3/12 rounded-lg">
-                    <img src={clock} alt="clock" className="w-4/12 invert" />
-                    <h2 className="ml-1">3 May</h2>
-                  </section>
-                </section>
-              </li>
-              <li className="w-full h-[30%] border-dashed border-2 border-zinc-400 rounded-xl"></li>
-            </ul>
-            <ul className="w-1/4 h-full flex flex-col justify-around items-stretch">
-              <li className="w-full h-[30%] ">
-                <section className="w-full h-full bg-white p-2 shadow-xl rounded-xl shadow-zinc-300">
-                  <header className="w-full h-1/4 flex justify-between items-center">
-                    <img
-                      src={handshake}
-                      alt="brain"
-                      className="w-2/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                    <img
-                      src={more}
-                      alt="brain"
-                      className="w-1/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                  </header>
-                  <main className="w-full h-2/4 text-black text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Doloribus, architecto.
-                  </main>
-                  <section className="bg-yellow-500 text-white text-sm p-1 flex w-3/12 rounded-lg">
-                    <img src={clock} alt="clock" className="w-4/12 invert" />
-                    <h2 className="ml-1">3 May</h2>
-                  </section>
-                </section>
-              </li>
-              <li className="w-full h-[30%] ">
-                <section className="w-full h-full bg-white p-2 shadow-xl rounded-xl shadow-zinc-300">
-                  <header className="w-full h-1/4 flex justify-between items-center">
-                    <img
-                      src={box}
-                      alt="brain"
-                      className="w-2/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                    <img
-                      src={more}
-                      alt="brain"
-                      className="w-1/12 p-1 bg-[#EFF0F1] rounded-2xl"
-                    />
-                  </header>
-                  <main className="w-full h-2/4 text-black text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Doloribus, architecto.
-                  </main>
-                  <section className="bg-green-500 text-white text-sm p-1 flex w-3/12 rounded-lg">
-                    <img src={clock} alt="clock" className="w-4/12 invert" />
-                    <h2 className="ml-1">3 May</h2>
-                  </section>
-                </section>
-              </li>
-              <li className="w-full h-[30%] border-dashed border-2 border-zinc-400 rounded-xl"></li>
-            </ul>
-          </section>
-          <section className="w-11/12 h-1/6">
-            <ul className="w-full h-full flex justify-around items-center">
-              <li className="w-1/4 h-5/6 border-dashed border-2 border-zinc-400 rounded-xl flex justify-center items-center">
-                <h2 className="opacity-30 text-8xl">+</h2>
-              </li>
-              <li className="w-1/4 h-5/6 border-dashed border-2 border-zinc-400 rounded-xl flex justify-center items-center">
-                <h2 className="opacity-30 text-8xl">+</h2>
-              </li>
-              <li className="w-1/4 h-5/6 border-dashed border-2 border-zinc-400 rounded-xl flex justify-center items-center">
-                <h2 className="opacity-30 text-8xl">+</h2>
-              </li>
-            </ul>
-          </section>
-        </main>
-      </section>
-      <section className="w-2/12 h-full"></section>
     </section>
   );
 };
-export default Board;
+
+export default board;
