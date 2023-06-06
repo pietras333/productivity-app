@@ -28,14 +28,6 @@
   clip-path: polygon(50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
 }
 
-* {
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
-}
-::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
-}
-
 @media not all and (min-width: 640px) {
   html {
     scroll-snap-type: y none;
@@ -48,11 +40,8 @@ html {
 }
 
 #root {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-flow: column nowrap;
-  font-family: monospace;
+  width: 100%;
+  height: 100%;
 }
 .gradienttext {
   background: #1fa2ff; /* fallback for old browsers */

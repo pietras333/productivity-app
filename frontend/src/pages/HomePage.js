@@ -135,7 +135,7 @@ const HomePage = () => {
   };
 
   return (
-    <section className={`${dark ? "dark" : ""}`}>
+    <section className={`${dark ? "dark" : ""} overflow-hidden`}>
       <section
         ref={homeRef}
         id="home"
