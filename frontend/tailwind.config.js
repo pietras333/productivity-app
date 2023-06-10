@@ -26,6 +26,7 @@ module.exports = {
         scrollLeft: "scrollLeft 11500ms infinite linear",
       },
       backgroundImage: {
+        board: "url('./assets/illustrations/lightMode/board.png')",
         navbar: "url('./assets/illustrations/lightMode/nav.svg')",
         credits: "url('./assets/illustrations/lightMode/credits.svg')",
         aboutUs: "url('./assets/illustrations/lightMode/about-us.svg')",
