@@ -1,0 +1,14 @@
+{
+  "parent": "Housework",
+  "author": "wendtpiotr333@gmail.com",
+  "tasks": {
+    "Clean Floors": {
+      "date": "Tommorow",
+      "done": false
+    },
+    "Chop wood": {
+      "date": "Tommorow",
+      "done": false
+    }
+  }
+}

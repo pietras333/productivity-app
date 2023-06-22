@@ -1,8 +1,4 @@
 import settings from "../assets/illustrations/icons/settings.png";
-import dashboard from "../assets/illustrations/icons/dashboard.png";
-import calendar from "../assets/illustrations/icons/calendar.png";
-import main from "../assets/illustrations/icons/board.png";
-import logo from "../assets/illustrations/icons/planet-purple.webp";
 import inbox from "../assets/illustrations/icons/inbox.png";
 import today from "../assets/illustrations/icons/today.png";
 import upcoming from "../assets/illustrations/icons/upcoming.png";
@@ -12,13 +8,142 @@ import arrow from "../assets/illustrations/icons/arrow.png";
 import search from "../assets/illustrations/icons/search.png";
 import sunglasses from "../assets/illustrations/icons/sunglasses.png";
 import explosion from "../assets/illustrations/icons/explosion.png";
-import graduation from "../assets/illustrations/icons/graduation.png";
 import plus from "../assets/illustrations/icons/plus.png";
 import more from "../assets/illustrations/icons/more.png";
-import move from "../assets/illustrations/icons/move.png";
 import help from "../assets/illustrations/icons/help.png";
+import ListItem from "../components/ListItem";
+import NewList from "../components/NewList.jsx";
+import NewTask from "../components/NewTask";
+import Task from "../components/Task";
+import { useState, useMemo } from "react";
+import { Transition } from "@tailwindui/react";
 
-const board = () => {
+const Board = () => {
+  const [newListOpen, setNewListOpen] = useState(false);
+  const [newTaskOpen, setNewTaskOpen] = useState(false);
+  const [list, setList] = useState([
+    "List",
+    ["Piniata", 5],
+    ["Work", 2],
+    ["Lecture", 5],
+  ]);
+  const [tasks, setTasks] = useState([
+    {
+      author: "wendtpiotr333@gmail.com",
+      category: "Skincare",
+      subtasks: [
+        { name: "Daily Routine", date: "Today", completed: false },
+        { name: "Skincare", date: "Everyday", completed: false },
+      ],
+    },
+    {
+      author: "wendtpiotr333@gmail.com",
+      category: "Housework",
+      subtasks: [
+        { name: "Daily Routine", date: "Tommorow", completed: false },
+        { name: "Chop wood", date: "3rd May", completed: false },
+      ],
+    },
+  ]);
+
+  const handleDataPassage = (data) => {
+    setNewListOpen(data);
+  };
+
+  const handleListAdd = (data) => {
+    setList((prev) => [...prev, [data, 1]]);
+  };
+
+  const handleTaskAdd = (data) => {
+    const updated = [...tasks];
+    updated.push({
+      category: data.name,
+      subtasks: [{ name: "Hello World", date: "Today", completed: false }],
+    });
+    setTasks(updated);
+  };
+
+  const handleNewTaskVisibility = (data) => {
+    setNewTaskOpen(data);
+  };
+
+  const handleSubTaskAdd = (data) => {
+    const updated = [...tasks];
+    const categoryIndex = tasks.findIndex(
+      (task) => task.category === data.category
+    );
+    if (categoryIndex === -1) {
+      return setTasks(updated);
+    }
+    updated[categoryIndex].subtasks.push({
+      name: data.name,
+      date: data.date,
+      completed: false,
+    });
+    setTasks(updated);
+  };
+
+  const handleSubTaskEdit = (data) => {
+    const updated = [...tasks];
+    const categoryIndex = tasks.findIndex(
+      (task) => task.category === data.category
+    );
+    if (categoryIndex === -1) {
+      return setTasks(updated);
+    }
+    updated[categoryIndex].subtasks[
+      updated[categoryIndex].subtasks.indexOf(data.oldname)
+    ] = {
+      name: data.name,
+      date: data.date,
+      completed: false,
+    };
+    setTasks(updated);
+  };
+
+  const newListTransition = useMemo(
+    (e) => (
+      <Transition
+        show={newListOpen}
+        as="section"
+        className="w-full h-full z-20 absolute top-0 left-0"
+        enter="transition-all duration-250"
+        enterFrom="opacity-0 top-[-50%]"
+        enterTo="opacity-100 top-0"
+        leave="transition-all duration-250"
+        leaveFrom="opacity-100 top-0"
+        leaveTo="opacity-0 top-[-50%]"
+      >
+        <section className="relative h-full w-full flex justify-center items-center">
+          <NewList setShowState={handleDataPassage} addList={handleListAdd} />
+        </section>
+      </Transition>
+    ),
+    [newListOpen]
+  );
+
+  const newTaskTransition = useMemo(
+    (e) => (
+      <Transition
+        show={newTaskOpen}
+        as="section"
+        className="w-full h-full z-20 absolute top-0 left-0"
+        enter="transition-all duration-250"
+        enterFrom="opacity-0 top-[-50%]"
+        enterTo="opacity-100 top-0"
+        leave="transition-all duration-250"
+        leaveFrom="opacity-100 top-0"
+        leaveTo="opacity-0 top-[-50%]"
+      >
+        <NewTask
+          setShowState={handleNewTaskVisibility}
+          addTask={handleTaskAdd}
+        />
+      </Transition>
+    ),
+    [newTaskOpen]
+  );
+
   return (
     <section className="w-screen h-screen flex">
       <aside className="w-1/6 h-full bg-[#F9F9F9] border-r-2 border-[#EBEBEB]">
@@ -96,98 +221,52 @@ const board = () => {
                   className="w-[25px] h-[25px] rotate-90"
                 />
                 <h2 className="ml-3 text-xl font-medium tracking-tight">
-                  List
+                  {list[0]}
                 </h2>
               </section>
             </button>
             <ul className="w-full h-auto">
-              <li className="w-full mt-2 bg-[#EBEBEB] flex p-2 rounded-xl items-center relative hover:border-[#EBEBEB] border-2 border-transparent">
-                <img
-                  src={sunglasses}
-                  alt="smiling face with sunglasses"
-                  className="w-[25px] h-[25px] ml-6"
-                />
-                <h3 className="text-xl font-medium ml-3">Personal</h3>
-                <span className="absolute right-3 text-lg opacity-25">7</span>
-              </li>
-              <li className="w-full mt-2 flex p-2 rounded-xl items-center relative hover:border-[#EBEBEB] border-2 border-transparent">
-                <img
-                  src={explosion}
-                  alt="exploding emoji"
-                  className="w-[25px] h-[25px] ml-6"
-                />
-                <h3 className="text-xl font-medium ml-3">Work</h3>
-                <span className="absolute right-3 text-lg opacity-25">4</span>
-              </li>
-              <li className="w-full mt-2 flex p-2 rounded-xl items-center relative hover:border-[#EBEBEB] border-2 border-transparent">
-                <img
-                  src={graduation}
-                  alt="graduation cap"
-                  className="w-[25px] h-[25px] ml-6"
-                />
-                <h3 className="text-xl font-medium ml-3">Lecture</h3>
-                <span className="absolute right-3 text-lg opacity-25">3</span>
-              </li>
-              <li className="w-full mt-2 flex p-2 rounded-xl items-center hover:border-blue-400 border-2 border-transparent">
-                <img
-                  src={plus}
-                  alt="graduation cap"
-                  className="w-[25px] h-[25px] ml-6"
-                />
-                <h3 className="text-xl font-medium ml-3">New list</h3>
-              </li>
-            </ul>
-          </section>
-          <section className="w-10/12">
-            <button className="w-full flex flex-col mt-5 items-center hover:bg-[#EBEBEB] p-1 rounded-xl">
-              <section className="w-full flex items-center">
-                <img src={arrow} alt="arrow" className="w-[25px] h-[25px]" />
-                <h2 className="ml-3 text-xl font-medium tracking-tight">
-                  Label
-                </h2>
-              </section>
-            </button>
-            <ul className="w-full h-auto hidden">
-              <li className="w-full mt-2 bg-[#EBEBEB] flex p-2 rounded-xl items-center relative hover:border-[#EBEBEB] border-2 border-transparent">
-                <img
-                  src={sunglasses}
-                  alt="smiling face with sunglasses"
-                  className="w-[25px] h-[25px] ml-6"
-                />
-                <h3 className="text-xl font-medium ml-3">Personal</h3>
-                <span className="absolute right-3 text-lg opacity-25">7</span>
-              </li>
-              <li className="w-full mt-2 flex p-2 rounded-xl items-center relative hover:border-[#EBEBEB] border-2 border-transparent">
-                <img
-                  src={explosion}
-                  alt="exploding emoji"
-                  className="w-[25px] h-[25px] ml-6"
-                />
-                <h3 className="text-xl font-medium ml-3">Work</h3>
-                <span className="absolute right-3 text-lg opacity-25">4</span>
-              </li>
-              <li className="w-full mt-2 flex p-2 rounded-xl items-center relative hover:border-[#EBEBEB] border-2 border-transparent">
-                <img
-                  src={graduation}
-                  alt="graduation cap"
-                  className="w-[25px] h-[25px] ml-6"
-                />
-                <h3 className="text-xl font-medium ml-3">Lecture</h3>
-                <span className="absolute right-3 text-lg opacity-25">3</span>
-              </li>
-              <li className="w-full mt-2 flex p-2 rounded-xl items-center hover:border-blue-400 border-2 border-transparent hover:cursor-pointer">
-                <img
-                  src={plus}
-                  alt="graduation cap"
-                  className="w-[25px] h-[25px] ml-6"
-                />
-                <h3 className="text-xl font-medium ml-3">New list</h3>
-              </li>
+              {list.map((el, index) => {
+                if (index === 0) {
+                }
+                if (list.length === index + 1) {
+                  return (
+                    <>
+                      <ListItem
+                        key={index}
+                        img={explosion}
+                        name={el[0]}
+                        count={el[1]}
+                      />
+                      <li
+                        onClick={() => {
+                          window.localStorage.setItem(
+                            "newListOpen",
+                            newListOpen
+                          );
+                          setNewListOpen((prev) => !prev);
+                        }}
+                        className="w-full mt-2 flex p-2 rounded-xl items-center hover:border-blue-400 border-2 border-transparent hover:cursor-pointer"
+                      >
+                        <img
+                          src={plus}
+                          alt="graduation cap"
+                          className="w-[25px] h-[25px] ml-6"
+                        />
+                        <h3 className="text-xl font-medium ml-3">New list</h3>
+                      </li>
+                    </>
+                  );
+                }
+                return <ListItem img={explosion} name={el[0]} count={el[1]} />;
+              })}
             </ul>
           </section>
         </section>
       </aside>
       <main className="w-5/6 h-full bg-white overflow-y-auto overflow-x-hidden relative">
+        {newListTransition}
+        {newTaskTransition}
         <section className="absolute right-5 top-2 flex p-2">
           <img
             src={settings}
@@ -211,225 +290,35 @@ const board = () => {
                 className="w-[25px] h-[25px] opacity-75 hover:cursor-pointer hover:opacity-100"
               />
             </section>
-            <button className="flex mt-12 items-center border-2 border-transparent hover:border-blue-400 hover:cursor-pointer rounded-xl p-2">
+            <button
+              onClick={() => {
+                setNewTaskOpen((prev) => !prev);
+              }}
+              className="flex mt-12 items-center border-2 border-transparent hover:border-blue-400 hover:cursor-pointer rounded-xl p-2"
+            >
               <img
                 src={plus}
                 alt="graduation cap"
                 className="w-[25px] h-[25px]"
               />
-              <h3 className="text-xl font-medium ml-3">New list</h3>
+              <h3 className="text-xl font-medium ml-3">New Task</h3>
             </button>
           </section>
         </header>
         <section className="w-full h-full flex flex-col justify-start items-center mt-10">
-          <section className="w-4/5 flex flex-col items-center justify-between">
-            <section className="flex justify-between w-full border-b-2 border-[#EBEBEB] pb-3">
-              <section className="flex items-center">
-                <img
-                  src={arrow}
-                  alt="arrow"
-                  className="w-[15px] h-[15px] rotate-90"
-                />
-                <h2 className="ml-3 text-3xl font-semibold tracking-tight">
-                  Skincare
-                </h2>
-                <span className="text-lg opacity-70 ml-2">2</span>
-              </section>
-              <img
-                src={more}
-                alt="three dots"
-                className="w-[25px] h-[25px] opacity-75 hover:cursor-pointer hover:opacity-100"
-              />
-            </section>
-            <ul className="w-full mt-5">
-              <li className="ml-5 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-            </ul>
-          </section>
-          <section className="w-4/5 flex flex-col items-center justify-between mt-10">
-            <section className="flex justify-between w-full border-b-2 border-[#EBEBEB] pb-3">
-              <section className="flex items-center">
-                <img
-                  src={arrow}
-                  alt="arrow"
-                  className="w-[15px] h-[15px] rotate-90"
-                />
-                <h2 className="ml-3 text-3xl font-semibold tracking-tight">
-                  Housework
-                </h2>
-                <span className="text-lg opacity-70 ml-2">10</span>
-              </section>
-              <img
-                src={more}
-                alt="three dots"
-                className="w-[25px] h-[25px] opacity-75 hover:cursor-pointer hover:opacity-100"
-              />
-            </section>
-            <ul className="w-full mt-5">
-              <li className="ml-5 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 mt-3 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 mt-3 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 mt-3 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 mt-3 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 mt-3 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 mt-3 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 mt-3 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 mt-3 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 mt-3 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-              <li className="ml-5 mt-3 flex w-full p-2 rounded-lg items-center border-2 border-transparent hover:bg-[#F9F9F9] hover:border-[#EBEBEB] hover:cursor-pointer">
-                <img src={move} alt="six dots" className="w-[25px] h-[25px]" />
-                <button className="w-[30px] h-[30px] border-2 border-[#EBEBEB] rounded-lg ml-2"></button>
-                <h3 className="font-semibold text-xl ml-2">Daily Routine</h3>
-                <section className="flex justify-center items-center">
-                  <span className="bg-green-500 bg-opacity-40 text-green-600 p-1 rounded-xl ml-2">
-                    Today
-                  </span>
-                </section>
-              </li>
-            </ul>
-          </section>
+          {tasks.map((tasks, index) => (
+            <Task
+              addTaskToTask={handleSubTaskAdd}
+              key={index}
+              taskName={tasks.category}
+              subTasks={tasks.subtasks}
+              editSubTask={handleSubTaskEdit}
+            />
+          ))}
         </section>
       </main>
     </section>
   );
 };
 
-export default board;
+export default Board;
