@@ -1,7 +1,13 @@
+import { useEffect, useState } from "react";
+
 const SelectDate = ({ selectDate }) => {
-  const handleDateChange = (date, color) => {
-    selectDate({ date: date, color: color });
+  const [date, setDate] = useState("");
+  const handleDateChange = (date) => {
+    setDate(date);
   };
+  useEffect(() => {
+    selectDate(date);
+  });
 
   return (
     <section className="bg-[#F9F9F9] border-2 border-[#EBEBEB] absolute top-9 rounded-lg z-10 right-0 w-[140px] h-[120px]">

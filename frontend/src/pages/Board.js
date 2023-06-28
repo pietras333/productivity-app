@@ -15,14 +15,14 @@ import ListItem from "../components/ListItem";
 import NewList from "../components/NewList.jsx";
 import NewTask from "../components/NewTask";
 import Task from "../components/Task";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Transition } from "@tailwindui/react";
 
 const Board = () => {
   const [newListOpen, setNewListOpen] = useState(false);
   const [newTaskOpen, setNewTaskOpen] = useState(false);
   const [list, setList] = useState([
-    "List",
+    ["List", 3],
     ["Piniata", 5],
     ["Work", 2],
     ["Lecture", 5],
@@ -91,15 +91,18 @@ const Board = () => {
     if (categoryIndex === -1) {
       return setTasks(updated);
     }
-    updated[categoryIndex].subtasks[
-      updated[categoryIndex].subtasks.indexOf(data.oldname)
-    ] = {
-      name: data.name,
-      date: data.date,
-      completed: false,
-    };
+    const subTaskIndex = updated[categoryIndex].subtasks.findIndex(
+      (obj) => obj.name === data.oldname
+    );
+    updated[categoryIndex].subtasks[subTaskIndex].name = data.name;
+    updated[categoryIndex].subtasks[subTaskIndex].date = data.date;
+    updated[categoryIndex].subtasks[subTaskIndex].completed = false;
     setTasks(updated);
   };
+
+  useEffect(() => {
+    console.log(tasks);
+  });
 
   const newListTransition = useMemo(
     (e) => (
