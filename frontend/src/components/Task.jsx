@@ -51,6 +51,10 @@ const Task = ({ addTaskToTask, taskName, subTasks, editSubTask }) => {
     });
   };
 
+  const handleShowEditable = () => {
+    setShowEditable((prev) => !prev);
+  };
+
   return (
     <section className="w-4/5 flex flex-col items-center justify-between mt-10">
       <section className="flex justify-between w-full border-b-2 border-[#EBEBEB] pb-3 relative">
@@ -81,6 +85,7 @@ const Task = ({ addTaskToTask, taskName, subTasks, editSubTask }) => {
       <ul ref={taskRef} className="w-full mt-5">
         {subTasks.map((subtask, index) => (
           <SubTask
+            handleShowEditable={handleShowEditable}
             editTask={handleSubTaskEdit}
             showEditable={showEditable}
             key={index + 1}
