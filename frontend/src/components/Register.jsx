@@ -32,10 +32,6 @@ const Register = () => {
     setFeedback(statusCode === 403 ? true : false);
     const data = await response.json();
     setServerData({ data });
-    window.localStorage.setItem(
-      "authorizationToken",
-      data.Headers.Authorization
-    );
   };
 
   const feedbackTransition = useMemo(

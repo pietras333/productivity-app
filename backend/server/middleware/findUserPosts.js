@@ -3,6 +3,7 @@ import postsModel from "../models/postModel.js";
 const findUserPosts = async (req, res, next) => {
   const user = res.user[0];
   const id = user._id.toString().replace(/['"]+/g, "");
+  console.log(id);
   let posts = await postsModel.find({
     userId: id,
   });
