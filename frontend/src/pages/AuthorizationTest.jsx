@@ -37,7 +37,7 @@ const AuthorizationTest = () => {
   };
 
   return (
-    <div className="bg-black">
+    <div>
       {authorized ? <div>hello world</div> : <div>Un authorized</div>}
       <button onClick={log}>TEST</button>
       <div>

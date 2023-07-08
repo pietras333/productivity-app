@@ -11,6 +11,7 @@ import verification from "./middleware/verification.js";
 import authorize from "./middleware/authorize.js";
 import postsModel from "./models/postModel.js";
 import findUserPosts from "./middleware/findUserPosts.js";
+import taskManager from "./middleware/taskManager.js";
 
 dotenv.config();
 app.use(express.urlencoded({ extended: false }));
@@ -18,6 +19,10 @@ app.use(express.json());
 
 app.get("/api", authorize, findUserPosts, async (req, res) => {
   res.status(201).send(res.posts);
+});
+
+app.post("/api/tasks/subtasks", taskManager.subtasks, (req, res) => {
+  res.status(200).send(req.data);
 });
 
 app.get("/api/verify/:token", verification, (req, res) => {
@@ -29,30 +34,15 @@ app.post("/main", authorize, (req, res) => {
 });
 
 app.post("/api/register", register, async (req, res) => {
-  const user = await userModel.find({ email: req.body.email });
-  console.log(user);
-  const token = jwt.sign({ id: user[0]._id }, process.env.JWT_SECRET, {
-    expiresIn: "2h",
-  });
-  await userModel.updateOne(
-    { email: req.body.email },
-    {
-      $set: {
-        authorizationToken: token,
-      },
-    }
-  );
   res.status(201).send({
-    Headers: {
-      Authorization: token,
-    },
     Message: "User created",
   });
 });
 
 app.post("/api/login", login, async (req, res) => {
   const user = await userModel.find({ email: req.body.email });
-  const token = jwt.sign({ id: user[0]._id }, process.env.JWT_SECRET, {
+  console.log(user);
+  const token = jwt.sign({ email: user[0].email }, process.env.JWT_SECRET, {
     expiresIn: "2h",
   });
   await userModel.updateOne(

@@ -17,6 +17,24 @@
   line-height: 1.75rem;
 }
 
+.bluegradient {
+  background: rgb(59, 130, 246);
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 1) 0%,
+    rgba(96, 165, 250, 1) 100%
+  );
+}
+
+.blueshadow {
+  /* -webkit-box-shadow: 8px 8px 100px 100px rgba(59, 130, 246, 0.25);
+  -moz-box-shadow: 8px 8px 100px 100px rgba(59, 130, 246, 0.25);
+  box-shadow: 8px 8px 100px 100px rgba(59, 130, 246, 0.25); */
+  -webkit-box-shadow: 8px 0px 100px 80px rgba(59, 130, 246, 0.3);
+  -moz-box-shadow: 8px 0px 100px 80px rgba(59, 130, 246, 0.3);
+  box-shadow: 8px 0px 100px 80px rgba(59, 130, 246, 0.3);
+}
+
 * {
   margin: none;
   padding: none;

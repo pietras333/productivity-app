@@ -12,7 +12,7 @@ module.exports = {
       "3/4": "75%",
     },
     fontFamily: {
-      Oswald: ["Oswald", "sans-serif"],
+      Manrope: ["Manrope", "sans-serif"],
     },
     extend: {
       animation: {
