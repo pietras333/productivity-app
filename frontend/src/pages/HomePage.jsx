@@ -6,6 +6,29 @@ import web from "../assets/illustrations/icons/web.png";
 import data from "../assets/illustrations/icons/data.png";
 
 const HomePage = () => {
+  const send = () => {
+    fetch("../api/tasks/subtasks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Action: "Addition",
+        Authorization:
+          "Bearer " + window.localStorage.getItem("authorizationToken"),
+      },
+      body: JSON.stringify({
+        category: "Skincare",
+        subtasks: {
+          name: "gowno",
+          new: {
+            name: "gowno",
+            date: "Dzisiaj",
+            completed: false,
+          },
+        },
+      }),
+    });
+  };
+
   return (
     <main className="w-full bg-blue-400 h-full bg-home bg-cover bg-no-repeat font-Manrope flex items-center flex-col">
       <header className="w-full flex flex-col justify-center">
@@ -26,7 +49,7 @@ const HomePage = () => {
             </li>
             <li className="ml-36 max-lg:ml-14">
               <button className="outline-white hover:opacity-100 opacity-50 text-opacity-30 flex justify-center items-center outline-1 outline-none pt-3 pb-3 pl-5 pr-5 rounded-full">
-                Create Account
+                <a href="../get-started">Create Account</a>
               </button>
             </li>
           </ul>
@@ -44,7 +67,7 @@ const HomePage = () => {
           </p>
           <section className="flex justify-center items-center">
             <button className="bluegradient border border-white hover:tracking-wide text-white max-[2559px]:text-xl max-[2559px]:w-[250px] w-[400px] text-3xl max-2xl:text-xl max-2xl:w-[200px] pt-3 pb-3 pl-5 pr-5 rounded-full mt-12 shadow-blue-500 blueshadow">
-              Returning user
+              <a href="../sign-in">Returning User</a>
             </button>
           </section>
         </section>
@@ -241,7 +264,7 @@ const HomePage = () => {
             Featuring many ways to help you maximize your productivity.
           </p>
           <button className="bg-white hover:tracking-wide max-[2559px]:text-xl max-[2559px]:w-[200px] text-black text-3xl max-2xl:text-xl max-2xl:w-[200px] max-xl:text-base max-xl:w-[150px] font-normal mt-12 w-[350px] flex justify-center items-center pt-3 pb-3 pl-5 pr-5 rounded-full">
-            Get started
+            <a href="../get-started">Get started</a>
           </button>
         </section>
         <section className="h-3/5 w-full flex justify-center absolute bottom-0 border border-transparent border-t-black border-opacity-30">
@@ -272,10 +295,10 @@ const HomePage = () => {
                     About
                   </li>
                   <li className="hover:opacity-100 opacity-50 hover:cursor-pointer mt-2">
-                    Get started
+                    <a href="../get-started">Get Started</a>
                   </li>
                   <li className="hover:opacity-100 opacity-50 hover:cursor-pointer mt-2">
-                    Sign in
+                    <a href="../sign-in">Sign In</a>
                   </li>
                   <li className="hover:opacity-100 opacity-50 hover:cursor-pointer mt-2">
                     Powered by Icons8
