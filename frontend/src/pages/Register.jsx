@@ -28,10 +28,10 @@ const Register = () => {
   };
 
   return (
-    <section className="w-screen bg-blue-400 h-screen font-Manrope flex">
-      <aside className="w-7/12 h-full bluegradient flex justify-start items-center flex-col max-xl:justify-center relative">
+    <section className="w-screen bg-blue-400 h-screen font-Manrope flex max-md:flex-col">
+      <aside className="w-7/12 max-md:w-full max-md:h-1/3 h-full bluegradient flex justify-start items-center flex-col max-xl:justify-center relative">
         <img src={register} alt="" className="w-2/3" />
-        <h2 className="text-lg text-white opacity-50 max-lg:text-base flex flex-col justify-start items-center">
+        <h2 className="text-lg max-md:hidden text-white opacity-50 max-lg:text-base flex flex-col justify-start items-center">
           <span>Create account.</span>
           <span>And start your journey into new productivity verse.</span>
         </h2>
@@ -39,15 +39,15 @@ const Register = () => {
           Focusio 2023, All Rights Reserved
         </h3>
       </aside>
-      <main className="w-5/12 h-full bg-[#121313] flex flex-col items-center justify-start relative">
+      <main className="w-5/12 max-md:w-full h-full bg-[#121313] flex flex-col items-center justify-start relative">
         <header className="w-full flex items-center justify-around flex-col">
           <h1 className="flex w-full justify-start items-center p-8 pl-36 max-xl:pl-12">
-            <p className="bluegradient w-10 h-10 rounded-full"></p>
-            <span className="text-white font-semibold text-3xl ml-1">
+            <p className="bluegradient w-10 h-10 max-md:w-7 max-md:h-7 rounded-full"></p>
+            <span className="text-white font-semibold text-3xl max-md:text-xl ml-1">
               Focusio
             </span>
           </h1>
-          <h2 className="text-5xl text-white w-11/12 mt-10 flex flex-col items-center justify-center font-bold">
+          <h2 className="text-5xl text-white w-11/12 mt-10 max-md:mt-2 flex flex-col items-center justify-center font-bold">
             <span className="text-center text-4xl max-xl:text-2xl">
               Prepare, create and start.
             </span>
@@ -56,7 +56,7 @@ const Register = () => {
             </span>
           </h2>
         </header>
-        <form className="w-11/12 max-xl:w-full h-1/2 mt-[15%] flex justify-start flex-col items-center">
+        <form className="w-11/12 max-xl:w-full h-1/2 mt-[15%] max-md:mt-4 flex justify-start flex-col items-center">
           <section className="w-3/4 flex justify-around max-xl:flex-col max-xl:items-center">
             <input
               value={name}
