@@ -41,7 +41,7 @@ const Register = () => {
       </aside>
       <main className="w-5/12 max-md:w-full h-full bg-[#121313] flex flex-col items-center justify-start relative">
         <header className="w-full flex items-center justify-around flex-col">
-          <h1 className="flex w-full justify-start items-center p-8 pl-36 max-xl:pl-12">
+          <h1 className="flex w-full justify-start items-center p-8 pl-36 max-xl:pl-12 max-md:p-4 max-md:pl-12">
             <p className="bluegradient w-10 h-10 max-md:w-7 max-md:h-7 rounded-full"></p>
             <span className="text-white font-semibold text-3xl max-md:text-xl ml-1">
               Focusio
@@ -63,14 +63,14 @@ const Register = () => {
               onChange={handleName}
               type="text"
               placeholder="First name."
-              className="w-5/12 max-xl:w-11/12 max-xl:mt-2 text-xl p-2 pl-3 text-white bg-transparent border border-blue-400 rounded-2xl focus:border-white"
+              className="w-5/12 max-xl:w-11/12 max-xl:mt-2 text-xl max-md:text-base p-2 pl-3 text-white bg-transparent border border-blue-400 rounded-2xl focus:border-white"
             />
             <input
               value={surname}
               onChange={handleSurname}
               type="text"
               placeholder="Last name."
-              className="w-5/12 max-xl:w-11/12 max-xl:mt-2 text-xl p-2 pl-3 text-white bg-transparent border border-blue-400 rounded-2xl focus:border-white"
+              className="w-5/12 max-xl:w-11/12 max-xl:mt-2 text-xl max-md:text-base p-2 pl-3 text-white bg-transparent border border-blue-400 rounded-2xl focus:border-white"
             />
           </section>
           <main className="w-3/4 flex flex-col items-center">
@@ -79,18 +79,18 @@ const Register = () => {
               onChange={handleEmail}
               type="email"
               placeholder="Email."
-              className="w-11/12 mt-3 text-xl p-2 pl-3 text-white bg-transparent border border-blue-400 rounded-2xl focus:border-white"
+              className="w-11/12 mt-3 text-xl p-2 pl-3 text-white max-md:text-base bg-transparent border border-blue-400 rounded-2xl focus:border-white"
             />
             <input
               value={password}
               onChange={handlePassword}
               type="password"
               placeholder="Password."
-              className="w-11/12 mt-3 text-xl p-2 pl-3 text-white bg-transparent border border-blue-400 rounded-2xl focus:border-white"
+              className="w-11/12 mt-3 text-xl p-2 pl-3 text-white max-md:text-base bg-transparent border border-blue-400 rounded-2xl focus:border-white"
             />
             <button
               onClick={sendRequest}
-              className="bluegradient border border-white hover:tracking-wide text-white max-[2559px]:text-xl max-[2559px]:w-[250px] w-[400px] text-3xl max-2xl:text-xl max-2xl:w-[200px] max-lg:text-lg max-lg:w-[180px] pt-3 pb-3 pl-5 pr-5 rounded-full mt-12 shadow-blue-500 blueshadow"
+              className="bluegradient border border-white hover:tracking-wide text-white max-[2559px]:text-xl max-[2559px]:w-[250px] w-[400px] text-3xl max-2xl:text-xl max-2xl:w-[200px] max-lg:text-lg max-lg:w-[180px] pt-3 pb-3 pl-5 pr-5 max-md:text-lg max-md:pt-2 max-md:pb-2 max-md:pl-3 max-md:pr-3 rounded-full mt-12 max-md:mt-4 shadow-blue-500 blueshadow"
             >
               Create account
             </button>
