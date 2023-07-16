@@ -1,7 +1,10 @@
 import { useState } from "react";
 import register from "../assets/illustrations/icons/register.png";
+import { Transition } from "@tailwindui/react";
 
 const Register = () => {
+  const [showResponse, setShowResponse] = useState(false);
+  const [response, setResponse] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -23,8 +26,27 @@ const Register = () => {
     setSurname(e.target.value);
   };
 
-  const sendRequest = (e) => {
+  const sendRequest = async (e) => {
     e.preventDefault();
+    setShowResponse(true);
+    const response = await fetch("../api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        surname: surname,
+        email: email,
+        password: password,
+      }),
+    });
+    setResponse(response.status);
+  };
+
+  const closeResponse = (e) => {
+    e.preventDefault();
+    setShowResponse(false);
   };
 
   return (
@@ -56,7 +78,44 @@ const Register = () => {
             </span>
           </h2>
         </header>
-        <form className="w-11/12 max-xl:w-full h-1/2 mt-[15%] max-md:mt-4 flex justify-start flex-col items-center">
+        <form className="w-11/12 max-xl:w-full h-1/2 mt-[15%] max-md:mt-4 flex justify-start flex-col items-center relative">
+          <Transition
+            show={showResponse}
+            as="section"
+            className="absolute w-full h-full flex justify-center items-center"
+            enter="transition-all duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-all duration-300"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            {response === 403 ? (
+              <section className="w-1/2 h-1/2 bg-[#121313] outline outline-red-500 rounded-xl flex justify-center flex-col items-center">
+                <h1 className="text-xl text-red-500 text-center max-lg:text-lg max-md:text-base">
+                  Email already in use.
+                </h1>
+                <button
+                  onClick={closeResponse}
+                  className="bluegradient border border-white hover:tracking-wide text-white max-[2559px]:text-xl max-[2559px]:w-[250px] w-[300px] text-3xl max-2xl:text-xl max-2xl:w-[200px] max-lg:text-lg max-lg:w-[130px] pt-3 pb-3 pl-5 pr-5  max-md:text-lg max-md:pt-2 max-md:pb-2 max-md:pl-3 max-md:pr-3 rounded-full mt-12 max-md:mt-4 shadow-blue-500 shadow-2xl"
+                >
+                  Close
+                </button>
+              </section>
+            ) : (
+              <section className="w-1/2 h-1/2 bg-[#121313] outline outline-green-500 rounded-xl flex justify-center flex-col items-center">
+                <h1 className="text-xl text-green-500 text-center max-lg:text-lg max-md:text-base">
+                  User created succesfully.
+                </h1>
+                <button
+                  onClick={closeResponse}
+                  className="bluegradient border border-white hover:tracking-wide text-white max-[2559px]:text-xl max-[2559px]:w-[250px] w-[300px] text-3xl max-2xl:text-xl max-2xl:w-[200px] max-lg:text-lg max-lg:w-[130px] pt-3 pb-3 pl-5 pr-5  max-md:text-lg max-md:pt-2 max-md:pb-2 max-md:pl-3 max-md:pr-3 rounded-full mt-12 max-md:mt-4 shadow-blue-500 shadow-2xl"
+                >
+                  Close
+                </button>
+              </section>
+            )}
+          </Transition>
           <section className="w-3/4 flex justify-around max-xl:flex-col max-xl:items-center">
             <input
               value={name}

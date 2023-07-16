@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { Transition } from "@tailwindui/react";
 import login from "../assets/illustrations/icons/login.png";
 
 const Login = () => {
+  const [showResponse, setShowResponse] = useState(false);
+  const [response, setResponse] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,8 +16,30 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const sendRequest = (e) => {
+  const sendRequest = async (e) => {
     e.preventDefault();
+    setShowResponse(true);
+    const response = await fetch("../api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    setResponse(response.status);
+    const data = await response.json();
+    window.localStorage.setItem(
+      "authorizationToken",
+      data.Headers.Authorization
+    );
+  };
+
+  const closeResponse = (e) => {
+    e.preventDefault();
+    setShowResponse(false);
   };
 
   const handleForgotPassword = () => {};
@@ -48,7 +73,46 @@ const Login = () => {
             </span>
           </h2>
         </header>
-        <form className="w-11/12 max-xl:w-full h-1/2 mt-[15%] max-md:mt-5 flex justify-start flex-col items-center">
+        <form className="w-11/12 max-xl:w-full h-1/2 mt-[15%] max-md:mt-5 flex justify-start flex-col items-center relative">
+          <Transition
+            show={showResponse}
+            as="section"
+            className="absolute w-full h-full flex justify-center items-center"
+            enter="transition-all duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-all duration-300"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            {response === 404 || response === 401 ? (
+              <section className="w-1/2 h-1/2 bg-[#121313] outline outline-red-500 rounded-xl flex justify-center flex-col items-center">
+                <h1 className="text-xl text-red-500 text-center max-lg:text-lg max-md:text-base">
+                  {response === 404
+                    ? "Email not found."
+                    : "Wrong email or password."}
+                </h1>
+                <button
+                  onClick={closeResponse}
+                  className="bluegradient border border-white hover:tracking-wide text-white max-[2559px]:text-xl max-[2559px]:w-[250px] w-[300px] text-3xl max-2xl:text-xl max-2xl:w-[200px] max-lg:text-lg max-lg:w-[130px] pt-3 pb-3 pl-5 pr-5  max-md:text-lg max-md:pt-2 max-md:pb-2 max-md:pl-3 max-md:pr-3 rounded-full mt-12 max-md:mt-4 shadow-blue-500 shadow-2xl"
+                >
+                  Close
+                </button>
+              </section>
+            ) : (
+              <section className="w-1/2 h-1/2 bg-[#121313] outline outline-green-500 rounded-xl flex justify-center flex-col items-center">
+                <h1 className="text-xl text-green-500 text-center max-lg:text-lg max-md:text-base">
+                  Succesfully logged in.
+                </h1>
+                <button
+                  onClick={closeResponse}
+                  className="bluegradient border border-white hover:tracking-wide text-white max-[2559px]:text-xl max-[2559px]:w-[250px] w-[300px] text-3xl max-2xl:text-xl max-2xl:w-[200px] max-lg:text-lg max-lg:w-[130px] pt-3 pb-3 pl-5 pr-5  max-md:text-lg max-md:pt-2 max-md:pb-2 max-md:pl-3 max-md:pr-3 rounded-full mt-12 max-md:mt-4 shadow-blue-500 shadow-2xl"
+                >
+                  Close
+                </button>
+              </section>
+            )}
+          </Transition>
           <main className="w-3/4 flex flex-col items-center">
             <input
               onChange={handleEmail}
