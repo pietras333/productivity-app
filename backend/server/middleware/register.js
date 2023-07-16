@@ -17,8 +17,8 @@ const register = async (req, res, next) => {
   }
   const verToken = await handleVerToken();
   const user = new userModel({
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
+    first_name: req.body.name,
+    last_name: req.body.surname,
     email: req.body.email.toLowerCase(),
     password: await bcrypt.hash(req.body.password, 10),
     verified: false,

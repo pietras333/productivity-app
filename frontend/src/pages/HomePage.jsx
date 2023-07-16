@@ -4,12 +4,50 @@ import profile from "../assets/illustrations/icons/profile.png";
 import landing from "../assets/illustrations/icons/landing.png";
 import web from "../assets/illustrations/icons/web.png";
 import data from "../assets/illustrations/icons/data.png";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Transition } from "@tailwindui/react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const HomePage = () => {
   const [openMobile, setOpenMobile] = useState(false);
+  const [navRef, navInView, navEntry] = useInView({
+    threshold: 0,
+  });
 
+  const [buttonRef, buttonInView, buttonEntry] = useInView({
+    threshold: 0,
+  });
+
+  const [cardsRef, cardsInView, cardsEntry] = useInView({
+    threshold: 0,
+  });
+  const [cards2Ref, cards2InView, cards2Entry] = useInView({
+    threshold: 0,
+  });
+
+  const [infoRef, infoInView, infoEntry] = useInView({
+    threshold: 0,
+  });
+  const [info2Ref, info2InView, info2Entry] = useInView({
+    threshold: 0,
+  });
+  const [articleRef, articleInView, articleEntry] = useInView({
+    threshold: 0,
+  });
+
+  const [footerRef, footerInView, footerEntry] = useInView({
+    threshold: 0,
+  });
+  const [getStartedRef, getStartedInView, getStartedEntry] = useInView({
+    threshold: 0,
+  });
+  const [headerRef, headerInView, headerEntry] = useInView({
+    threshold: 0,
+  });
+  const [midHeaderRef, midHeaderInView, midHeaderEntry] = useInView({
+    threshold: 0,
+  });
   const send = () => {
     fetch("../api/tasks/subtasks", {
       method: "POST",
@@ -99,8 +137,21 @@ const HomePage = () => {
         </ul>
       </Transition>
       <header className="w-full flex flex-col justify-center">
-        <nav className="w-full  h-[135px] flex justify-center max-lg:hidden">
-          <ul className="w-4/6 h-full text-3xl max-[2559px]:text-xl max-2xl:text-lg max-xl:text-base max-lg:text-sm max-xl:w-full max-2xl:w-4/5 pl-12 pr-12font-medium text-white flex items-center justify-around">
+        <nav
+          ref={navRef}
+          className="w-full  h-[135px] flex justify-center max-lg:hidden"
+        >
+          <Transition
+            show={navInView}
+            as="ul"
+            className="w-4/6 h-full text-3xl max-[2559px]:text-xl max-2xl:text-lg max-xl:text-base max-lg:text-sm max-xl:w-full max-2xl:w-4/5 pl-12 pr-12font-medium text-white flex items-center justify-around"
+            enter="duration-300 transition-all"
+            enterFrom="-translate-y-1/4 opacity-0"
+            enterTo="translate-y-0 opacity-100"
+            leave="duration-300 transition-all"
+            leaveFrom="translate-y-0 opacity-100"
+            leaveTo="-translate-y-1/4 oapcity-0"
+          >
             <li className="text-5xl max-[2559px]:text-3xl max-2xl:text-2xl max-xl:text-xl max-lg:text-base text-white font-semibold flex items-center">
               <p className="bluegradient w-6 h-6 max-xl:w-5 max-xl:h-5 max-lg:h-4 max-lg:w-4 rounded-full"></p>
               <span className="ml-1">Focusio</span>
@@ -119,30 +170,78 @@ const HomePage = () => {
                 <a href="../get-started">Create Account</a>
               </button>
             </li>
-          </ul>
+          </Transition>
         </nav>
-        <section className="w-full h-[110vh] max-md:h-[90vh] max-md:flex max-md:flex-col max-md:items-center">
-          <h1 className="text-[10rem] max-[2559px]:text-8xl max-2xl:text-7xl max-md:text-5xl mt-24 font-bold text-white flex flex-col items-center max-md:justify-center">
+        <section
+          ref={headerRef}
+          className="w-full h-[110vh] max-md:h-[90vh] max-md:flex max-md:flex-col max-md:items-center"
+        >
+          <Transition
+            show={headerInView}
+            as="h1"
+            className="text-[10rem] max-[2559px]:text-8xl max-2xl:text-7xl max-md:text-5xl mt-24 font-bold text-white flex flex-col items-center max-md:justify-center"
+            enter="duration-500 transition-all"
+            enterFrom="-translate-x-full opacity-0"
+            enterTo="-translate-x-0 opacity-100"
+            leave="duration-500 transition-all"
+            leaveFrom="-translate-x-0 opacity-100"
+            leaveTo="-translate-x-full opacity-0"
+          >
             <span>Connect with</span>
             <span className="mt-1">your mind</span>
-          </h1>
-          <p className="flex text-center max-[2559px]:text-lg text-2xl max-2xl:text-base max-md:text-xs max-md:w-3/4 flex-col items-center text-white text-opacity-40 font-medium mt-12">
+          </Transition>
+
+          <Transition
+            show={headerInView}
+            as="p"
+            className="flex text-center max-[2559px]:text-lg text-2xl max-2xl:text-base max-md:text-xs max-md:w-3/4 flex-col items-center text-white text-opacity-40 font-medium mt-12"
+            enter="duration-300 transition-all"
+            enterFrom=" opacity-0"
+            enterTo=" opacity-100"
+            leave="duration-300 transition-all"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
             <span>Elevate your focus. Maximize productivity.</span>
             <span>
               Accomplish tasks effortlessly. Unleash your full potential.
             </span>
-          </p>
-          <section className="flex justify-center items-center">
-            <button className="bluegradient border border-white hover:tracking-wide text-white max-[2559px]:text-xl max-[2559px]:w-[250px] w-[400px] text-3xl max-2xl:text-xl max-2xl:w-[200px] max-md:w-[150px] max-md:text-sm pt-3 pb-3 pl-5 pr-5 rounded-full mt-12 shadow-blue-500 blueshadow">
+          </Transition>
+
+          <section ref={buttonRef} className="flex justify-center items-center">
+            <Transition
+              show={buttonInView}
+              as="button"
+              className="bluegradient border border-white hover:tracking-wide text-white max-[2559px]:text-xl max-[2559px]:w-[250px] w-[400px] text-3xl max-2xl:text-xl max-2xl:w-[200px] max-md:w-[150px] max-md:text-sm pt-3 pb-3 pl-5 pr-5 rounded-full mt-12 shadow-blue-500 blueshadow"
+              enter="duration-700 transition-all"
+              enterFrom="scale-50 opacity-0"
+              enterTo="scale-100 opacity-100"
+              leave="duration-700 transition-all"
+              leaveFrom="scale-100 opacity-100"
+              leaveTo="scale-50 opacity-0"
+            >
               <a href="../sign-in">Returning User</a>
-            </button>
+            </Transition>
           </section>
         </section>
       </header>
 
       <section className="w-full h-[130vh] max-md:h-[120vh] bg-white flex justify-center items-end relative">
-        <article className="bluegradient w-3/4 max-xl:w-11/12 h-2/3 max-md:h-2/3 rounded-3xl absolute -top-[30%] max-md:-top-[25%] ml-auto mr-auto left-0 right-0">
-          <header className="w-full h-1/3 flex flex-col justify-center items-center text-white">
+        <article
+          ref={articleRef}
+          className="bluegradient w-3/4 max-xl:w-11/12 h-2/3 max-md:h-2/3 rounded-3xl absolute -top-[30%] max-md:-top-[25%] ml-auto mr-auto left-0 right-0"
+        >
+          <Transition
+            show={articleInView}
+            as="header"
+            className="w-full h-1/3 flex flex-col justify-center items-center text-white"
+            enter="duration-700 transition-all"
+            enterFrom="scale-50 opacity-0"
+            enterTo="scale-100 opacity-100"
+            leave="duration-700 transition-all"
+            leaveFrom="scale-100 opacity-100"
+            leaveTo="scale-50 opacity-0"
+          >
             <h2 className="text-9xl max-[2559px]:text-7xl max-2xl:text-5xl max-xl:text-5xl max-md:text-2xl max-md:text-center font-bold mt-24 max-md:mt-2">
               Choose us, choose wisely.
             </h2>
@@ -153,10 +252,24 @@ const HomePage = () => {
               accusantium eaque voluptas nemo, voluptates reiciendis? Vitae,
               velit!
             </p>
-          </header>
+          </Transition>
+
           <main className="w-full h-2/3 max-md:mt-4">
-            <ul className="w-full h-full max-md:snap-y max-md:snap-mandatory max-md:h-3/4 flex max-md:flex-col max-md:overflow-scroll max-md:justify-start justify-around items-center">
-              <li className="bg-white max-md:snap-center rounded-3xl h-2/3 w-1/4 max-md:w-3/4 max-md:mt-12 p-4 max-md:p-2 max-md:pl-4 pl-6">
+            <ul
+              ref={cardsRef}
+              className="w-full h-full max-md:snap-y max-md:snap-mandatory max-md:h-3/4 flex max-md:flex-col max-md:overflow-scroll max-md:justify-start justify-around items-center"
+            >
+              <Transition
+                show={cardsInView}
+                as="li"
+                className="bg-white max-md:snap-center rounded-3xl h-2/3 w-1/4 max-md:w-3/4 max-md:mt-12 p-4 max-md:p-2 max-md:pl-4 pl-6"
+                enter="duration-300 transition-all"
+                enterFrom="opacity-0 -translate-x-full"
+                enterTo="opacity-100 -translate-x-0"
+                leave="duration-300 transition-all"
+                leaveFrom="opacity-100 -translate-x-0"
+                leaveTo="opacity-0 -translate-x-full"
+              >
                 <h3 className="text-2xl max-[2559px]:text-xl max-2xl:text-lg max-xl:text-base max-lg:text-sm text-blue-500 font-medium">
                   1.
                 </h3>
@@ -168,8 +281,18 @@ const HomePage = () => {
                   Voluptates enim, magnam alias modi ad dolores cumque officia
                   sunt nemo iste.
                 </p>
-              </li>
-              <li className="bg-white max-md:snap-center rounded-3xl h-2/3 w-1/4 max-md:w-3/4 max-md:mt-12 p-4 max-md:p-2 max-md:pl-4 pl-6">
+              </Transition>
+              <Transition
+                show={cardsInView}
+                as="li"
+                className="bg-white max-md:snap-center rounded-3xl h-2/3 w-1/4 max-md:w-3/4 max-md:mt-12 p-4 max-md:p-2 max-md:pl-4 pl-6"
+                enter="duration-700 transition-all"
+                enterFrom="opacity-0 -translate-x-full"
+                enterTo="opacity-100 -translate-x-0"
+                leave="duration-700 transition-all"
+                leaveFrom="opacity-100 -translate-x-0"
+                leaveTo="opacity-0 -translate-x-full"
+              >
                 <h3 className="text-2xl max-[2559px]:text-xl max-2xl:text-lg max-xl:text-base max-lg:text-sm text-blue-500 font-medium">
                   2.
                 </h3>
@@ -181,8 +304,18 @@ const HomePage = () => {
                   Voluptates enim, magnam alias modi ad dolores cumque officia
                   sunt nemo iste.
                 </p>
-              </li>
-              <li className="bg-white max-md:snap-center rounded-3xl h-2/3 w-1/4 max-md:w-3/4 max-md:mt-12 max-md:mb-12 p-4 max-md:p-2 max-md:pl-4 pl-6">
+              </Transition>
+              <Transition
+                show={cardsInView}
+                as="li"
+                className="bg-white max-md:snap-center rounded-3xl h-2/3 w-1/4 max-md:w-3/4 max-md:mt-12 p-4 max-md:p-2 max-md:pl-4 pl-6"
+                enter="duration-1000 transition-all"
+                enterFrom="opacity-0 -translate-x-full"
+                enterTo="opacity-100 -translate-x-0"
+                leave="duration-1000 transition-all"
+                leaveFrom="opacity-100 -translate-x-0"
+                leaveTo="opacity-0 -translate-x-full"
+              >
                 <h3 className="text-2xl max-[2559px]:text-xl max-2xl:text-lg max-xl:text-base max-lg:text-sm text-blue-500 font-medium">
                   3.
                 </h3>
@@ -194,17 +327,40 @@ const HomePage = () => {
                   Voluptates enim, magnam alias modi ad dolores cumque officia
                   sunt nemo iste.
                 </p>
-              </li>
+              </Transition>
             </ul>
           </main>
         </article>
-        <section className="w-full h-2/3 flex flex-col justify-center items-center">
-          <header className="w-2/3 flex justify-center">
+        <section
+          ref={midHeaderRef}
+          className="w-full h-2/3 flex flex-col justify-center items-center"
+        >
+          <Transition
+            show={midHeaderInView}
+            as="header"
+            className="w-2/3 flex justify-center"
+            enter="duration-300 transition-all"
+            enterFrom="opacity-0 "
+            enterTo="opacity-100 "
+            leave="duration-300 transition-all"
+            leaveFrom="opacity-100 "
+            leaveTo="opacity-0 "
+          >
             <h3 className="text-2xl max-[2559px]:text-base max-2xl:text-base max-xl:text-sm max-lg:text-xs max-md:mt-6 text-black text-opacity-30 font-semibold">
               Change the way you work.
             </h3>
-          </header>
-          <main className="w-2/3 max-md:w-full flex flex-col justify-center items-center">
+          </Transition>
+          <Transition
+            show={midHeaderInView}
+            as="main"
+            className="w-2/3 max-md:w-full flex flex-col justify-center items-center"
+            enter="duration-500 transition-all"
+            enterFrom="opacity-0"
+            enterTo="opacity-500"
+            leave="duration-300 transition-all"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
             <h2 className="text-[#1E1E20] max-[2559px]:text-4xl flex flex-col justify-center items-center text-8xl max-2xl:text-2xl max-[2559px]:mt-5 max-xl:text-xl max-xl:mt-5 max-lg:mt-2 max-lg:text-lg font-bold mt-20">
               <span className="mb-4 max-2xl:mb-2">Some of our features </span>
               <span>that will help you</span>
@@ -218,9 +374,21 @@ const HomePage = () => {
                 awesome things inside that will help you in your design process
               </span>
             </p>
-          </main>
-          <ul className="w-7/12 max-lg:w-9/12 max-md:w-11/12 flex justify-between items-center mt-16 max-md:mt-4">
-            <li>
+          </Transition>
+          <ul
+            ref={cards2Ref}
+            className="w-7/12 max-lg:w-9/12 max-md:w-11/12 flex justify-between items-center mt-16 max-md:mt-4"
+          >
+            <Transition
+              show={cardsInView}
+              as="li"
+              enter="duration-300 transition-all"
+              enterFrom="opacity-0 -translate-x-full"
+              enterTo="opacity-100 -translate-x-0"
+              leave="duration-300 transition-all"
+              leaveFrom="opacity-100 -translate-x-0"
+              leaveTo="opacity-0 -translate-x-full"
+            >
               <img
                 src={security}
                 alt="Shield Icon"
@@ -234,8 +402,17 @@ const HomePage = () => {
                 Doloremque expedita sint repudiandae repellendus similique
                 tempore libero corporis maxime eius repellat.
               </p>
-            </li>
-            <li>
+            </Transition>
+            <Transition
+              show={cardsInView}
+              as="li"
+              enter="duration-700 transition-all"
+              enterFrom="opacity-0 -translate-x-full"
+              enterTo="opacity-100 -translate-x-0"
+              leave="duration-700 transition-all"
+              leaveFrom="opacity-100 -translate-x-0"
+              leaveTo="opacity-0 -translate-x-full"
+            >
               <img
                 src={wallet}
                 alt="Wallet Icon"
@@ -249,8 +426,17 @@ const HomePage = () => {
                 Doloremque expedita sint repudiandae repellendus similique
                 tempore libero corporis maxime eius repellat.
               </p>
-            </li>
-            <li>
+            </Transition>
+            <Transition
+              show={cardsInView}
+              as="li"
+              enter="duration-700 transition-all"
+              enterFrom="opacity-0 -translate-x-full"
+              enterTo="opacity-100 -translate-x-0"
+              leave="duration-700 transition-all"
+              leaveFrom="opacity-100 -translate-x-0"
+              leaveTo="opacity-0 -translate-x-full"
+            >
               <img
                 src={profile}
                 alt="Profile Icon"
@@ -264,21 +450,34 @@ const HomePage = () => {
                 Doloremque expedita sint repudiandae repellendus similique
                 tempore libero corporis maxime eius repellat.
               </p>
-            </li>
+            </Transition>
           </ul>
         </section>
       </section>
 
-      <section className="w-full h-[200vh] bg-[#121313] flex flex-col  justify-center items-start relative">
-        <section className="w-full h-1/2 flex max-md:flex-col text-white max-md:items-center">
-          <aside className="w-1/2 max-md:w-full h-full flex justify-center ">
+      <section className="w-full h-[200vh] bg-[#121313] flex flex-col overflow-x-hidden justify-center items-start relative">
+        <section
+          ref={infoRef}
+          className="w-full h-1/2 flex max-md:flex-col text-white max-md:items-center"
+        >
+          <aside className="w-1/2 max-md:w-full h-full flex justify-center items-center">
             <img
               src={web}
               alt="Web Isometric"
               className="w-4/5 max-xl:w-full"
             />
           </aside>
-          <main className="w-2/5 max-md:w-full h-full flex justify-center">
+          <Transition
+            show={infoInView}
+            as="main"
+            className="w-2/5 max-md:w-full h-full flex justify-center overflow-x-hidden"
+            enter="duration-700 transition-all"
+            enterFrom="opacity-0 translate-x-full"
+            enterTo="opacity-100 translate-x-0"
+            leave="duration-700 transition-all"
+            leaveFrom="opacity-100 translate-x-0"
+            leaveTo="opacity-0 translate-x-full"
+          >
             <section className="w-2/3 h-full flex flex-col justify-center items-start max-md:items-center max-md:text-center">
               <h2 className="text-9xl max-[2559px]:text-5xl max-2xl:text-5xl max-xl:text-3xl max-lg:text-2xl font-bold">
                 Easy and effortless way to express your ideas
@@ -292,10 +491,23 @@ const HomePage = () => {
                 Learn more about Focusio
               </button>
             </section>
-          </main>
+          </Transition>
         </section>
-        <section className="w-full h-1/2 flex max-md:flex-col-reverse text-white justify-end">
-          <main className="w-2/5 max-md:w-full h-full flex justify-center items-start">
+        <section
+          ref={info2Ref}
+          className="w-full h-1/2 flex max-md:flex-col-reverse text-white justify-end"
+        >
+          <Transition
+            show={info2InView}
+            as="main"
+            className="w-2/5 max-md:w-full h-full flex justify-center items-start overflow-x-hidden"
+            enter="duration-1000 transition-all"
+            enterFrom="opacity-0 -translate-x-full"
+            enterTo="opacity-100 -translate-x-0"
+            leave="duration-1000 transition-all"
+            leaveFrom="opacity-100 -translate-x-0"
+            leaveTo="opacity-0 -translate-x-full"
+          >
             <section className="w-2/3 h-full flex flex-col justify-start max-md:items-center max-md:text-center">
               <h2 className="text-9xl max-[2559px]:text-5xl max-2xl:text-5xl max-xl:text-3xl max-lg:text-2xl font-bold">
                 Tons of spaces for your mind to discover
@@ -309,7 +521,7 @@ const HomePage = () => {
                 Explore the opportunities
               </button>
             </section>
-          </main>
+          </Transition>
           <aside className="w-1/2 max-md:w-full h-full relative">
             <img
               src={data}
@@ -320,8 +532,20 @@ const HomePage = () => {
         </section>
       </section>
 
-      <section className="w-full h-[75vh] bg-white flex flex-col justify-center items-start relative">
-        <section className="w-3/5 max-md:w-11/12 max-md:h-2/5 max-md:-top-[15%] h-3/5 bluegradient absolute -top-[35%] left-0 right-0 ml-auto mr-auto rounded-3xl flex justify-center flex-col items-center">
+      <section
+        ref={getStartedRef}
+        className="w-full h-[75vh] bg-white flex flex-col justify-center items-start relative"
+      >
+        <Transition
+          show={getStartedInView}
+          as="main"
+          className="overflow-hidden w-3/5 max-md:w-11/12 max-md:h-2/5 max-md:-top-[15%] h-3/5 bluegradient absolute -top-[35%] left-0 right-0 ml-auto mr-auto rounded-3xl flex justify-center flex-col items-center"
+          enterFrom="opacity-0 scale-50"
+          enterTo="opacity-100 scale-100"
+          leave="duration-1000 transition-all"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-50"
+        >
           <h2 className="flex max-[2559px]:text-4xl flex-col items-center text-7xl max-2xl:text-4xl max-md:text-xl max-xl:text-3xl font-extrabold text-white">
             <span>Join thousands</span>
             <span>creative minds on Focusio</span>
@@ -333,9 +557,23 @@ const HomePage = () => {
           <button className="bg-white hover:tracking-wide max-md:w-[150px] max-md:mt-4 max-[2559px]:text-xl max-[2559px]:w-[200px] text-black text-3xl max-2xl:text-xl max-2xl:w-[200px] max-xl:text-base max-xl:w-[150px] font-normal mt-12 w-[350px] flex justify-center items-center pt-3 pb-3 pl-5 pr-5 rounded-full">
             <a href="../get-started">Get started</a>
           </button>
-        </section>
-        <section className="h-3/5 w-full flex justify-center absolute bottom-0 border border-transparent border-t-black border-opacity-30">
-          <section className="w-2/3 max-lg:w-3/4 max-md:w-full h-full flex">
+        </Transition>
+
+        <section
+          ref={footerRef}
+          className="h-3/5 w-full flex justify-center absolute bottom-0 border border-transparent border-t-black border-opacity-30"
+        >
+          <Transition
+            show={footerInView}
+            as="main"
+            className="w-2/3 max-lg:w-3/4 max-md:w-full h-full flex"
+            enter="duration-500 transition-all"
+            enterFrom="opacity-0 -translate-y-full"
+            enterTo="opacity-100 -translate-y-0"
+            leave="duration-500 transition-all"
+            leaveFrom="opacity-100 -translate-y-full"
+            leaveTo="opacity-0 -translate-y-0"
+          >
             <section className="w-1/3 max-xl:w-1/2 h-full pl-8 relative flex justify-start flex-col items-start">
               <section className="w-full h-full mt-24 ml-8">
                 <h2 className="flex items-center">
@@ -373,7 +611,7 @@ const HomePage = () => {
                 </section>
               </ul>
             </section>
-          </section>
+          </Transition>
         </section>
       </section>
     </main>
