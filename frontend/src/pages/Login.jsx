@@ -46,7 +46,7 @@ const Login = () => {
 
   return (
     <section className="w-screen bg-green-400 h-screen font-Manrope flex max-md:flex-col">
-      <aside className="w-7/12 max-md:w-full max-sm:h-1/3 h-full greengradient flex justify-start items-center flex-col max-xl:justify-center relative">
+      <aside className="animate-slide-in-l w-7/12 max-md:w-full max-sm:h-1/3 h-full greengradient flex justify-start items-center flex-col max-xl:justify-center relative">
         <img src={login} alt="" className="w-2/3" />
         <h2 className="text-lg max-md:hidden text-white opacity-50 max-lg:text-base max-md:text-xs flex flex-col justify-start items-center">
           <span>Sign in.</span>
@@ -73,7 +73,7 @@ const Login = () => {
             </span>
           </h2>
         </header>
-        <form className="w-11/12 max-xl:w-full h-1/2 mt-[15%] max-md:mt-5 flex justify-start flex-col items-center relative">
+        <form className="w-11/12 animate-fade-in max-xl:w-full h-1/2 mt-[15%] max-md:mt-5 flex justify-start flex-col items-center relative">
           <Transition
             show={showResponse}
             as="section"
