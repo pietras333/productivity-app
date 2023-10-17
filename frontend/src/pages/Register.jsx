@@ -50,9 +50,9 @@ const Register = () => {
   };
 
   return (
-    <section className="w-screen bg-blue-400 h-screen font-Manrope flex max-md:flex-col">
-      <aside className="w-7/12 max-md:w-full max-md:h-1/3 h-full bluegradient flex justify-start items-center flex-col max-xl:justify-center relative">
-        <img src={register} alt="" className="w-2/3" />
+    <section className="w-screen bg-blue-400 h-screen font-Manrope flex max-md:flex-col transition-all">
+      <aside className="w-7/12 animate-slide-in-l max-md:w-full max-md:h-1/3 h-full bluegradient flex justify-start items-center flex-col max-xl:justify-center relative">
+        <img src={register} alt="register" className="w-3/4" />
         <h2 className="text-lg max-md:hidden text-white opacity-50 max-lg:text-base flex flex-col justify-start items-center">
           <span>Create account.</span>
           <span>And start your journey into new productivity verse.</span>
@@ -78,7 +78,7 @@ const Register = () => {
             </span>
           </h2>
         </header>
-        <form className="w-11/12 max-xl:w-full h-1/2 mt-[15%] max-md:mt-4 flex justify-start flex-col items-center relative">
+        <form className="w-11/12 max-xl:w-full h-1/2 mt-[15%] animate-fade-in max-md:mt-4 flex justify-start flex-col items-center relative">
           <Transition
             show={showResponse}
             as="section"

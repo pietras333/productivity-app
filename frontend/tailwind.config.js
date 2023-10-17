@@ -16,14 +16,8 @@ module.exports = {
     },
     extend: {
       animation: {
-        slidetop: "slidetop 500ms forwards",
-        slideleft: "slideleft 1000ms forwards",
-        slideright: "slideright 1000ms forwards",
-        fadein: "fadein 3000ms forwards",
-        fadeinloader: "fadein 500ms forwards",
-        fadeoutloader: "fadeout 500ms forwards",
-        fadeinbg: "fadeinbg 1500ms forwards",
-        scrollLeft: "scrollLeft 11500ms infinite linear",
+        "slide-in-l": "slide-in-l forwards 500ms",
+        "fade-in": "fade-in forwards 500ms",
       },
       backgroundImage: {
         board: "url('./assets/illustrations/lightMode/board.png')",

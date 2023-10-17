@@ -1,3 +1,5 @@
+import List from "../components/List";
+
 const Board = () => {
   const sendRequest = async () => {
     const jwt = window.localStorage.getItem("authorizationToken");
@@ -20,7 +22,7 @@ const Board = () => {
     });
   };
 
-  return <section className="w-screen h-screen flex bg-[#0F1125]"></section>;
+  return <List />;
 };
 
 export default Board;

@@ -100,3 +100,43 @@
   stroke-dashoffset: -134;
   stroke-width: 6;
 }
+
+@keyframes slide-in-l {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+.scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #60a5fa #1c1c1c;
+}
+
+/* Chrome, Edge, and Safari */
+.scroll::-webkit-scrollbar {
+  width: 13px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: #1c1c1c;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #60a5fa;
+  border-radius: 8px;
+  border: 2px none #ffffff;
+}

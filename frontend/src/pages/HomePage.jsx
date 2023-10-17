@@ -1,76 +1,47 @@
 import wallet from "../assets/illustrations/icons/wallet.png";
 import security from "../assets/illustrations/icons/security.png";
 import profile from "../assets/illustrations/icons/profile.png";
-import landing from "../assets/illustrations/icons/landing.png";
 import web from "../assets/illustrations/icons/web.png";
 import data from "../assets/illustrations/icons/data.png";
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import { Transition } from "@tailwindui/react";
-import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const HomePage = () => {
   const [openMobile, setOpenMobile] = useState(false);
-  const [navRef, navInView, navEntry] = useInView({
+  const [navRef, navInView] = useInView({
     threshold: 0,
   });
-
-  const [buttonRef, buttonInView, buttonEntry] = useInView({
+  const [buttonRef, buttonInView] = useInView({
     threshold: 0,
   });
-
-  const [cardsRef, cardsInView, cardsEntry] = useInView({
+  const [cardsRef, cardsInView] = useInView({
     threshold: 0,
   });
-  const [cards2Ref, cards2InView, cards2Entry] = useInView({
+  const [cards2Ref, cards2InView] = useInView({
     threshold: 0,
   });
-
-  const [infoRef, infoInView, infoEntry] = useInView({
+  const [infoRef, infoInView] = useInView({
     threshold: 0,
   });
-  const [info2Ref, info2InView, info2Entry] = useInView({
+  const [info2Ref, info2InView] = useInView({
     threshold: 0,
   });
-  const [articleRef, articleInView, articleEntry] = useInView({
+  const [articleRef, articleInView] = useInView({
     threshold: 0,
   });
-
-  const [footerRef, footerInView, footerEntry] = useInView({
+  const [footerRef, footerInView] = useInView({
     threshold: 0,
   });
-  const [getStartedRef, getStartedInView, getStartedEntry] = useInView({
+  const [getStartedRef, getStartedInView] = useInView({
     threshold: 0,
   });
-  const [headerRef, headerInView, headerEntry] = useInView({
+  const [headerRef, headerInView] = useInView({
     threshold: 0,
   });
-  const [midHeaderRef, midHeaderInView, midHeaderEntry] = useInView({
+  const [midHeaderRef, midHeaderInView] = useInView({
     threshold: 0,
   });
-  const send = () => {
-    fetch("../api/tasks/subtasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Action: "Addition",
-        Authorization:
-          "Bearer " + window.localStorage.getItem("authorizationToken"),
-      },
-      body: JSON.stringify({
-        category: "Skincare",
-        subtasks: {
-          name: "gowno",
-          new: {
-            name: "gowno",
-            date: "Dzisiaj",
-            completed: false,
-          },
-        },
-      }),
-    });
-  };
-
   const handleMobileMenu = () => {
     return setOpenMobile((prev) => !prev);
   };
@@ -254,11 +225,8 @@ const HomePage = () => {
             </p>
           </Transition>
 
-          <main className="w-full h-2/3 max-md:mt-4">
-            <ul
-              ref={cardsRef}
-              className="w-full h-full max-md:snap-y max-md:snap-mandatory max-md:h-3/4 flex max-md:flex-col max-md:overflow-scroll max-md:justify-start justify-around items-center"
-            >
+          <main ref={cardsRef} className="w-full h-2/3 max-md:mt-4">
+            <ul className="w-full h-full max-md:snap-y max-md:snap-mandatory max-md:h-3/4 flex max-md:flex-col max-md:overflow-scroll max-md:justify-start justify-around items-center">
               <Transition
                 show={cardsInView}
                 as="li"
@@ -380,7 +348,7 @@ const HomePage = () => {
             className="w-7/12 max-lg:w-9/12 max-md:w-11/12 flex justify-between items-center mt-16 max-md:mt-4"
           >
             <Transition
-              show={cardsInView}
+              show={cards2InView}
               as="li"
               enter="duration-300 transition-all"
               enterFrom="opacity-0 -translate-x-full"
@@ -404,7 +372,7 @@ const HomePage = () => {
               </p>
             </Transition>
             <Transition
-              show={cardsInView}
+              show={cards2InView}
               as="li"
               enter="duration-700 transition-all"
               enterFrom="opacity-0 -translate-x-full"
@@ -428,7 +396,7 @@ const HomePage = () => {
               </p>
             </Transition>
             <Transition
-              show={cardsInView}
+              show={cards2InView}
               as="li"
               enter="duration-700 transition-all"
               enterFrom="opacity-0 -translate-x-full"
